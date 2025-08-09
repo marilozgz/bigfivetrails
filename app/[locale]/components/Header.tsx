@@ -1,4 +1,7 @@
 "use client"
+import { useLocale, useTranslations } from "next-intl"
+import { usePathname, useRouter } from "next/navigation"
+
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
@@ -13,6 +16,12 @@ const cormorant = Cormorant_Garamond({
 })
 
 export default function Header() {
+  const t = useTranslations()
+  const locale = useLocale()
+  const pathname = usePathname()
+  const router = useRouter()
+
+  const transparentPages = ["/", "/destinations"]
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [quoteModalOpen, setQuoteModalOpen] = useState(false)
@@ -24,23 +33,24 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const isTransparent = transparentPages.includes(pathname)
+  const solid = !isTransparent || scrolled
+
   return (
     <header
       className={
         "fixed inset-x-0 top-0 z-50 transition-all " +
-        (scrolled
-          ? "backdrop-blur bg-[#1f221b]/70 shadow-sm"
-          : "bg-transparent")
+        (solid ? "backdrop-blur bg-[#1f221b]/70 shadow-sm" : "bg-transparent")
       }>
-      {/* Top microbar */}
+      {/* Microbar */}
       <div
         className={`hidden md:flex items-center justify-center gap-6 text-sm py-2 text-[#e7c6c2] bg-[#1f221b] ${cormorant.className}`}>
-        <span className='opacity-90'>Tanzania Safaris • Tailor‑Made</span>
+        <span className='opacity-90'>{t("microbar.tagline")}</span>
         <span className='h-3 w-px bg-[#c6b892]/40' />
         <a
-          href='tel:+255000000'
+          href={`tel:${t("microbar.phoneRaw")}`}
           className='hover:underline'>
-          +255 000 000
+          {t("microbar.phone")}
         </a>
       </div>
 
@@ -59,16 +69,17 @@ export default function Header() {
             />
             <div className='leading-tight'>
               <span className='block text-lg font-semibold tracking-wide text-[#e7c6c2]'>
-                bigfivetrails
+                {t("brand.title")}
               </span>
               <span className='block text-[11px] uppercase tracking-[0.2em] text-[#c6b892]/80'>
-                Safari Experiences
+                {t("brand.subtitle")}
               </span>
             </div>
           </Link>
 
           {/* Desktop menu */}
           <NavMenu fontClass={cormorant.className} />
+
           {/* Desktop actions */}
           <div className='hidden lg:flex items-center gap-4'>
             <a
@@ -76,21 +87,29 @@ export default function Header() {
               target='_blank'
               rel='noopener noreferrer'
               className='text-green-500 text-2xl transition-transform transform hover:scale-110 hover:text-green-400'
-              aria-label='WhatsApp'>
+              aria-label={t("actions.whatsapp")}>
               <FaWhatsapp />
             </a>
 
             <select
+              value={locale}
+              onChange={(e) => {
+                const nextLocale = e.target.value
+                const segments = pathname.split("/")
+                segments[1] = nextLocale
+                router.replace(segments.join("/"))
+              }}
               className={`bg-transparent border border-[#c6b892]/40 text-[#f6f3ee] rounded-full px-2 py-1 text-sm ${cormorant.className}`}>
               <option value='en'>EN</option>
               <option value='es'>ES</option>
+              <option value='de'>DE</option>
             </select>
 
             <a
               href='#quote'
               onClick={() => setQuoteModalOpen(true)}
               className={`inline-flex items-center rounded-full border border-[#c6b892]/40 bg-[#e7c6c2] px-4 py-2 text-sm font-medium text-[#1f221b] shadow-sm hover:translate-y-[-1px] hover:shadow transition-all ${cormorant.className}`}>
-              Request a Quote
+              {t("actions.requestQuote")}
             </a>
           </div>
 
@@ -137,7 +156,7 @@ export default function Header() {
                 alt='logo'
                 className='h-7 w-7 rounded-full ring-1 ring-[#c6b892]/30 bg-[#1f221b] p-1'
               />
-              <span className='font-semibold'>bigfivetrails</span>
+              <span className='font-semibold'>{t("brand.title")}</span>
             </Link>
             <button
               aria-label='Close menu'
@@ -151,27 +170,27 @@ export default function Header() {
             <MobileLink
               onClick={() => setOpen(false)}
               href='#tours'>
-              Tours
+              {t("nav.tours")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
               href='#destinations'>
-              Destinations
+              {t("nav.destinations")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
               href='#why-us'>
-              Why Us
+              {t("nav.whyUs")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
               href='#reviews'>
-              Reviews
+              {t("nav.reviews")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
               href='#contact'>
-              Contact
+              {t("nav.contact")}
             </MobileLink>
             <div className='flex gap-3 pt-4'>
               <a
@@ -179,7 +198,7 @@ export default function Header() {
                 target='_blank'
                 rel='noopener noreferrer'
                 className='flex-1 rounded-full bg-green-500/90 px-3 py-2 text-white text-sm font-semibold text-center'>
-                WhatsApp
+                {t("actions.whatsapp")}
               </a>
               <a
                 href='https://t.me/username'
@@ -190,9 +209,17 @@ export default function Header() {
               </a>
             </div>
             <select
+              value={locale}
+              onChange={(e) => {
+                const nextLocale = e.target.value
+                const segments = pathname.split("/")
+                segments[1] = nextLocale
+                router.replace(segments.join("/"))
+              }}
               className={`mt-4 w-full bg-transparent border border-[#c6b892]/40 text-[#f6f3ee] rounded-full px-2 py-1 text-sm ${cormorant.className}`}>
               <option value='en'>EN</option>
               <option value='es'>ES</option>
+              <option value='de'>DE</option>
             </select>
           </div>
 
@@ -201,7 +228,7 @@ export default function Header() {
               href='#quote'
               onClick={() => setOpen(false)}
               className={`block w-full text-center rounded-full border border-[#c6b892]/40 bg-[#e7c6c2] px-4 py-2 text-sm font-medium text-[#1f221b] shadow-sm hover:translate-y-[-1px] hover:shadow transition-all ${cormorant.className}`}>
-              Request a Quote
+              {t("actions.requestQuote")}
             </a>
           </div>
         </aside>
@@ -213,8 +240,6 @@ export default function Header() {
     </header>
   )
 }
-
-// removed unused NavLink
 
 function MobileLink({
   href,

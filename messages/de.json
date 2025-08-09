@@ -1,0 +1,157 @@
+{
+  "microbar": {
+    "tagline": "Tansania-Safaris • Maßgeschneidert",
+    "phone": "+255 000 000",
+    "phoneRaw": "+255000000"
+  },
+  "brand": {
+    "title": "bigfivetrails",
+    "subtitle": "Safari-Erlebnisse"
+  },
+  "actions": {
+    "requestQuote": "Angebot anfordern",
+    "whatsapp": "WhatsApp"
+  },
+  "nav": {
+    "tours": "Touren",
+    "destinations": "Reiseziele",
+    "whyUs": "Warum wir",
+    "reviews": "Bewertungen",
+    "contact": "Kontakt",
+    "packages": {
+      "tours": "Touren",
+      "serengetiLuxury": "Luxusurlaub im Serengeti",
+      "ngorongoro": "Ngorongoro-Krater-Tour",
+      "migration": "Große Migration Spezial",
+      "tarangire": "Tarangire & Lake Manyara",
+      "zanzibar": "Sansibar Strand & Safari"
+    }
+  },
+  "hero": {
+    "eyebrow": "Maßgeschneidert • Kleine Gruppen • Private Guides",
+    "headline": "Safarimomente, die sich <strong>unglaublich nah</strong> anfühlen",
+    "subcopy": "Handverlesene Reisen durch Serengeti, Ngorongoro und mehr — Luxus-Camps, erfahrene Tracker und Sonnenaufgangsfahrten, über die Sie noch Jahre sprechen werden.",
+    "cta": {
+      "explore": "Safari-Pakete entdecken",
+      "quote": "Mein maßgeschneidertes Angebot"
+    },
+    "trust": {
+      "rating": "Mit 5★ von Reisenden bewertet",
+      "badge": "Lizenzierter TALA-Operator • 24/7 Unterstützung vor Ort"
+    },
+    "scroll": "Scrollen"
+  },
+  "featuredSafaris": {
+    "title": "Ausgewählte Safari-Erlebnisse",
+    "subtitle": "Handverlesene Reisen durch Serengeti, Ngorongoro und mehr — Luxus-Camps, erfahrene Tracker und Sonnenaufgangsfahrten, über die Sie noch Jahre sprechen werden.",
+    "items": [
+      {
+        "title": "Luxusurlaub im Serengeti",
+        "tagline": "Testigo de la Gran Migración de forma elegante",
+        "img": "/images/serengetideluxe.jpg",
+        "badge": "Más popular",
+        "link": "#serengeti"
+      },
+      {
+        "title": "Tour zum Ngorongoro-Krater",
+        "tagline": "Erkunde die Schönheit von Afrika",
+        "img": "/images/ngorongoro.jpg",
+        "badge": "Feste Daten 2025",
+        "link": "#ngorongoro"
+      },
+      {
+        "title": "Tarangire & Lake Manyara",
+        "tagline": "Elefanten, Baobab-Bäume und Flamingos",
+        "img": "/images/tarangire.jpg",
+        "badge": "Neu",
+        "link": "#tarangire"
+      }
+    ]
+  },
+  "whyUs": {
+    "title": "Warum mit uns reisen?",
+    "subtitle": "Honest expertise, thoughtful design and seamless execution—so you can focus on the magic of Tanzania.",
+    "cta": "Mein maßgeschneidertes Angebot",
+    "items": [
+      {
+        "title": "Experten-Guides",
+        "text": "Handverlesene Naturisten und Tracker, die jeden versteckten Winkel des Busches kennen."
+      },
+      {
+        "title": "Maßgeschneidertes Itinerar",
+        "text": "Dein Tempo, dein Stil. Wir gestalten jede Route nach Jahreszeiten, Interessen und Budget."
+      },
+      {
+        "title": "Luxus-Camps & Lodges",
+        "text": "Von eleganten Tented Camps bis Boutique Lodges – Komfort ohne den Wilden zu verlieren."
+      },
+      {
+        "title": "24/7 Unterstützung vor Ort",
+        "text": "Lokales Team in Tanzania, echte Menschen auf der Stelle – vor, während und nach Ihrer Reise."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Gästebewertungen",
+    "subtitle": "Echte Geschichten von Reisenden, die mit uns in Tanzania erlebten.",
+    "items": [
+      {
+        "name": "Emma & David",
+        "trip": "Serengeti & Ngorongoro",
+        "text": "Jeder Tag war wie ein Traum – von den Luxus-Camps bis hin zum nächsten großen Tier. Die Guides waren außergewöhnlich!",
+        "img": "/images/testimonial1.jpg"
+      },
+      {
+        "name": "Lucas M.",
+        "trip": "Große Migration Spezial",
+        "text": "Ich hätte nie gedacht, dass ich so nah an der Migration sein würde. Der gesamte Aufenthalt war perfekt geplant und stressfrei.",
+        "img": "/images/testimonial2.jpg"
+      },
+      {
+        "name": "Sophie & Claire",
+        "trip": "Tarangire & Zanzibar",
+        "text": "Die Mischung aus Safari-Abenteuer und entspannenden Stränden war genau das, was wir brauchten. BigFiveTrails wird sehr empfohlen!",
+        "img": "/images/testimonial3.jpg"
+      }
+    ],
+    "cta": {
+      "label": "Mehr Bewertungen auf TripAdvisor lesen",
+      "link": "https://www.tripadvisor.com/"
+    }
+  },
+  "footer": {
+    "tagline": "Safaris in Tanzania • Maßgeschneidert",
+    "contact": {
+      "title": "Kontakt",
+      "items": [
+        { "label": "+255 000 000", "href": "tel:+255000000" },
+        {
+          "label": "info@bigfivetrails.com",
+          "href": "mailto:info@bigfivetrails.com"
+        },
+        { "label": "Arusha, Tanzania" },
+        { "label": "Mon-Fri: 9am–6pm" }
+      ]
+    },
+    "explore": {
+      "title": "Explorar",
+      "items": [
+        { "label": "Tours", "href": "#tours" },
+        { "label": "Destinations", "href": "#destinations" },
+        { "label": "Why Us", "href": "#why-us" },
+        { "label": "Reviews", "href": "#reviews" },
+        { "label": "Contact", "href": "#contact" }
+      ]
+    },
+    "follow": {
+      "title": "Folgen Sie uns"
+    },
+    "newsletter": {
+      "placeholder": "Ihre E-Mail",
+      "button": "Abonnieren"
+    },
+    "bottom": {
+      "text": "BigFiveTrails. Alle Rechte vorbehalten. | Datenschutzrichtlinie"
+    }
+  }
+}

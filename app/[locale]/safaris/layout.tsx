@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
+import "../../globals.css"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-import "../globals.css"
 
 export const metadata: Metadata = {
   title: "Big Five Trails",

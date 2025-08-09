@@ -1,0 +1,158 @@
+{
+  "microbar": {
+    "tagline": "Tanzania Safaris • Tailor-Made",
+    "phone": "+255 000 000",
+    "phoneRaw": "+255000000"
+  },
+  "brand": {
+    "title": "bigfivetrails",
+    "subtitle": "Safari Experiences"
+  },
+  "actions": {
+    "requestQuote": "Request a Quote",
+    "whatsapp": "WhatsApp"
+  },
+  "nav": {
+    "tours": "Tours",
+    "destinations": "Destinations",
+    "whyUs": "Why Us",
+    "reviews": "Reviews",
+    "contact": "Contact",
+    "packages": {
+      "tours": "Tours",
+      "serengetiLuxury": "Serengeti Luxury Escape",
+      "ngorongoro": "Ngorongoro Crater Tour",
+      "migration": "Great Migration Special",
+      "tarangire": "Tarangire & Lake Manyara",
+      "zanzibar": "Zanzibar Beach & Safari"
+    },
+    "hero": {
+      "eyebrow": "Tailor-Made • Small Groups • Private Guides",
+      "headline": "Safari moments that feel <strong>impossibly close</strong>",
+      "subcopy": "Hand-crafted journeys across Serengeti, Ngorongoro and beyond — luxury camps, expert trackers, and sunrise drives you’ll talk about for years.",
+      "cta": {
+        "explore": "Explore Safari Packages",
+        "quote": "Get My Tailor-Made Quote"
+      },
+      "trust": {
+        "rating": "Rated 5★ by travelers",
+        "badge": "Licensed TALA Operator • 24/7 On-ground Support"
+      },
+      "scroll": "Scroll"
+    }
+  },
+
+  "featuredSafaris": {
+    "title": "Featured Safari Experiences",
+    "subtitle": "Hand-picked journeys to showcase the best of Tanzania — from vast plains to hidden gems.",
+    "items": [
+      {
+        "title": "Serengeti Luxury Escape",
+        "tagline": "Witness the Great Migration in style",
+        "img": "/images/serengetideluxe.jpg",
+        "badge": "Most Popular",
+        "link": "#serengeti"
+      },
+      {
+        "title": "Ngorongoro Crater Adventure",
+        "tagline": "Explore the Eden of Africa",
+        "img": "/images/ngorongoro.jpg",
+        "badge": "Limited Dates 2025",
+        "link": "#ngorongoro"
+      },
+      {
+        "title": "Tarangire & Lake Manyara",
+        "tagline": "Elephants, baobabs & flamingos",
+        "img": "/images/tarangire.jpg",
+        "badge": "New",
+        "link": "#tarangire"
+      }
+    ]
+  },
+  "whyUs": {
+    "title": "Why Travel With Us",
+    "subtitle": "Honest expertise, thoughtful design and seamless execution—so you can focus on the magic of Tanzania.",
+    "cta": "Get My Tailor-Made Quote",
+    "items": [
+      {
+        "title": "Expert Guides",
+        "text": "Hand-picked naturalists and trackers who know every hidden corner of the bush."
+      },
+      {
+        "title": "Tailor-Made Itineraries",
+        "text": "Your pace, your style. We craft each route around seasons, interests and budget."
+      },
+      {
+        "title": "Luxury Camps & Lodges",
+        "text": "From elegant tented camps to boutique lodges—comfort without losing the wild."
+      },
+      {
+        "title": "24/7 On-Ground Support",
+        "text": "Local team in Tanzania, real humans on call—before, during and after your trip."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Guest Testimonials",
+    "subtitle": "Real stories from travelers who explored Tanzania with us.",
+    "items": [
+      {
+        "name": "Emma & David",
+        "trip": "Serengeti & Ngorongoro",
+        "text": "Every day felt like a dream — from the luxury camps to seeing the Big Five up close. The guides were outstanding!",
+        "img": "/images/testimonial1.jpg"
+      },
+      {
+        "name": "Lucas M.",
+        "trip": "Great Migration Special",
+        "text": "I never imagined I’d be this close to the migration. The entire trip was perfectly planned and stress-free.",
+        "img": "/images/testimonial2.jpg"
+      },
+      {
+        "name": "Sophie & Claire",
+        "trip": "Tarangire & Zanzibar",
+        "text": "The mix of safari adventure and relaxing beaches was exactly what we needed. Highly recommend BigFiveTrails!",
+        "img": "/images/testimonial3.jpg"
+      }
+    ],
+    "cta": {
+      "label": "Read more reviews on TripAdvisor",
+      "link": "https://www.tripadvisor.com/"
+    }
+  },
+  "footer": {
+    "tagline": "Tailor-made safaris across Tanzania — luxury camps, expert guides & unforgettable moments.",
+    "explore": {
+      "title": "Explore",
+      "items": [
+        { "label": "Tours", "href": "#tours" },
+        { "label": "Destinations", "href": "#destinations" },
+        { "label": "Why Us", "href": "#why-us" },
+        { "label": "Reviews", "href": "#reviews" },
+        { "label": "Contact", "href": "#contact" }
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "items": [
+        { "label": "+255 000 000", "href": "tel:+255000000" },
+        {
+          "label": "info@bigfivetrails.com",
+          "href": "mailto:info@bigfivetrails.com"
+        },
+        { "label": "Arusha, Tanzania" },
+        { "label": "Mon-Fri: 9am–6pm" }
+      ]
+    },
+    "follow": {
+      "title": "Follow us"
+    },
+    "newsletter": {
+      "placeholder": "Your email",
+      "button": "Subscribe"
+    },
+    "bottom": {
+      "text": "BigFiveTrails. All rights reserved. | Privacy Policy"
+    }
+  }
+}

@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+
+import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import {
@@ -14,6 +17,8 @@ const cormorant = Cormorant_Garamond({
 })
 
 export default function Footer() {
+  const t = useTranslations("footer")
+
   return (
     <footer className='bg-[#1f221b] text-[#f6f3ee] pt-16 pb-8'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-10 md:grid-cols-4'>
@@ -32,84 +37,54 @@ export default function Footer() {
             </span>
           </div>
           <p className='mt-4 text-sm text-[#f6f3ee]/80 max-w-xs'>
-            Tailor-made safaris across Tanzania — luxury camps, expert guides &
-            unforgettable moments.
+            {t("tagline")}
           </p>
         </div>
 
         {/* Quick menu */}
         <div>
           <h4 className={`${cormorant.className} text-lg font-semibold mb-4`}>
-            Explore
+            {t("explore.title")}
           </h4>
           <ul className='space-y-2 text-sm'>
-            <li>
-              <a
-                href='#tours'
-                className='hover:text-[#e7c6c2] transition'>
-                Tours
-              </a>
-            </li>
-            <li>
-              <a
-                href='#destinations'
-                className='hover:text-[#e7c6c2] transition'>
-                Destinations
-              </a>
-            </li>
-            <li>
-              <a
-                href='#why-us'
-                className='hover:text-[#e7c6c2] transition'>
-                Why Us
-              </a>
-            </li>
-            <li>
-              <a
-                href='#reviews'
-                className='hover:text-[#e7c6c2] transition'>
-                Reviews
-              </a>
-            </li>
-            <li>
-              <a
-                href='#contact'
-                className='hover:text-[#e7c6c2] transition'>
-                Contact
-              </a>
-            </li>
+            {t.raw("explore.items").map((item: any) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className='hover:text-[#e7c6c2] transition'>
+                  {item.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Contact */}
         <div>
           <h4 className={`${cormorant.className} text-lg font-semibold mb-4`}>
-            Contact
+            {t("contact.title")}
           </h4>
           <ul className='space-y-2 text-sm'>
-            <li>
-              <a
-                href='tel:+255000000'
-                className='hover:text-[#e7c6c2] transition'>
-                +255 000 000
-              </a>
-            </li>
-            <li>
-              <a
-                href='mailto:info@bigfivetrails.com'
-                className='hover:text-[#e7c6c2] transition'>
-                info@bigfivetrails.com
-              </a>
-            </li>
-            <li>Arusha, Tanzania</li>
-            <li>Mon-Fri: 9am–6pm</li>
+            {t.raw("contact.items").map((item: any, i: number) => (
+              <li key={i}>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className='hover:text-[#e7c6c2] transition'>
+                    {item.label}
+                  </a>
+                ) : (
+                  item.label
+                )}
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Social + Newsletter */}
         <div>
           <h4 className={`${cormorant.className} text-lg font-semibold mb-4`}>
-            Follow us
+            {t("follow.title")}
           </h4>
           <div className='flex gap-3 mb-6'>
             <SocialIcon
@@ -139,13 +114,13 @@ export default function Footer() {
             className='flex bg-[#f6f3ee]/10 rounded-full overflow-hidden'>
             <input
               type='email'
-              placeholder='Your email'
+              placeholder={t("newsletter.placeholder")}
               className='flex-1 px-4 py-2 bg-transparent text-sm placeholder-[#f6f3ee]/60 focus:outline-none'
             />
             <button
               type='submit'
               className='bg-[#e7c6c2] text-[#1f221b] px-4 py-2 text-sm font-semibold hover:bg-[#c6b892] transition'>
-              Subscribe
+              {t("newsletter.button")}
             </button>
           </form>
         </div>
@@ -153,8 +128,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className='mt-12 pt-6 border-t border-[#c6b892]/30 text-center text-xs text-[#f6f3ee]/60'>
-        © {new Date().getFullYear()} BigFiveTrails. All rights reserved. |
-        Privacy Policy
+        © {new Date().getFullYear()} {t("bottom.text")}
       </div>
     </footer>
   )

@@ -1,18 +1,21 @@
 "use client"
+import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 
 export default function NavMenu({ fontClass }: { fontClass?: string }) {
+  const t = useTranslations("nav")
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const sections = [
-    { id: "tours", label: "Tours" },
-    { id: "destinations", label: "Destinations" },
-    { id: "why-us", label: "Why Us" },
-    { id: "reviews", label: "Reviews" },
-    { id: "contact", label: "Contact" }
+    { id: "tours", label: t("tours") },
+    { id: "destinations", label: t("destinations") },
+    { id: "why-us", label: t("whyUs") },
+    { id: "reviews", label: t("reviews") },
+    { id: "contact", label: t("contact") }
   ]
 
   const [active, setActive] = useState("")
 
-  // Detect active section on scroll
   useEffect(() => {
     const handler = () => {
       let current = ""
@@ -31,7 +34,7 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
     window.addEventListener("scroll", handler)
     handler()
     return () => window.removeEventListener("scroll", handler)
-  }, [])
+  }, [sections])
 
   return (
     <div className={`hidden lg:flex items-center gap-8 ${fontClass}`}>
@@ -54,6 +57,7 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
 }
 
 function ToursDropdown({ active }: { active: boolean }) {
+  const t = useTranslations("nav.packages")
   const [open, setOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -67,11 +71,11 @@ function ToursDropdown({ active }: { active: boolean }) {
   }
 
   const packages = [
-    { name: "Serengeti Luxury Escape", href: "#serengeti" },
-    { name: "Ngorongoro Crater Tour", href: "#ngorongoro" },
-    { name: "Great Migration Special", href: "#migration" },
-    { name: "Tarangire & Lake Manyara", href: "#tarangire" },
-    { name: "Zanzibar Beach & Safari", href: "#zanzibar" }
+    { name: t("serengetiLuxury"), href: "#serengeti" },
+    { name: t("ngorongoro"), href: "#ngorongoro" },
+    { name: t("migration"), href: "#migration" },
+    { name: t("tarangire"), href: "#tarangire" },
+    { name: t("zanzibar"), href: "#zanzibar" }
   ]
 
   return (
@@ -88,7 +92,7 @@ function ToursDropdown({ active }: { active: boolean }) {
           after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-[#c6b892]
           after:transition-all after:duration-300
           ${active ? "after:w-full" : "after:w-0 hover:after:w-full"}`}>
-        Tours
+        {t("tours", { scope: ".." })}
       </button>
 
       <div

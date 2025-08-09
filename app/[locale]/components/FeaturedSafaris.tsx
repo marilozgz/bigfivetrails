@@ -1,4 +1,6 @@
 "use client"
+
+import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 
@@ -7,31 +9,17 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"]
 })
 
-const safaris = [
-  {
-    title: "Serengeti Luxury Escape",
-    tagline: "Witness the Great Migration in style",
-    img: "/images/serengetideluxe.jpg",
-    badge: "Most Popular",
-    link: "#serengeti"
-  },
-  {
-    title: "Ngorongoro Crater Adventure",
-    tagline: "Explore the Eden of Africa",
-    img: "/images/ngorongoro.jpg",
-    badge: "Limited Dates 2025",
-    link: "#ngorongoro"
-  },
-  {
-    title: "Tarangire & Lake Manyara",
-    tagline: "Elephants, baobabs & flamingos",
-    img: "/images/tarangire.jpg",
-    badge: "New",
-    link: "#tarangire"
-  }
-]
-
 export default function FeaturedSafaris() {
+  const t = useTranslations("featuredSafaris")
+
+  const safaris = t.raw("items") as {
+    title: string
+    tagline: string
+    img: string
+    badge: string
+    link: string
+  }[]
+
   return (
     <section
       id='featured'
@@ -41,11 +29,10 @@ export default function FeaturedSafaris() {
         <div className='text-center mb-12'>
           <h2
             className={`${cormorant.className} text-3xl sm:text-4xl md:text-5xl font-semibold text-[#f6f3ee]`}>
-            Featured Safari Experiences
+            {t("title")}
           </h2>
           <p className='mt-3 text-[#f6f3ee]/80 text-lg max-w-2xl mx-auto'>
-            Hand-picked journeys to showcase the best of Tanzania — from vast
-            plains to hidden gems.
+            {t("subtitle")}
           </p>
         </div>
 
