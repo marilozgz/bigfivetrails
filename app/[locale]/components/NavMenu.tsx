@@ -1,4 +1,5 @@
 "use client"
+import { Link as LocaleLink } from "@/navigation"
 import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 
@@ -40,9 +41,9 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
     <div className={`hidden lg:flex items-center gap-8 ${fontClass}`}>
       <ToursDropdown active={active === "tours"} />
       {sections.slice(1).map((s) => (
-        <a
+        <LocaleLink
           key={s.id}
-          href={s.id === "destinations" ? `/safaris` : `#${s.id}`}
+          href={s.id === "destinations" ? "/safaris" : `/#${s.id}`}
           className={`relative text-sm font-medium text-[#c6b892]/95 hover:text-[#c6b892] transition
             after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-[#c6b892]
             after:transition-all after:duration-300
@@ -50,7 +51,7 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
               active === s.id ? "after:w-full" : "after:w-0 hover:after:w-full"
             }`}>
           {s.label}
-        </a>
+        </LocaleLink>
       ))}
     </div>
   )

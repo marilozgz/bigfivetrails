@@ -18,11 +18,25 @@ type IGItem = {
 
 export default function InstagramFeed() {
   const [items, setItems] = useState<IGItem[]>([])
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   useEffect(() => {
     fetch("/api/instagram")
       .then((r) => r.json())
       .then((d) => setItems(d.items || []))
   }, [])
+  // Cargar script de Elfsight solo en cliente para evitar desajustes SSR/CSR
+  useEffect(() => {
+    if (!mounted) return
+    if (document.getElementById("elfsight-platform")) return
+    const s = document.createElement("script")
+    s.src = "https://static.elfsight.com/platform/platform.js"
+    s.async = true
+    s.id = "elfsight-platform"
+    document.body.appendChild(s)
+  }, [mounted])
 
   return (
     <section
@@ -64,6 +78,13 @@ export default function InstagramFeed() {
             </motion.a>
           ))}
         </div>
+        {mounted && (
+          <div
+            className='elfsight-app-c5dead4b-e52f-495b-803f-34e19ce7c7d7'
+            data-elfsight-app-lazy
+            suppressHydrationWarning
+          />
+        )}
 
         <a
           href='https://instagram.com/bigfivetrails'

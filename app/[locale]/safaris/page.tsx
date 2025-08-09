@@ -103,6 +103,7 @@ export default function DestinationsPage() {
   const t = useTranslations("safaris")
   // Filters
   const [query, setQuery] = useState("")
+  const [filtersOpen, setFiltersOpen] = useState(false)
   const [selectedLocations, setSelectedLocations] = useState<Set<string>>(
     new Set()
   )
@@ -205,8 +206,24 @@ export default function DestinationsPage() {
       <section className='mx-auto max-w-7xl '>
         <div className='flex flex-col md:flex-row gap-8'>
           {/* ---------- Left: Refine sidebar (professional look) ---------- */}
+          {/* Mobile toggle */}
+          <div className='md:hidden mb-2 flex items-center justify-between px-4'>
+            <button
+              onClick={() => setFiltersOpen((v) => !v)}
+              className='rounded-md border border-[var(--gold)]/50 px-3 py-2 text-sm font-semibold text-[#1f221b] bg-white'>
+              {t("filters.title")}
+            </button>
+            <button
+              onClick={clearAll}
+              className='text-xs underline underline-offset-4'>
+              {t("filters.clear")}
+            </button>
+          </div>
+
           <aside
-            className={`w-full md:w-72 bg-transparent md:border-r md:border-[var(--accent-color)]/20 p-0 md:pr-6`}>
+            className={`${
+              filtersOpen ? "block" : "hidden"
+            } md:block w-full md:w-72 bg-transparent md:border-r md:border-[var(--accent-color)]/20 px-4 md:px-0 md:pr-6`}>
             <header className='mb-4 flex items-center justify-between'>
               <h2 className='text-base font-semibold tracking-wide'>
                 {t("filters.title")}
@@ -372,7 +389,7 @@ export default function DestinationsPage() {
           </aside>
 
           {/* ---------- Right: Results & cards (scroll) ---------- */}
-          <main className='flex-1 overflow-visible pr-0 md:pl-6'>
+          <main className='flex-1 overflow-visible px-4 md:px-0 md:pl-6'>
             {/* Top bar */}
             <div className='mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
               <p className='text-sm'>
@@ -476,10 +493,10 @@ function SafariCardRow({ safari }: { safari: Safari }) {
   const route = safari.route ?? []
 
   return (
-    <article className='relative overflow-hidden rounded-xl border border-[var(--accent-color)]/50 bg-white shadow-sm h-[400px] text-[#1f221b]/95'>
+    <article className='relative overflow-hidden rounded-xl border border-[var(--accent-color)]/50 bg-white shadow-sm md:h-[400px] text-[#1f221b]/95'>
       <div className='grid grid-cols-1 md:grid-cols-[1.7fr_2.3fr] h-full'>
         {/* Media: ~half of previous height */}
-        <div className='relative h-full min-h-[260px]'>
+        <div className='relative min-h-[220px] md:h-full'>
           <Image
             fill
             sizes='(min-width: 1024px) 40vw, 100vw'
@@ -493,18 +510,29 @@ function SafariCardRow({ safari }: { safari: Safari }) {
               {t("card.popular")}
             </span>
           )}
+          {/* Price badge overlay (mobile) */}
+          <div className='absolute right-0 top-0 md:hidden'>
+            <div className='rounded-bl-3xl bg-[var(--terra)] px-4 py-2 text-right text-white shadow-md'>
+              <div className='text-xs uppercase tracking-widest opacity-90'>
+                {t("card.from")}
+              </div>
+              <div className='text-xl font-extrabold leading-none'>
+                {formatCurrency(safari.priceFrom)}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Content */}
-        <div className='relative bg-white h-full p-6 md:p-8 pt-24 md:pt-28 flex flex-col text-[#1f221b]/95'>
-          {/* Price badge */}
-          <div className='absolute right-0 top-0'>
-            <div className='relative translate-x-2 -translate-y-2'>
+        <div className='relative bg-white h-full p-6 md:p-8 pt-4 md:pt-24 flex flex-col text-[#1f221b]/95'>
+          {/* Price badge (desktop only) */}
+          <div className='hidden md:block md:absolute md:right-0 md:top-0'>
+            <div className='relative md:translate-x-2 md:-translate-y-2'>
               <div className='rounded-bl-3xl bg-[var(--terra)] px-6 py-5 text-right text-white shadow-md min-w-[150px]'>
-                <div className='text-xs md:text-sm uppercase tracking-widest opacity-90'>
+                <div className='text-sm uppercase tracking-widest opacity-90'>
                   {t("card.from")}
                 </div>
-                <div className='text-2xl md:text-3xl font-extrabold leading-none'>
+                <div className='text-3xl font-extrabold leading-none'>
                   {formatCurrency(safari.priceFrom)}
                 </div>
               </div>
@@ -512,12 +540,12 @@ function SafariCardRow({ safari }: { safari: Safari }) {
           </div>
 
           <h3
-            className={`mb-4 ${cormorant.className} text-2xl md:text-3xl font-semibold tracking-wide text-[#1f221b]`}>
+            className={`mb-2 ${cormorant.className} text-lg md:text-3xl font-semibold tracking-wide text-[#1f221b] line-clamp-2 md:line-clamp-none`}>
             {safari.durationDays} {t("card.days")} •{" "}
             {safari.title.toUpperCase()}
           </h3>
 
-          <ul className='mb-4 list-disc pl-5 text-sm leading-6'>
+          <ul className='mb-3 list-disc pl-5 text-sm leading-6 md:mb-4'>
             {highlights.slice(0, 3).map((h) => (
               <li key={h}>{h}</li>
             ))}

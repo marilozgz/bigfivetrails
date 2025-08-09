@@ -2,6 +2,7 @@
 import { useLocale, useTranslations } from "next-intl"
 import { usePathname, useRouter } from "next/navigation"
 
+import { Link as LocaleLink } from "@/navigation"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
@@ -126,14 +127,14 @@ export default function Header() {
       {/* Mobile drawer */}
       <div
         className={
-          "fixed inset-0 z-40 lg:hidden transition " +
+          "fixed inset-0 z-[60] lg:hidden h-full transition isolate " +
           (open ? "pointer-events-auto" : "pointer-events-none")
         }>
-        {/* Backdrop */}
+        {/* Backdrop: área fuera del panel con blur claro */}
         <div
           onClick={() => setOpen(false)}
           className={
-            "absolute inset-0 bg-black/40 transition-opacity " +
+            "absolute inset-0 right-80 bg-white/25 backdrop-blur-md transition-opacity " +
             (open ? "opacity-100" : "opacity-0")
           }
         />
@@ -141,9 +142,13 @@ export default function Header() {
         {/* Panel */}
         <aside
           className={
-            "absolute right-0 top-0 h-full w-80 max-w-[85%] bg-[#1f221b] text-[#e7c6c2] shadow-xl transition-transform " +
+            "absolute right-0 top-0 h-full w-full bg-[#1f221b] text-[#e7c6c2] shadow-2xl ring-1 ring-black/20 transition-transform z-[70] " +
             (open ? "translate-x-0" : "translate-x-full")
           }>
+          <div
+            className='absolute inset-0 bg-[#1f221b]/40 opacity-100 pointer-events-none'
+            aria-hidden
+          />
           <div className='flex items-center justify-between p-4 border-b border-[#c6b892]/20'>
             <Link
               href='/'
@@ -166,30 +171,30 @@ export default function Header() {
             </button>
           </div>
 
-          <div className={`p-4 space-y-1 ${cormorant.className}`}>
+          <div className={`p-4 space-y-1 ${cormorant.className} bg-[#1f221b]`}>
             <MobileLink
               onClick={() => setOpen(false)}
-              href='#tours'>
+              href='/#tours'>
               {t("nav.tours")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
-              href='#destinations'>
+              href='/safaris'>
               {t("nav.destinations")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
-              href='#why-us'>
+              href='/#why-us'>
               {t("nav.whyUs")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
-              href='#reviews'>
+              href='/#reviews'>
               {t("nav.reviews")}
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
-              href='#contact'>
+              href='/#contact'>
               {t("nav.contact")}
             </MobileLink>
             <div className='flex gap-3 pt-4'>
@@ -197,15 +202,9 @@ export default function Header() {
                 href='https://wa.me/255000000'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex-1 rounded-full bg-green-500/90 px-3 py-2 text-white text-sm font-semibold text-center'>
-                {t("actions.whatsapp")}
-              </a>
-              <a
-                href='https://t.me/username'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='flex-1 rounded-full bg-blue-500/90 px-3 py-2 text-white text-sm font-semibold text-center'>
-                Telegram
+                className='flex-1 rounded-full bg-green-500/90 px-3 py-2 text-white text-sm font-semibold text-center inline-flex items-center justify-center gap-2'>
+                <FaWhatsapp aria-hidden />
+                <span>{t("actions.whatsapp")}</span>
               </a>
             </div>
             <select
@@ -223,7 +222,7 @@ export default function Header() {
             </select>
           </div>
 
-          <div className='p-4'>
+          <div className='p-4 bg-[#1f221b]'>
             <a
               href='#quote'
               onClick={() => setOpen(false)}
@@ -251,12 +250,12 @@ function MobileLink({
   onClick: () => void
 }) {
   return (
-    <a
+    <LocaleLink
       href={href}
       onClick={onClick}
       className='block rounded-md px-3 py-3 text-base font-medium text-[#f6f3ee] hover:bg-[#c6b892]/10'>
       {children}
-    </a>
+    </LocaleLink>
   )
 }
 

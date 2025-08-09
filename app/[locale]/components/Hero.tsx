@@ -23,7 +23,6 @@ export default function Hero() {
             src='/videos/serengeti.mp4'
             type='video/mp4'
           />
-          {t("fallback")}
         </video>
         <div className='absolute inset-0 bg-gradient-to-t from-[#1f221b] via-[#1f221b]/40 to-transparent' />
       </div>
@@ -50,8 +49,8 @@ export default function Hero() {
           {t.rich("headline", {
             strong: (chunks) => (
               <span className='relative inline-block'>
-                <span className='relative z-[1] px-2'>{chunks}</span>
-                <span className='absolute inset-x-1 bottom-1 h-3 bg-[#e7c6c2]/70 -skew-x-6 rounded' />
+                <span className='relative z-[1] '>{chunks}</span>
+                <span className='absolute inset-x-0 top-8 h-3 bg-[#e7c6c2]/70 -skew-x-6 rounded' />
               </span>
             )
           })}
