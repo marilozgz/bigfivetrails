@@ -50,7 +50,7 @@ export default function Hero() {
             strong: (chunks) => (
               <span className='relative inline-block'>
                 <span className='relative z-[1] '>{chunks}</span>
-                <span className='absolute inset-x-0 top-8 h-3 bg-[#e7c6c2]/70 -skew-x-6 rounded' />
+                <span className='absolute inset-x-0 bottom-2 h-3 bg-[#e7c6c2]/70 -skew-x-6 rounded' />
               </span>
             )
           })}
