@@ -40,7 +40,7 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
         <a
           key={s.id}
           href={s.id === "destinations" ? `/safaris` : `#${s.id}`}
-          className={`relative text-sm font-medium text-[#1f221b]/95 hover:text-[#1f221b] transition
+          className={`relative text-sm font-medium text-[#c6b892]/95 hover:text-[#c6b892] transition
             after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-[#c6b892]
             after:transition-all after:duration-300
             ${
@@ -84,7 +84,7 @@ function ToursDropdown({ active }: { active: boolean }) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup='menu'
         aria-expanded={open}
-        className={`relative text-sm font-medium text-[#1f221b]/95 hover:text-[#1f221b] transition
+        className={`relative text-sm font-medium text-[#c6b892]/95 hover:text-[#c6b892] transition
           after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-[#c6b892]
           after:transition-all after:duration-300
           ${active ? "after:w-full" : "after:w-0 hover:after:w-full"}`}>

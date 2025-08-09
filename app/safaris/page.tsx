@@ -218,8 +218,7 @@ export default function DestinationsPage() {
         ["--green" as any]: COLORS.green,
         ["--terra" as any]: COLORS.terracotta
       }}>
-      {/* Spacer to avoid fixed header overlap (adjust to your header heights) */}
-      <div className='h-16 md:h-[96px]' />
+      {/* Mini-hero ya maneja el espacio bajo el header en layout */}
 
       <section className='mx-auto max-w-7xl '>
         <div className='flex flex-col md:flex-row gap-8'>
