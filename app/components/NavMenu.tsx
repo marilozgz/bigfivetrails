@@ -39,8 +39,8 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
       {sections.slice(1).map((s) => (
         <a
           key={s.id}
-          href={`#${s.id}`}
-          className={`relative text-sm font-medium text-[#f6f3ee]/95 hover:text-white transition
+          href={s.id === "destinations" ? `/safaris` : `#${s.id}`}
+          className={`relative text-sm font-medium text-[#1f221b]/95 hover:text-[#1f221b] transition
             after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-[#c6b892]
             after:transition-all after:duration-300
             ${
@@ -84,14 +84,17 @@ function ToursDropdown({ active }: { active: boolean }) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup='menu'
         aria-expanded={open}
-        className={`relative text-sm font-medium text-[#f6f3ee]/95 hover:text-white transition
+        className={`relative text-sm font-medium text-[#1f221b]/95 hover:text-[#1f221b] transition
           after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:bg-[#c6b892]
           after:transition-all after:duration-300
           ${active ? "after:w-full" : "after:w-0 hover:after:w-full"}`}>
         Tours
       </button>
 
-      <div className='absolute left-0 top-full pt-2'>
+      <div
+        className={`absolute left-0 top-full pt-2 ${
+          open ? "pointer-events-auto" : "pointer-events-none"
+        }`}>
         <div
           className={
             "w-64 rounded-lg bg-[#1f221b] border border-[#c6b892]/30 shadow-lg " +
@@ -101,6 +104,7 @@ function ToursDropdown({ active }: { active: boolean }) {
           }
           role='menu'
           aria-label='Tours'
+          aria-hidden={!open}
           style={{ transition: "opacity 120ms ease, transform 120ms ease" }}>
           <ul className='py-2'>
             {packages.map((p) => (

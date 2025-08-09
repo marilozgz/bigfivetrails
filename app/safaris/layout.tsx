@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import Header from "./components/Header"
-import "./globals.css"
+import Header from "../components/Header"
+import "../globals.css"
 
 export const metadata: Metadata = {
   title: "Big Five Trails",

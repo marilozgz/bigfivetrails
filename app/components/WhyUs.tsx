@@ -40,7 +40,7 @@ export default function WhyUs() {
   return (
     <section
       id='why-us'
-      className='bg-[#f3dedb] py-20'>
+      className='bg-[#E5BDB5] py-20'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Heading */}
         <motion.div
@@ -68,9 +68,9 @@ export default function WhyUs() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className='rounded-xl bg-white/60 border border-[#e7c6c2] p-6 shadow-sm hover:shadow-md transition-shadow'>
+              className='rounded-xl bg-white/60 border border-[#E5BDB5] p-6 shadow-sm hover:shadow-md transition-shadow'>
               <div className='flex items-center gap-3 text-[#1f221b]'>
-                <span className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#e7c6c2]'>
+                <span className='inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#E5BDB5]'>
                   {it.icon}
                 </span>
                 <h3

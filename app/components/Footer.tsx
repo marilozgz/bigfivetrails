@@ -21,7 +21,7 @@ export default function Footer() {
         <div>
           <div className='flex items-center gap-3'>
             <Image
-              src='/logo.jpg'
+              src='/logo.png'
               alt='BigFiveTrails logo'
               width={40}
               height={40}
