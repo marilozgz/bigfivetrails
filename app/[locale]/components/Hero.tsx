@@ -23,7 +23,7 @@ export default function Hero() {
             src='/videos/serengeti.mp4'
             type='video/mp4'
           />
-          Your browser does not support the video tag.
+          {t("fallback")}
         </video>
         <div className='absolute inset-0 bg-gradient-to-t from-[#1f221b] via-[#1f221b]/40 to-transparent' />
       </div>

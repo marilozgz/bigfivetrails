@@ -159,10 +159,10 @@ export default function Header() {
               <span className='font-semibold'>{t("brand.title")}</span>
             </Link>
             <button
-              aria-label='Close menu'
+              aria-label={t("actions.closeMenu", { fallback: "Close menu" })}
               onClick={() => setOpen(false)}
               className='rounded-md border border-[#c6b892]/30 px-2 py-1 hover:bg-[#c6b892]/10'>
-              Close
+              {t("actions.close", { fallback: "Close" })}
             </button>
           </div>
 

@@ -1,9 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
+import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import { useMemo, useState } from "react"
+import {
+  formatCurrency,
+  sortByKey,
+  type SortKey,
+  useUniqueByKey
+} from "./utils"
 
 /** ---------------- Palette ---------------- */
 const COLORS = {
@@ -26,13 +33,31 @@ interface Safari {
   title: string
   location: string
   durationDays: number
-  experienceTypes: string[]
+  experienceTypes: ExperienceTypeKey[]
   priceFrom: number
   thumbnail: string
   popular?: boolean
-  highlights?: string[]
+  highlights?: HighlightKey[]
   route?: string[]
 }
+
+type ExperienceTypeKey =
+  | "lodge"
+  | "photographic"
+  | "smallGroup"
+  | "adventure"
+  | "camping"
+
+type HighlightKey =
+  | "bigFive"
+  | "privateGuide"
+  | "greatFirstTimers"
+  | "twiceDailyDrives"
+  | "maraRiverView"
+  | "budgetFriendly"
+  | "kiliFoothills"
+  | "nightInBush"
+  | "customizableCamp"
 
 const SAFARIS: Safari[] = [
   {
@@ -40,15 +65,11 @@ const SAFARIS: Safari[] = [
     title: "Serengeti Classic",
     location: "Tanzania",
     durationDays: 7,
-    experienceTypes: ["Lodge", "Photographic"],
+    experienceTypes: ["lodge", "photographic"],
     priceFrom: 2450,
     popular: true,
     thumbnail: "/images/safaris/safariclassic.jpg",
-    highlights: [
-      "Big Five Encounters",
-      "Private driver‑guide",
-      "Great for first‑timers"
-    ],
+    highlights: ["bigFive", "privateGuide", "greatFirstTimers"],
     route: ["Arusha", "Tarangire", "Central Serengeti", "Ngorongoro"]
   },
   {
@@ -56,14 +77,10 @@ const SAFARIS: Safari[] = [
     title: "Masai Mara Express",
     location: "Kenya",
     durationDays: 4,
-    experienceTypes: ["Lodge", "Small Group"],
+    experienceTypes: ["lodge", "smallGroup"],
     priceFrom: 1190,
     thumbnail: "/images/safaris/masaimara.jpg",
-    highlights: [
-      "Game drives twice a day",
-      "Mara River view",
-      "Budget friendly"
-    ],
+    highlights: ["twiceDailyDrives", "maraRiverView", "budgetFriendly"],
     route: ["Nairobi", "Masai Mara"]
   },
   {
@@ -71,57 +88,19 @@ const SAFARIS: Safari[] = [
     title: "Kilimanjaro Adventure + Safari",
     location: "Tanzania",
     durationDays: 10,
-    experienceTypes: ["Adventure", "Camping"],
+    experienceTypes: ["adventure", "camping"],
     priceFrom: 3290,
     thumbnail: "/images/safaris/kilimanjaro.jpg",
-    highlights: [
-      "Kili foothills hike",
-      "Night in the bush",
-      "Customizable camp setup"
-    ],
+    highlights: ["kiliFoothills", "nightInBush", "customizableCamp"],
     route: ["Arusha", "Manyara", "Serengeti", "Ngorongoro"]
   }
 ]
 
-/** ---------------- Utils ---------------- */
-const currency = (n: number) =>
-  new Intl.NumberFormat("en-GB", { style: "currency", currency: "EUR" }).format(
-    n
-  )
-
-function useUnique<T extends keyof Safari>(list: Safari[], key: T) {
-  return useMemo(
-    () => Array.from(new Set(list.map((s) => String(s[key])))).sort(),
-    [list, key]
-  )
-}
-
-type SortKey =
-  | "popularity"
-  | "priceAsc"
-  | "priceDesc"
-  | "durationAsc"
-  | "durationDesc"
-
-function sortSafaris(list: Safari[], key: SortKey) {
-  const arr = [...list]
-  switch (key) {
-    case "priceAsc":
-      return arr.sort((a, b) => a.priceFrom - b.priceFrom)
-    case "priceDesc":
-      return arr.sort((a, b) => b.priceFrom - a.priceFrom)
-    case "durationAsc":
-      return arr.sort((a, b) => a.durationDays - b.durationDays)
-    case "durationDesc":
-      return arr.sort((a, b) => b.durationDays - a.durationDays)
-    default:
-      // popularity => keep original/mock order
-      return arr
-  }
-}
+/** ---------------- i18n helpers (moved utils to ./utils) ---------------- */
 
 /** ---------------- Page ---------------- */
 export default function DestinationsPage() {
+  const t = useTranslations("safaris")
   // Filters
   const [query, setQuery] = useState("")
   const [selectedLocations, setSelectedLocations] = useState<Set<string>>(
@@ -140,7 +119,7 @@ export default function DestinationsPage() {
   const [sortKey, setSortKey] = useState<SortKey>("popularity")
 
   // Options
-  const locations = useUnique(SAFARIS, "location")
+  const locations = useUniqueByKey(SAFARIS, "location")
   const experiences = useMemo(
     () => Array.from(new Set(SAFARIS.flatMap((s) => s.experienceTypes))).sort(),
     []
@@ -156,8 +135,11 @@ export default function DestinationsPage() {
   // Filter logic
   const filtered = useMemo(() => {
     return SAFARIS.filter((s) => {
+      const expLabels = s.experienceTypes
+        .map((k) => t(`catalog.experienceTypes.${k}`))
+        .join(" ")
       const matchesQuery = query
-        ? [s.title, s.location, s.experienceTypes.join(" ")]
+        ? [s.title, s.location, expLabels]
             .join(" ")
             .toLowerCase()
             .includes(query.toLowerCase())
@@ -176,10 +158,10 @@ export default function DestinationsPage() {
         matchesQuery && matchesLocation && matchesExperience && matchesDuration
       )
     })
-  }, [query, selectedLocations, selectedExperiences, minDays, maxDays])
+  }, [query, selectedLocations, selectedExperiences, minDays, maxDays, t])
 
   const sorted = useMemo(
-    () => sortSafaris(filtered, sortKey),
+    () => sortByKey(filtered, sortKey),
     [filtered, sortKey]
   )
 
@@ -227,25 +209,25 @@ export default function DestinationsPage() {
             className={`w-full md:w-72 bg-transparent md:border-r md:border-[var(--accent-color)]/20 p-0 md:pr-6`}>
             <header className='mb-4 flex items-center justify-between'>
               <h2 className='text-base font-semibold tracking-wide'>
-                Refine results
+                {t("filters.title")}
               </h2>
               <button
                 className='text-xs underline underline-offset-4 hover:opacity-80 hover:text-[#1f221b]'
                 onClick={clearAll}
                 aria-label='Clear all filters'>
-                Clear all
+                {t("filters.clear")}
               </button>
             </header>
 
             {/* Search */}
             <div className='mb-5'>
               <label className='mb-1 block text-xs font-medium opacity-80'>
-                Search
+                {t("filters.search.label")}
               </label>
               <div className='relative'>
                 <input
                   className='w-full rounded-lg border border-[var(--gold)]/50 bg-white px-3 py-2 text-sm placeholder:opacity-60 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40'
-                  placeholder='Search safaris...'
+                  placeholder={t("filters.search.placeholder")}
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
@@ -256,7 +238,7 @@ export default function DestinationsPage() {
             </div>
 
             {/* Locations */}
-            <Fieldset title='Location'>
+            <Fieldset title={t("filters.location")}>
               <div className='space-y-2'>
                 {locations.map((loc) => {
                   const checked = selectedLocations.has(loc)
@@ -291,7 +273,7 @@ export default function DestinationsPage() {
             </Fieldset>
 
             {/* Experience */}
-            <Fieldset title='Experience'>
+            <Fieldset title={t("filters.experience")}>
               <div className='space-y-2'>
                 {experiences.map((exp) => {
                   const checked = selectedExperiences.has(exp)
@@ -313,7 +295,7 @@ export default function DestinationsPage() {
                           setSelectedExperiences(next)
                         }}
                       />
-                      <span>{exp}</span>
+                      <span>{t(`catalog.experienceTypes.${exp}`)}</span>
                     </label>
                   )
                 })}
@@ -321,10 +303,12 @@ export default function DestinationsPage() {
             </Fieldset>
 
             {/* Duration */}
-            <Fieldset title='Duration (days)'>
+            <Fieldset title={t("filters.duration")}>
               <div className='grid grid-cols-2 gap-2'>
                 <div>
-                  <label className='mb-1 block text-xs opacity-70'>Min</label>
+                  <label className='mb-1 block text-xs opacity-70'>
+                    {t("filters.min")}
+                  </label>
                   <input
                     type='number'
                     className='w-full rounded-lg border border-[var(--gold)]/50 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40'
@@ -338,7 +322,9 @@ export default function DestinationsPage() {
                   />
                 </div>
                 <div>
-                  <label className='mb-1 block text-xs opacity-70'>Max</label>
+                  <label className='mb-1 block text-xs opacity-70'>
+                    {t("filters.max")}
+                  </label>
                   <input
                     type='number'
                     className='w-full rounded-lg border border-[var(--gold)]/50 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--gold)]/40'
@@ -357,7 +343,7 @@ export default function DestinationsPage() {
             {/* Active chips */}
             <div className='mt-4'>
               <p className='text-xs font-medium opacity-80 mb-2'>
-                Active filters
+                {t("filters.active")}
               </p>
               <div className='flex flex-wrap gap-2'>
                 {Array.from(selectedLocations).map((loc) => (
@@ -376,7 +362,11 @@ export default function DestinationsPage() {
                 ))}
                 {!selectedLocations.size &&
                   !selectedExperiences.size &&
-                  !query && <span className='text-xs opacity-50'>None</span>}
+                  !query && (
+                    <span className='text-xs opacity-50'>
+                      {t("filters.none")}
+                    </span>
+                  )}
               </div>
             </div>
           </aside>
@@ -386,26 +376,29 @@ export default function DestinationsPage() {
             {/* Top bar */}
             <div className='mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
               <p className='text-sm'>
-                <span className='font-semibold'>{sorted.length}</span> results
                 {query ? (
                   <>
-                    {" "}
-                    for <span className='font-semibold'>“{query}”</span>
+                    {t("results.countFor", {
+                      count: sorted.length,
+                      query
+                    })}
                   </>
-                ) : null}
+                ) : (
+                  t("results.count", { count: sorted.length })
+                )}
               </p>
 
               <label className='flex items-center gap-2 text-sm'>
-                <span className='opacity-80'>Sort by:</span>
+                <span className='opacity-80'>{t("sort.label")}</span>
                 <select
                   value={sortKey}
                   onChange={(e) => setSortKey(e.target.value as SortKey)}
                   className={`rounded-md border border-[var(--accent-color)]/50 bg-white px-2 py-1 text-sm ${cormorant.className} hover:text-[#1f221b]`}>
-                  <option value='popularity'>Popularity</option>
-                  <option value='priceAsc'>Price (low → high)</option>
-                  <option value='priceDesc'>Price (high → low)</option>
-                  <option value='durationAsc'>Duration (short → long)</option>
-                  <option value='durationDesc'>Duration (long → short)</option>
+                  <option value='popularity'>{t("sort.popularity")}</option>
+                  <option value='priceAsc'>{t("sort.priceAsc")}</option>
+                  <option value='priceDesc'>{t("sort.priceDesc")}</option>
+                  <option value='durationAsc'>{t("sort.durationAsc")}</option>
+                  <option value='durationDesc'>{t("sort.durationDesc")}</option>
                 </select>
               </label>
             </div>
@@ -419,9 +412,7 @@ export default function DestinationsPage() {
                 />
               ))}
               {sorted.length === 0 && (
-                <p className='text-sm opacity-70'>
-                  No safaris match your filters.
-                </p>
+                <p className='text-sm opacity-70'>{t("results.empty")}</p>
               )}
             </div>
 
@@ -473,11 +464,15 @@ function Chip({
 }
 
 function SafariCardRow({ safari }: { safari: Safari }) {
-  const highlights = safari.highlights ?? [
-    "Expert local guide",
-    "Daily game drives",
-    "Flexible departures"
-  ]
+  const t = useTranslations("safaris")
+  const highlightKeys =
+    safari.highlights ??
+    ([
+      "bigFive",
+      "twiceDailyDrives",
+      "customizableCamp"
+    ] as unknown as HighlightKey[])
+  const highlights = highlightKeys.map((key) => t(`catalog.highlights.${key}`))
   const route = safari.route ?? []
 
   return (
@@ -495,7 +490,7 @@ function SafariCardRow({ safari }: { safari: Safari }) {
           />
           {safari.popular && (
             <span className='absolute left-3 top-3 rounded-md bg-[#e9f0e4] px-2 py-1 text-xs font-semibold text-[#2e4e1f] shadow'>
-              Popular
+              {t("card.popular")}
             </span>
           )}
         </div>
@@ -507,10 +502,10 @@ function SafariCardRow({ safari }: { safari: Safari }) {
             <div className='relative translate-x-2 -translate-y-2'>
               <div className='rounded-bl-3xl bg-[var(--terra)] px-6 py-5 text-right text-white shadow-md min-w-[150px]'>
                 <div className='text-xs md:text-sm uppercase tracking-widest opacity-90'>
-                  From
+                  {t("card.from")}
                 </div>
                 <div className='text-2xl md:text-3xl font-extrabold leading-none'>
-                  {currency(safari.priceFrom)}
+                  {formatCurrency(safari.priceFrom)}
                 </div>
               </div>
             </div>
@@ -518,7 +513,8 @@ function SafariCardRow({ safari }: { safari: Safari }) {
 
           <h3
             className={`mb-4 ${cormorant.className} text-2xl md:text-3xl font-semibold tracking-wide text-[#1f221b]`}>
-            {safari.durationDays} DAYS • {safari.title.toUpperCase()}
+            {safari.durationDays} {t("card.days")} •{" "}
+            {safari.title.toUpperCase()}
           </h3>
 
           <ul className='mb-4 list-disc pl-5 text-sm leading-6'>
@@ -542,7 +538,7 @@ function SafariCardRow({ safari }: { safari: Safari }) {
 
           <div className='mt-auto'>
             <button className='inline-flex w-full items-center justify-center rounded-md bg-[var(--green)] px-4 py-3 text-sm font-extrabold tracking-wide text-white hover:brightness-110'>
-              VIEW THIS TRIP
+              {t("card.viewTrip")}
             </button>
           </div>
         </div>

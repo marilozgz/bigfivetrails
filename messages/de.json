@@ -4,13 +4,78 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "safaris": {
+    "catalog": {
+      "experienceTypes": {
+        "lodge": "Lodge",
+        "photographic": "Fotografisch",
+        "smallGroup": "Kleine Gruppe",
+        "adventure": "Abenteuer",
+        "camping": "Camping"
+      },
+      "highlights": {
+        "bigFive": "Begegnungen mit den Big Five",
+        "privateGuide": "Privater Fahrer‑Guide",
+        "greatFirstTimers": "Ideal für Erstbesucher",
+        "twiceDailyDrives": "Pirschfahrten zweimal täglich",
+        "maraRiverView": "Blick auf den Mara‑Fluss",
+        "budgetFriendly": "Preiswert",
+        "kiliFoothills": "Wanderung an den Ausläufern des Kili",
+        "nightInBush": "Nacht in der Wildnis",
+        "customizableCamp": "Anpassbares Camp‑Setup"
+      }
+    },
+    "hero": {
+      "alt": "Reiseziele & Safaris",
+      "title": "Handverlesene Reiseziele · Unvergessliche Safaris",
+      "description": "Entdecken Sie unsere kuratierte Auswahl an Safaris in Tansania und Ostafrika. Von kurzen Ausflügen bis zu längeren Abenteuern – jedes Itinerar ist darauf ausgelegt, Sie mitten ins Herz der Wildnis zu führen – mit Komfort, Stil und authentischen Erlebnissen."
+    },
+    "filters": {
+      "title": "Ergebnisse verfeinern",
+      "clear": "Alles löschen",
+      "search": { "label": "Suchen", "placeholder": "Safaris suchen..." },
+      "location": "Reiseziel",
+      "experience": "Erlebnis",
+      "duration": "Dauer (Tage)",
+      "min": "Min",
+      "max": "Max",
+      "active": "Aktive Filter",
+      "none": "Keine"
+    },
+    "results": {
+      "count": "{count} Ergebnisse",
+      "countFor": "{count} Ergebnisse für \u201C{query}\u201D",
+      "empty": "Keine Safaris entsprechen deinen Filtern."
+    },
+    "sort": {
+      "label": "Sortieren nach:",
+      "popularity": "Popularität",
+      "priceAsc": "Preis (niedrig → hoch)",
+      "priceDesc": "Preis (hoch → niedrig)",
+      "durationAsc": "Dauer (kurz → lang)",
+      "durationDesc": "Dauer (lang → kurz)"
+    },
+    "card": {
+      "from": "Ab",
+      "days": "TAGE",
+      "popular": "Beliebt",
+      "viewTrip": "REISE ANSEHEN",
+      "defaultHighlights": [
+        "Experten-Guide vor Ort",
+        "Tägliche Pirschfahrten",
+        "Flexible Abreisen"
+      ]
+    }
+  },
   "brand": {
     "title": "bigfivetrails",
     "subtitle": "Safari-Erlebnisse"
   },
   "actions": {
     "requestQuote": "Angebot anfordern",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "WhatsApp",
+    "close": "Schließen",
+    "closeMenu": "Menü schließen"
   },
   "nav": {
     "tours": "Touren",
@@ -39,7 +104,8 @@
       "rating": "Mit 5★ von Reisenden bewertet",
       "badge": "Lizenzierter TALA-Operator • 24/7 Unterstützung vor Ort"
     },
-    "scroll": "Scrollen"
+    "scroll": "Scrollen",
+    "fallback": "Ihr Browser unterstützt das Video-Tag nicht."
   },
   "featuredSafaris": {
     "title": "Ausgewählte Safari-Erlebnisse",
@@ -68,6 +134,7 @@
       }
     ]
   },
+
   "whyUs": {
     "title": "Warum mit uns reisen?",
     "subtitle": "Honest expertise, thoughtful design and seamless execution—so you can focus on the magic of Tanzania.",

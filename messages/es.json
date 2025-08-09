@@ -4,13 +4,78 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "safaris": {
+    "catalog": {
+      "experienceTypes": {
+        "lodge": "Lodge",
+        "photographic": "Fotográfico",
+        "smallGroup": "Grupo reducido",
+        "adventure": "Aventura",
+        "camping": "Camping"
+      },
+      "highlights": {
+        "bigFive": "Encuentros con los Cinco Grandes",
+        "privateGuide": "Conductor‑guía privado",
+        "greatFirstTimers": "Ideal para primeros viajes",
+        "twiceDailyDrives": "Safaris dos veces al día",
+        "maraRiverView": "Vista al río Mara",
+        "budgetFriendly": "Económico",
+        "kiliFoothills": "Caminata en las faldas del Kili",
+        "nightInBush": "Noche en la sabana",
+        "customizableCamp": "Campamento personalizable"
+      }
+    },
+    "hero": {
+      "alt": "Destinos y Safaris",
+      "title": "Destinos seleccionados · Safaris inolvidables",
+      "description": "Explora nuestra selección curada de safaris por Tanzania y África Oriental. Desde escapadas cortas hasta aventuras prolongadas, cada itinerario está diseñado para sumergirte en el corazón de lo salvaje — con comodidad, estilo y experiencias auténticas."
+    },
+    "filters": {
+      "title": "Refinar resultados",
+      "clear": "Borrar todo",
+      "search": { "label": "Buscar", "placeholder": "Buscar safaris..." },
+      "location": "Destino",
+      "experience": "Experiencia",
+      "duration": "Duración (días)",
+      "min": "Mín",
+      "max": "Máx",
+      "active": "Filtros activos",
+      "none": "Ninguno"
+    },
+    "results": {
+      "count": "{count} resultados",
+      "countFor": "{count} resultados para \u201C{query}\u201D",
+      "empty": "No hay safaris que coincidan con tus filtros."
+    },
+    "sort": {
+      "label": "Ordenar por:",
+      "popularity": "Popularidad",
+      "priceAsc": "Precio (menor → mayor)",
+      "priceDesc": "Precio (mayor → menor)",
+      "durationAsc": "Duración (corta → larga)",
+      "durationDesc": "Duración (larga → corta)"
+    },
+    "card": {
+      "from": "Desde",
+      "days": "DÍAS",
+      "popular": "Popular",
+      "viewTrip": "VER ESTE VIAJE",
+      "defaultHighlights": [
+        "Guía local experto",
+        "Safaris diarios",
+        "Salidas flexibles"
+      ]
+    }
+  },
   "brand": {
     "title": "bigfivetrails",
     "subtitle": "Experiencias de Safari"
   },
   "actions": {
     "requestQuote": "Solicitar presupuesto",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "WhatsApp",
+    "close": "Cerrar",
+    "closeMenu": "Cerrar menú"
   },
   "nav": {
     "tours": "Tours",

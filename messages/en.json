@@ -4,13 +4,78 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "safaris": {
+    "catalog": {
+      "experienceTypes": {
+        "lodge": "Lodge",
+        "photographic": "Photographic",
+        "smallGroup": "Small Group",
+        "adventure": "Adventure",
+        "camping": "Camping"
+      },
+      "highlights": {
+        "bigFive": "Big Five Encounters",
+        "privateGuide": "Private driver‑guide",
+        "greatFirstTimers": "Great for first‑timers",
+        "twiceDailyDrives": "Game drives twice a day",
+        "maraRiverView": "Mara River view",
+        "budgetFriendly": "Budget friendly",
+        "kiliFoothills": "Kili foothills hike",
+        "nightInBush": "Night in the bush",
+        "customizableCamp": "Customizable camp setup"
+      }
+    },
+    "hero": {
+      "alt": "Destinations & Safaris",
+      "title": "Handpicked Destinations · Unforgettable Safaris",
+      "description": "Explore our curated selection of safaris across Tanzania and East Africa. From short escapes to extended adventures, each itinerary is crafted to immerse you in the heart of the wild — with comfort, style, and authentic experiences."
+    },
+    "filters": {
+      "title": "Refine results",
+      "clear": "Clear all",
+      "search": { "label": "Search", "placeholder": "Search safaris..." },
+      "location": "Location",
+      "experience": "Experience",
+      "duration": "Duration (days)",
+      "min": "Min",
+      "max": "Max",
+      "active": "Active filters",
+      "none": "None"
+    },
+    "results": {
+      "count": "{count} results",
+      "countFor": "{count} results for \u201C{query}\u201D",
+      "empty": "No safaris match your filters."
+    },
+    "sort": {
+      "label": "Sort by:",
+      "popularity": "Popularity",
+      "priceAsc": "Price (low → high)",
+      "priceDesc": "Price (high → low)",
+      "durationAsc": "Duration (short → long)",
+      "durationDesc": "Duration (long → short)"
+    },
+    "card": {
+      "from": "From",
+      "days": "DAYS",
+      "popular": "Popular",
+      "viewTrip": "VIEW THIS TRIP",
+      "defaultHighlights": [
+        "Expert local guide",
+        "Daily game drives",
+        "Flexible departures"
+      ]
+    }
+  },
   "brand": {
     "title": "bigfivetrails",
     "subtitle": "Safari Experiences"
   },
   "actions": {
     "requestQuote": "Request a Quote",
-    "whatsapp": "WhatsApp"
+    "whatsapp": "WhatsApp",
+    "close": "Close",
+    "closeMenu": "Close menu"
   },
   "nav": {
     "tours": "Tours",
@@ -39,7 +104,8 @@
       "rating": "Rated 5★ by travelers",
       "badge": "Licensed TALA Operator • 24/7 On-ground Support"
     },
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "fallback": "Your browser does not support the video tag."
   },
 
   "featuredSafaris": {
@@ -69,6 +135,7 @@
       }
     ]
   },
+
   "whyUs": {
     "title": "Why Travel With Us",
     "subtitle": "Honest expertise, thoughtful design and seamless execution—so you can focus on the magic of Tanzania.",
