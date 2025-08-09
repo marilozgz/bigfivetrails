@@ -25,21 +25,21 @@
       "migration": "Great Migration Special",
       "tarangire": "Tarangire & Lake Manyara",
       "zanzibar": "Zanzibar Beach & Safari"
-    },
-    "hero": {
-      "eyebrow": "Tailor-Made • Small Groups • Private Guides",
-      "headline": "Safari moments that feel <strong>impossibly close</strong>",
-      "subcopy": "Hand-crafted journeys across Serengeti, Ngorongoro and beyond — luxury camps, expert trackers, and sunrise drives you’ll talk about for years.",
-      "cta": {
-        "explore": "Explore Safari Packages",
-        "quote": "Get My Tailor-Made Quote"
-      },
-      "trust": {
-        "rating": "Rated 5★ by travelers",
-        "badge": "Licensed TALA Operator • 24/7 On-ground Support"
-      },
-      "scroll": "Scroll"
     }
+  },
+  "hero": {
+    "eyebrow": "Tailor-Made • Small Groups • Private Guides",
+    "headline": "Safari moments that feel <strong>impossibly close</strong>",
+    "subcopy": "Hand-crafted journeys across Serengeti, Ngorongoro and beyond — luxury camps, expert trackers, and sunrise drives you’ll talk about for years.",
+    "cta": {
+      "explore": "Explore Safari Packages",
+      "quote": "Get My Tailor-Made Quote"
+    },
+    "trust": {
+      "rating": "Rated 5★ by travelers",
+      "badge": "Licensed TALA Operator • 24/7 On-ground Support"
+    },
+    "scroll": "Scroll"
   },
 
   "featuredSafaris": {
