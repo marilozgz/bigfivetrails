@@ -1,6 +1,7 @@
 "use client"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 import { FaWhatsapp } from "react-icons/fa"
 import NavMenu from "./NavMenu"
@@ -46,8 +47,8 @@ export default function Header() {
       <nav className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between'>
           {/* Brand */}
-          <a
-            href='#'
+          <Link
+            href='/'
             className={`flex items-center gap-3 group ${cormorant.className}`}>
             <Image
               width={32}
@@ -64,7 +65,7 @@ export default function Header() {
                 Safari Experiences
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop menu */}
           <NavMenu fontClass={cormorant.className} />
@@ -125,7 +126,10 @@ export default function Header() {
             (open ? "translate-x-0" : "translate-x-full")
           }>
           <div className='flex items-center justify-between p-4 border-b border-[#c6b892]/20'>
-            <div className={`flex items-center gap-2 ${cormorant.className}`}>
+            <Link
+              href='/'
+              onClick={() => setOpen(false)}
+              className={`flex items-center gap-2 ${cormorant.className}`}>
               <Image
                 width={28}
                 height={28}
@@ -134,7 +138,7 @@ export default function Header() {
                 className='h-7 w-7 rounded-full ring-1 ring-[#c6b892]/30 bg-[#1f221b] p-1'
               />
               <span className='font-semibold'>bigfivetrails</span>
-            </div>
+            </Link>
             <button
               aria-label='Close menu'
               onClick={() => setOpen(false)}
@@ -210,21 +214,7 @@ export default function Header() {
   )
 }
 
-function NavLink({
-  href,
-  children
-}: {
-  href: string
-  children: React.ReactNode
-}) {
-  return (
-    <a
-      href={href}
-      className='relative text-sm font-medium text-[#f6f3ee]/95 hover:text-white transition'>
-      <span className='px-1'>{children}</span>
-    </a>
-  )
-}
+// removed unused NavLink
 
 function MobileLink({
   href,
