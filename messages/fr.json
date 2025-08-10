@@ -1,0 +1,226 @@
+{
+  "microbar": {
+    "tagline": "Safaris Tanzanie • Sur Mesure",
+    "phone": "+255 000 000",
+    "phoneRaw": "+255000000"
+  },
+  "safaris": {
+    "catalog": {
+      "experienceTypes": {
+        "lodge": "Lodge",
+        "photographic": "Photographique",
+        "smallGroup": "Petit Groupe",
+        "adventure": "Aventure",
+        "camping": "Camping"
+      },
+      "highlights": {
+        "bigFive": "Rencontres du Big Five",
+        "privateGuide": "Guide-chauffeur privé",
+        "greatFirstTimers": "Parfait pour les débutants",
+        "twiceDailyDrives": "Safaris deux fois par jour",
+        "maraRiverView": "Vue sur la rivière Mara",
+        "budgetFriendly": "Budget accessible",
+        "kiliFoothills": "Randonnée au pied du Kili",
+        "nightInBush": "Nuit dans la brousse",
+        "customizableCamp": "Installation de camp personnalisable"
+      }
+    },
+    "hero": {
+      "alt": "Destinations & Safaris",
+      "title": "Destinations Sélectionnées · Safaris Inoubliables",
+      "description": "Explorez notre sélection de safaris à travers la Tanzanie et l'Afrique de l'Est. Des escapades courtes aux aventures prolongées, chaque itinéraire est conçu pour vous immerger au cœur de la nature sauvage — avec confort, style et expériences authentiques."
+    },
+    "filters": {
+      "title": "Affiner les résultats",
+      "clear": "Tout effacer",
+      "search": {
+        "label": "Rechercher",
+        "placeholder": "Rechercher des safaris..."
+      },
+      "location": "Localisation",
+      "experience": "Expérience",
+      "duration": "Durée (jours)",
+      "min": "Min",
+      "max": "Max",
+      "active": "Filtres actifs",
+      "none": "Aucun"
+    },
+    "results": {
+      "count": "{count} résultats",
+      "countFor": "{count} résultats pour \u201C{query}\u201D",
+      "empty": "Aucun safari ne correspond à vos filtres."
+    },
+    "sort": {
+      "label": "Trier par :",
+      "popularity": "Popularité",
+      "priceAsc": "Prix (croissant)",
+      "priceDesc": "Prix (décroissant)",
+      "durationAsc": "Durée (courte → longue)",
+      "durationDesc": "Durée (longue → courte)"
+    },
+    "card": {
+      "from": "À partir de",
+      "days": "JOURS",
+      "popular": "Populaire",
+      "viewTrip": "VOIR CE VOYAGE",
+      "defaultHighlights": [
+        "Guide local expert",
+        "Safaris quotidiens",
+        "Départs flexibles"
+      ]
+    }
+  },
+  "brand": {
+    "title": "bigfivetrails",
+    "subtitle": "Expériences Safari"
+  },
+  "actions": {
+    "requestQuote": "Demander un Devis",
+    "whatsapp": "WhatsApp",
+    "close": "Fermer",
+    "closeMenu": "Fermer le menu"
+  },
+  "nav": {
+    "tours": "Circuits",
+    "destinations": "Destinations",
+    "whyUs": "Pourquoi Nous",
+    "reviews": "Avis",
+    "contact": "Contact",
+    "packages": {
+      "tours": "Circuits",
+      "serengetiLuxury": "Évasion Luxe Serengeti",
+      "ngorongoro": "Tour du Cratère Ngorongoro",
+      "migration": "Spécial Grande Migration",
+      "tarangire": "Tarangire & Lac Manyara",
+      "zanzibar": "Plage Zanzibar & Safari"
+    }
+  },
+  "hero": {
+    "eyebrow": "Sur Mesure • Petits Groupes • Guides Privés",
+    "headline": "Des moments safari qui semblent <strong>impossiblement proches</strong>",
+    "subcopy": "Voyages artisanaux à travers le Serengeti, le Ngorongoro et au-delà — camps de luxe, pisteurs experts et safaris à l'aube dont vous parlerez pendant des années.",
+    "cta": {
+      "explore": "Explorer les Forfaits Safari",
+      "quote": "Obtenir Mon Devis Sur Mesure"
+    },
+    "trust": {
+      "rating": "Noté 5★ par les voyageurs",
+      "badge": "Opérateur TALA Agréé • Support Sur Place 24h/24"
+    },
+    "scroll": "Défiler",
+    "fallback": "Votre navigateur ne supporte pas la balise vidéo."
+  },
+  "featuredSafaris": {
+    "title": "Expériences Safari Vedettes",
+    "subtitle": "Voyages sélectionnés pour présenter le meilleur de la Tanzanie — des vastes plaines aux joyaux cachés.",
+    "items": [
+      {
+        "title": "Évasion Luxe Serengeti",
+        "tagline": "Assistez à la Grande Migration avec style",
+        "img": "/images/serengetideluxe.jpg",
+        "badge": "Le Plus Populaire",
+        "link": "#serengeti"
+      },
+      {
+        "title": "Aventure Cratère Ngorongoro",
+        "tagline": "Explorez l'Éden d'Afrique",
+        "img": "/images/ngorongoro.jpg",
+        "badge": "Dates Limitées 2025",
+        "link": "#ngorongoro"
+      },
+      {
+        "title": "Tarangire & Lac Manyara",
+        "tagline": "Éléphants, baobabs & flamants",
+        "img": "/images/tarangire.jpg",
+        "badge": "Nouveau",
+        "link": "#tarangire"
+      }
+    ]
+  },
+  "whyUs": {
+    "title": "Pourquoi Voyager Avec Nous",
+    "subtitle": "Expertise honnête, conception réfléchie et exécution fluide — pour que vous puissiez vous concentrer sur la magie de la Tanzanie.",
+    "cta": "Obtenir Mon Devis Sur Mesure",
+    "items": [
+      {
+        "title": "Guides Experts",
+        "text": "Naturalistes et pisteurs sélectionnés qui connaissent chaque recoin caché de la brousse."
+      },
+      {
+        "title": "Itinéraires Sur Mesure",
+        "text": "Votre rythme, votre style. Nous créons chaque route autour des saisons, intérêts et budget."
+      },
+      {
+        "title": "Camps & Lodges de Luxe",
+        "text": "Des camps de tentes élégants aux lodges boutique — confort sans perdre le sauvage."
+      },
+      {
+        "title": "Support Sur Place 24h/24",
+        "text": "Équipe locale en Tanzanie, vrais humains disponibles — avant, pendant et après votre voyage."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Témoignages Clients",
+    "subtitle": "Vraies histoires de voyageurs qui ont exploré la Tanzanie avec nous.",
+    "items": [
+      {
+        "name": "Emma & David",
+        "trip": "Serengeti & Ngorongoro",
+        "text": "Chaque jour était comme un rêve — des camps de luxe à voir le Big Five de près. Les guides étaient exceptionnels !",
+        "img": "/images/testimonial1.jpg"
+      },
+      {
+        "name": "Lucas M.",
+        "trip": "Spécial Grande Migration",
+        "text": "Je n'aurais jamais imaginé être si proche de la migration. Tout le voyage était parfaitement planifié et sans stress.",
+        "img": "/images/testimonial2.jpg"
+      },
+      {
+        "name": "Sophie & Claire",
+        "trip": "Tarangire & Zanzibar",
+        "text": "Le mélange d'aventure safari et de plages relaxantes était exactement ce dont nous avions besoin. Recommande vivement BigFiveTrails !",
+        "img": "/images/testimonial3.jpg"
+      }
+    ],
+    "cta": {
+      "label": "Lire plus d'avis sur TripAdvisor",
+      "link": "https://www.tripadvisor.com/"
+    }
+  },
+  "footer": {
+    "tagline": "Safaris sur mesure à travers la Tanzanie — camps de luxe, guides experts et moments inoubliables.",
+    "explore": {
+      "title": "Explorer",
+      "items": [
+        { "label": "Circuits", "href": "#tours" },
+        { "label": "Destinations", "href": "#destinations" },
+        { "label": "Pourquoi Nous", "href": "#why-us" },
+        { "label": "Avis", "href": "#reviews" },
+        { "label": "Contact", "href": "#contact" }
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "items": [
+        { "label": "+255 000 000", "href": "tel:+255000000" },
+        {
+          "label": "info@bigfivetrails.com",
+          "href": "mailto:info@bigfivetrails.com"
+        },
+        { "label": "Arusha, Tanzanie" },
+        { "label": "Lun-Ven: 9h–18h" }
+      ]
+    },
+    "follow": {
+      "title": "Suivez-nous"
+    },
+    "newsletter": {
+      "placeholder": "Votre email",
+      "button": "S'abonner"
+    },
+    "bottom": {
+      "text": "BigFiveTrails. Tous droits réservés. | Politique de Confidentialité"
+    }
+  }
+}
