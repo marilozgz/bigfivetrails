@@ -184,7 +184,7 @@ export default function DestinationsPage() {
     } else {
       const next = new Set(selectedExperiences)
       next.delete(value)
-      setSelectedExperiences(next)
+      setSelectedLocations(next)
     }
   }
 
@@ -201,7 +201,34 @@ export default function DestinationsPage() {
         ["--green" as any]: COLORS.green,
         ["--terra" as any]: COLORS.terracotta
       }}>
-      {/* Mini-hero ya maneja el espacio bajo el header en layout */}
+      {/* Hero Section para la página principal */}
+      <div className='mt-1 mb-10'>
+        <div className='relative h-[290px] w-full overflow-hidden'>
+          <Image
+            src='/images/tarangire.jpg'
+            alt={t("hero.alt")}
+            fill
+            priority
+            className='object-cover'
+          />
+          {/* Capa de color + blur */}
+          <div className='absolute inset-0 bg-black/30 backdrop-blur-sm' />
+
+          {/* Gradiente sutil por encima para darle profundidad */}
+          <div className='absolute inset-0 bg-gradient-to-r from-black/50 via-black/30 to-black/10' />
+
+          <div className='relative mt-6 z-10 mx-auto max-w-7xl h-full flex flex-col justify-center px-4 sm:px-6 lg:px-8'>
+            <h2
+              className={`text-white text-xl sm:text-2xl font-semibold tracking-wide mb-2 ${cormorant.className}`}>
+              {t("hero.title")}
+            </h2>
+            <p
+              className={`text-white/90 text-sm sm:text-base max-w-3xl leading-relaxed ${cormorant.className}`}>
+              {t("hero.description")}
+            </p>
+          </div>
+        </div>
+      </div>
 
       <section className='mx-auto max-w-7xl '>
         <div className='flex flex-col md:flex-row gap-8'>
@@ -565,9 +592,11 @@ function SafariCardRow({ safari }: { safari: Safari }) {
           )}
 
           <div className='mt-auto'>
-            <button className='inline-flex w-full items-center justify-center rounded-md bg-[var(--green)] px-4 py-3 text-sm font-extrabold tracking-wide text-white hover:brightness-110'>
+            <a
+              href={`/safaris/${safari.id}`}
+              className='inline-flex w-full items-center justify-center rounded-md bg-[var(--green)] px-4 py-3 text-sm font-extrabold tracking-wide text-white hover:brightness-110 transition-colors'>
               {t("card.viewTrip")}
-            </button>
+            </a>
           </div>
         </div>
       </div>
