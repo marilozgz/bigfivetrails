@@ -222,5 +222,105 @@
     "bottom": {
       "text": "BigFiveTrails. Tous droits réservés. | Politique de Confidentialité"
     }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contactez-nous",
+      "subtitle": "Nous sommes là pour vous aider à planifier votre safari en Tanzanie. Nous sommes disponibles 24h/24 et 7j/7 pour répondre à vos questions et vous aider à planifier votre voyage."
+    },
+    "form": {
+      "title": "Contactez-nous",
+      "description": "Nous sommes là pour vous aider à planifier votre safari en Tanzanie. Nous sommes disponibles 24h/24 et 7j/7 pour répondre à vos questions et vous aider à planifier votre voyage.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Email",
+      "phone": "Téléphone",
+      "tripType": "Type de safari",
+      "tripTypes": {
+        "serengeti": "Safari Serengeti",
+        "ngorongoro": "Safari Ngorongoro",
+        "migration": "Safari Grande Migration",
+        "tarangire": "Safari Tarangire",
+        "zanzibar": "Safari Zanzibar",
+        "custom": "Autre Safari"
+      },
+      "traveler": "Voyageur",
+      "travelers": "Nombre de voyageurs",
+      "budget": "Budget",
+      "budgets": {
+        "budget": "Budget",
+        "midrange": "Moyen",
+        "luxury": "Luxueux",
+        "ultraLuxury": "Ultra-Luxueux"
+      },
+      "message": "Détails supplémentaires",
+      "messagePlaceholder": "Dites-nous plus sur votre style de voyage, vos intérêts, vos besoins spéciaux ou toute question que vous pourriez avoir...",
+      "submit": "Envoyer Ma Demande de Safari",
+      "firstNamePlaceholder": "Entrez votre prénom",
+      "lastNamePlaceholder": "Entrez votre nom",
+      "emailPlaceholder": "Votre email",
+      "phonePlaceholder": "Votre numéro de téléphone",
+      "tripTypePlaceholder": "Sélectionnez votre type de safari",
+      "travelersPlaceholder": "Sélectionnez le nombre de voyageurs",
+      "budgetPlaceholder": "Sélectionnez votre budget"
+    },
+    "tripTypes": {
+      "serengeti": "Safari Serengeti",
+      "ngorongoro": "Safari Ngorongoro",
+      "migration": "Safari Grande Migration",
+      "tarangire": "Safari Tarangire",
+      "zanzibar": "Safari Zanzibar",
+      "custom": "Autre Safari"
+    },
+    "directContact": {
+      "title": "Contactez-nous directement",
+      "whatsapp": "Chat de WhatsApp",
+      "phone": "Llamada Telefónica",
+      "email": "Envíanos un Email"
+    },
+    "office": {
+      "title": "Notre Bureau",
+      "hours": {
+        "title": "Horaires",
+        "schedule": "Lun-Ven: 9h–18h"
+      },
+      "address": {
+        "title": "Adresse",
+        "street": "123 Calle Safari, Arusha",
+        "city": "Arusha, Tanzanie",
+        "country": "Afrique de l'Est"
+      }
+    },
+
+    "trust": {
+      "title": "Pourquoi Confier à Nous",
+      "licensed": "Opérateur TALA Agréé • Support Sur Place 24h/24",
+      "certified": "Guides Safari Certifiés",
+      "experienced": "15+ Années d'Expérience",
+      "local": "100% Équipe Locale Tanzanienne"
+    },
+    "faq": {
+      "title": "Questions Fréquentes",
+      "q1": {
+        "question": "Comment puis-je réserver un safari ?",
+        "answer": "Vous pouvez réserver un safari en ligne en sélectionnant le safari de vos rêves et en suivant les instructions. Vous pouvez également nous contacter par téléphone ou par e-mail."
+      },
+      "q2": {
+        "question": "Comment puis-je réserver un safari ?",
+        "answer": "Vous pouvez réserver un safari en ligne en sélectionnant le safari de vos rêves et en suivant les instructions. Vous pouvez également nous contacter par téléphone ou par e-mail."
+      },
+      "q3": {
+        "question": "Comment puis-je réserver un safari ?",
+        "answer": "Vous pouvez réserver un safari en ligne en sélectionnant le safari de vos rêves et en suivant les instructions. Vous pouvez également nous contacter par téléphone ou par e-mail."
+      },
+      "q4": {
+        "question": "Comment puis-je réserver un safari ?",
+        "answer": "Vous pouvez réserver un safari en ligne en sélectionnant le safari de vos rêves et en suivant les instructions. Vous pouvez également nous contacter par téléphone ou par e-mail."
+      },
+      "q5": {
+        "question": "Comment puis-je réserver un safari ?",
+        "answer": "Vous pouvez réserver un safari en ligne en sélectionnant le safari de vos rêves et en suivant les instructions. Vous pouvez également nous contacter par téléphone ou par e-mail."
+      }
+    }
   }
 }

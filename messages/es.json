@@ -218,5 +218,92 @@
     "bottom": {
       "text": "BigFiveTrails. Todos los derechos reservados. | Política de privacidad"
     }
+  },
+  "contact": {
+    "hero": {
+      "title": "Planifiquemos Tu Aventura Safari",
+      "subtitle": "Ponte en contacto con nuestros expertos de Tanzania. Estamos aquí para crear tu experiencia safari perfecta con atención personalizada y experiencia local."
+    },
+    "form": {
+      "title": "Cuéntanos Sobre Tu Safari Soñado",
+      "description": "Comparte tus preferencias de viaje y crearemos un itinerario personalizado solo para ti. Todas las consultas reciben respuesta en 24 horas.",
+      "firstName": "Nombre",
+      "firstNamePlaceholder": "Ingresa tu nombre",
+      "lastName": "Apellido",
+      "lastNamePlaceholder": "Ingresa tu apellido",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "tu.email@ejemplo.com",
+      "phone": "Número de Teléfono",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "tripType": "Tipo de Safari Preferido",
+      "tripTypePlaceholder": "Selecciona tu safari preferido",
+      "tripTypes": {
+        "serengeti": "Escape de Lujo Serengeti",
+        "ngorongoro": "Aventura Cratère Ngorongoro",
+        "migration": "Especial Gran Migración",
+        "tarangire": "Tarangire y Lago Manyara",
+        "zanzibar": "Playa Zanzíbar y Safari",
+        "custom": "Itinerario Personalizado"
+      },
+      "travelers": "Número de Viajeros",
+      "travelersPlaceholder": "Selecciona número de viajeros",
+      "traveler": "Viajero",
+      "budget": "Rango de Presupuesto",
+      "budgetPlaceholder": "Selecciona tu rango de presupuesto",
+      "budgets": {
+        "budget": "Económico ($1,500 - $3,000 por persona)",
+        "midrange": "Medio ($3,000 - $6,000 por persona)",
+        "luxury": "Lujo ($6,000 - $12,000 por persona)",
+        "ultraLuxury": "Ultra-Lujo ($12,000+ por persona)"
+      },
+      "message": "Detalles Adicionales",
+      "messagePlaceholder": "Cuéntanos sobre tu estilo de viaje, intereses, requisitos especiales o cualquier pregunta que tengas...",
+      "submit": "Enviar Mi Solicitud de Safari"
+    },
+    "directContact": {
+      "title": "Contáctanos Directamente",
+      "whatsapp": "Chat de WhatsApp",
+      "phone": "Llamada Telefónica",
+      "email": "Envíanos un Email"
+    },
+    "office": {
+      "title": "Nuestra Oficina",
+      "address": {
+        "title": "Dirección",
+        "street": "123 Calle Safari, Arusha",
+        "city": "Arusha, Tanzania",
+        "country": "África Oriental"
+      },
+      "hours": {
+        "title": "Horario Comercial",
+        "schedule": "Lunes - Viernes: 9:00 AM - 6:00 PM (EAT)"
+      }
+    },
+    "trust": {
+      "title": "Por Qué Confiar en Nosotros",
+      "licensed": "Operador Licenciado TALA",
+      "certified": "Guías Safari Certificados",
+      "experienced": "15+ Años de Experiencia",
+      "local": "100% Equipo Local Tanzano"
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "q1": {
+        "question": "¿Qué tan rápido recibiré una respuesta?",
+        "answer": "Respondemos a todas las consultas en 24 horas, a menudo mucho antes. Para solicitudes urgentes, puedes llamarnos directamente o usar WhatsApp para asistencia inmediata."
+      },
+      "q2": {
+        "question": "¿Qué información necesitan para planificar mi safari?",
+        "answer": "Necesitaremos tus fechas de viaje preferidas, número de viajeros, rango de presupuesto y cualquier interés o requisito específico. Cuantos más detalles proporciones, mejor podremos personalizar tu experiencia."
+      },
+      "q3": {
+        "question": "¿Sus safaris son adecuados para familias con niños?",
+        "answer": "¡Absolutamente! Ofrecemos safaris familiares con actividades apropiadas para la edad. Muchos de nuestros lodges y campamentos reciben niños, y podemos ajustar los itinerarios para acomodar las necesidades familiares."
+      },
+      "q4": {
+        "question": "¿Qué medidas de seguridad tienen implementadas?",
+        "answer": "Tu seguridad es nuestra máxima prioridad. Todos nuestros vehículos se mantienen regularmente, los guías están certificados en primeros auxilios y seguimos estrictos protocolos COVID-19. También estamos completamente asegurados y licenciados por TALA."
+      }
+    }
   }
 }

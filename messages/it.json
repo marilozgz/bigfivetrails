@@ -219,5 +219,84 @@
     "bottom": {
       "text": "BigFiveTrails. Tutti i diritti riservati. | Politica sulla Privacy"
     }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contattaci",
+      "subtitle": "Siamo qui per aiutarti a pianificare il tuo safari in Tanzania. Siamo disponibili 24 ore al giorno e 7 giorni alla settimana per rispondere alle tue domande e aiutarti a pianificare il tuo viaggio."
+    },
+    "form": {
+      "title": "Contattaci",
+      "description": "Siamo qui per aiutarti a pianificare il tuo safari in Tanzania. Siamo disponibili 24 ore al giorno e 7 giorni alla settimana per rispondere alle tue domande e aiutarti a pianificare il tuo viaggio.",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "email": "Email",
+      "phone": "Telefono",
+      "tripType": "Tipo di safari",
+      "tripTypePlaceholder": "Seleziona il tipo di safari",
+      "tripTypes": {
+        "serengeti": "Safari Serengeti",
+        "ngorongoro": "Safari Ngorongoro",
+        "migration": "Safari Grande Migrazione",
+        "tarangire": "Safari Tarangire",
+        "zanzibar": "Safari Zanzibar",
+        "custom": "Altro Safari"
+      },
+      "traveler": "Viaggiatore",
+      "travelers": "Numero di viaggiatori",
+      "budget": "Budget",
+      "budgets": {
+        "budget": "Budget",
+        "midrange": "Midrange",
+        "luxury": "Lusso",
+        "ultraLuxury": "Ultra-Lusso"
+      },
+      "message": "Dettagli aggiuntivi",
+      "messagePlaceholder": "Dicci di più sul tuo stile di viaggio, i tuoi interessi, i tuoi requisiti speciali o qualsiasi domanda che potresti avere...",
+      "submit": "Invia la mia richiesta di safari",
+      "firstNamePlaceholder": "Inserisci il tuo nome",
+      "lastNamePlaceholder": "Inserisci il tuo cognome",
+      "emailPlaceholder": "Inserisci la tua email",
+      "phonePlaceholder": "Inserisci il tuo telefono",
+      "travelersPlaceholder": "Seleziona il numero di viaggiatori",
+      "budgetPlaceholder": "Seleziona il tuo budget"
+    },
+    "directContact": {
+      "title": "Contattaci direttamente",
+      "whatsapp": "Chat di WhatsApp",
+      "phone": "Chiamata Telefonica",
+      "email": "Invia un Email"
+    },
+    "office": {
+      "title": "Il nostro Bureau",
+      "address": {
+        "title": "Indirizzo",
+        "street": "123 Via Safari, Arusha",
+        "city": "Arusha, Tanzania",
+        "country": "Africa Orientale"
+      }
+    },
+    "trust": {
+      "title": "Perché Scegliere BigFiveTrails",
+      "licensed": "Operatore TALA Autorizzato • Supporto Sul Campo 24/7",
+      "certified": "Guides Safari Certificati",
+      "experienced": "15+ Anni di Esperienza",
+      "local": "100% Equipe Locale Tanzaniana"
+    },
+    "faq": {
+      "title": "Domande Frequenti",
+      "q1": {
+        "question": "Come posso prenotare un safari?",
+        "answer": "Puoi prenotare un safari online selezionando il safari dei tuoi sogni e seguendo le istruzioni. Puoi anche contattarci via telefono o email."
+      }
+    }
+  },
+
+  "form": {
+    "title": "Contattaci",
+    "description": "Siamo qui per aiutarti a pianificare il tuo safari in Tanzania. Siamo disponibili 24 ore al giorno e 7 giorni alla settimana per rispondere alle tue domande e aiutarti a pianificare il tuo viaggio."
+  },
+  "bottom": {
+    "text": "BigFiveTrails. Tutti i diritti riservati. | Politica sulla Privacy"
   }
 }

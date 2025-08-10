@@ -221,5 +221,92 @@
     "bottom": {
       "text": "BigFiveTrails. All rights reserved. | Privacy Policy"
     }
+  },
+  "contact": {
+    "hero": {
+      "title": "Let's Plan Your Safari Adventure",
+      "subtitle": "Get in touch with our Tanzania experts. We're here to craft your perfect safari experience with personalized attention and local expertise."
+    },
+    "form": {
+      "title": "Tell Us About Your Dream Safari",
+      "description": "Share your travel preferences and we'll create a custom itinerary just for you. All inquiries receive a response within 24 hours.",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "email": "Email Address",
+      "emailPlaceholder": "your.email@example.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "tripType": "Preferred Safari Type",
+      "tripTypePlaceholder": "Select your preferred safari",
+      "tripTypes": {
+        "serengeti": "Serengeti Luxury Escape",
+        "ngorongoro": "Ngorongoro Crater Adventure",
+        "migration": "Great Migration Special",
+        "tarangire": "Tarangire & Lake Manyara",
+        "zanzibar": "Zanzibar Beach & Safari",
+        "custom": "Custom Itinerary"
+      },
+      "travelers": "Number of Travelers",
+      "travelersPlaceholder": "Select number of travelers",
+      "traveler": "Traveler",
+      "budget": "Budget Range",
+      "budgetPlaceholder": "Select your budget range",
+      "budgets": {
+        "budget": "Budget ($1,500 - $3,000 per person)",
+        "midrange": "Mid-Range ($3,000 - $6,000 per person)",
+        "luxury": "Luxury ($6,000 - $12,000 per person)",
+        "ultraLuxury": "Ultra-Luxury ($12,000+ per person)"
+      },
+      "message": "Additional Details",
+      "messagePlaceholder": "Tell us about your travel style, interests, special requirements, or any questions you have...",
+      "submit": "Send My Safari Request"
+    },
+    "directContact": {
+      "title": "Contact Us Directly",
+      "whatsapp": "WhatsApp Chat",
+      "phone": "Phone Call",
+      "email": "Email Us"
+    },
+    "office": {
+      "title": "Our Office",
+      "address": {
+        "title": "Address",
+        "street": "123 Safari Street, Arusha",
+        "city": "Arusha, Tanzania",
+        "country": "East Africa"
+      },
+      "hours": {
+        "title": "Business Hours",
+        "schedule": "Monday - Friday: 9:00 AM - 6:00 PM (EAT)"
+      }
+    },
+    "trust": {
+      "title": "Why Trust Us",
+      "licensed": "TALA Licensed Operator",
+      "certified": "Certified Safari Guides",
+      "experienced": "15+ Years Experience",
+      "local": "100% Local Tanzanian Team"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "q1": {
+        "question": "How quickly will I receive a response?",
+        "answer": "We respond to all inquiries within 24 hours, often much sooner. For urgent requests, you can call us directly or use WhatsApp for immediate assistance."
+      },
+      "q2": {
+        "question": "What information do you need to plan my safari?",
+        "answer": "We'll need your preferred travel dates, number of travelers, budget range, and any specific interests or requirements. The more details you provide, the better we can customize your experience."
+      },
+      "q3": {
+        "question": "Are your safaris suitable for families with children?",
+        "answer": "Absolutely! We offer family-friendly safaris with age-appropriate activities. Many of our lodges and camps welcome children, and we can adjust itineraries to accommodate family needs."
+      },
+      "q4": {
+        "question": "What safety measures do you have in place?",
+        "answer": "Your safety is our top priority. All our vehicles are regularly maintained, guides are certified in first aid, and we follow strict COVID-19 protocols. We're also fully insured and licensed by TALA."
+      }
+    }
   }
 }

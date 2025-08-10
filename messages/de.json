@@ -220,5 +220,77 @@
     "bottom": {
       "text": "BigFiveTrails. Alle Rechte vorbehalten. | Datenschutzrichtlinie"
     }
+  },
+  "contact": {
+    "hero": {
+      "title": "Kontakt",
+      "subtitle": "Wir sind hier, um Ihnen zu helfen, Ihren Safari in Tansania zu planen. Wir sind 24 Stunden am Tag und 7 Tage pro Woche für Ihre Fragen und um Ihnen bei der Planung Ihrer Reise zu helfen."
+    },
+    "directContact": {
+      "title": "Kontakt",
+      "whatsapp": "WhatsApp",
+      "phone": "Telefon",
+      "email": "E-Mail"
+    },
+    "office": {
+      "title": "Unser Büro",
+      "address": {
+        "title": "Adresse",
+        "street": "123 Calle Safari, Arusha",
+        "city": "Arusha, Tanzania",
+        "country": "Ostafrika"
+      }
+    },
+    "form": {
+      "title": "Kontakt",
+      "description": "Wir sind hier, um Ihnen zu helfen, Ihren Safari in Tansania zu planen. Wir sind 24 Stunden am Tag und 7 Tage pro Woche für Ihre Fragen und um Ihnen bei der Planung Ihrer Reise zu helfen.",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "tripType": "Safari-Typ",
+      "tripTypePlaceholder": "Wählen Sie Ihren Safari-Typ",
+      "tripTypes": {
+        "serengeti": "Serengeti-Safari",
+        "ngorongoro": "Ngorongoro-Safari",
+        "migration": "Migration-Safari",
+        "tarangire": "Tarangire-Safari",
+        "zanzibar": "Zanzibar-Safari",
+        "custom": "Anderer Safari"
+      },
+      "traveler": "Reisende",
+      "travelers": "Anzahl der Reisenden",
+      "travelersPlaceholder": "Wählen Sie die Anzahl der Reisenden",
+      "budget": "Budget",
+      "budgets": {
+        "budget": "Budget",
+        "midrange": "Midrange",
+        "luxury": "Lusso",
+        "ultraLuxury": "Ultra-Lusso"
+      },
+      "budgetPlaceholder": "Wählen Sie Ihr Budget",
+
+      "message": "Zusätzliche Details",
+      "messagePlaceholder": "Erzählen Sie uns mehr über Ihren Reise-Stil, Ihre Interessen, Ihre speziellen Anforderungen oder jede Frage, die Sie haben könnten...",
+      "submit": "Meine Safari-Anfrage senden",
+      "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+      "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+      "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+      "phonePlaceholder": "Geben Sie Ihre Telefonnummer ein"
+    },
+    "trust": {
+      "title": "Warum mit uns reisen?",
+      "licensed": "TALA-Lizenzierter Operator • 24/7 Unterstützung vor Ort",
+      "certified": "Safari-Guides",
+      "experienced": "15+ Jahre Erfahrung",
+      "local": "100% lokale Tanzanische Team"
+    },
+    "faq": {
+      "title": "Häufig gestellte Fragen",
+      "q1": {
+        "question": "Wie kann ich einen Safari buchen?",
+        "answer": "Sie können einen Safari online buchen, indem Sie den Safari Ihrer Träume auswählen und die Anweisungen befolgen. Sie können uns auch per Telefon oder E-Mail kontaktieren."
+      }
+    }
   }
 }
