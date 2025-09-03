@@ -119,73 +119,75 @@ export default async function SafariDetailPage({
                 </h2>
                 <div className='space-y-6'>
                   {safari.itinerary.map((day: ItineraryDay) => (
-                  <div
-                    key={day.day}
-                    className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
-                    <div className='flex items-start gap-4'>
-                      <div className='flex-shrink-0 w-12 h-12 bg-[#c6b892] rounded-full flex items-center justify-center text-white font-bold'>
-                        {day.day}
-                      </div>
-                      <div className='flex-1'>
-                        <h3 className='text-xl font-semibold mb-2'>
-                          {day.title}
-                        </h3>
-                        <p className='text-gray-700 mb-3'>{day.description}</p>
-
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                          <div>
-                            <h4 className='font-semibold text-[#c6b892] mb-2'>
-                              {t("detail.accommodation")}
-                            </h4>
-                            <p className='text-sm text-gray-600'>
-                              {typeof day.accommodation === "string"
-                                ? day.accommodation
-                                : typeof day.accommodation === "object" &&
-                                  day.accommodation?.name
-                                ? day.accommodation.name
-                                : "Alojamiento incluido"}
-                            </p>
-                          </div>
-                          <div>
-                            <h4 className='font-semibold text-[#c6b892] mb-2'>
-                              {t("detail.meals")}
-                            </h4>
-                            <p className='text-sm text-gray-600'>
-                              {day.meals
-                                ? day.meals
-                                    .filter(
-                                      (meal): meal is string =>
-                                        typeof meal === "string"
-                                    )
-                                    .join(", ")
-                                : t("detail.mealsIncluded")}
-                            </p>
-                          </div>
+                    <div
+                      key={day.day}
+                      className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
+                      <div className='flex items-start gap-4'>
+                        <div className='flex-shrink-0 w-12 h-12 bg-[#c6b892] rounded-full flex items-center justify-center text-white font-bold'>
+                          {day.day}
                         </div>
+                        <div className='flex-1'>
+                          <h3 className='text-xl font-semibold mb-2'>
+                            {day.title}
+                          </h3>
+                          <p className='text-gray-700 mb-3'>
+                            {day.description}
+                          </p>
 
-                        {day.activities && day.activities.length > 0 && (
-                          <div className='mt-3'>
-                            <h4 className='font-semibold text-[#c6b892] mb-2'>
-                              {t("detail.activities")}
-                            </h4>
-                            <ul className='list-disc list-inside text-sm text-gray-600'>
-                              {day.activities
-                                .filter(
-                                  (activity): activity is string =>
-                                    typeof activity === "string"
-                                )
-                                .map((activity: string, index: number) => (
-                                  <li key={index}>{activity}</li>
-                                ))}
-                            </ul>
+                          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                            <div>
+                              <h4 className='font-semibold text-[#c6b892] mb-2'>
+                                {t("detail.accommodation")}
+                              </h4>
+                              <p className='text-sm text-gray-600'>
+                                {typeof day.accommodation === "string"
+                                  ? day.accommodation
+                                  : typeof day.accommodation === "object" &&
+                                    day.accommodation?.name
+                                  ? day.accommodation.name
+                                  : "Alojamiento incluido"}
+                              </p>
+                            </div>
+                            <div>
+                              <h4 className='font-semibold text-[#c6b892] mb-2'>
+                                {t("detail.meals")}
+                              </h4>
+                              <p className='text-sm text-gray-600'>
+                                {day.meals
+                                  ? day.meals
+                                      .filter(
+                                        (meal): meal is string =>
+                                          typeof meal === "string"
+                                      )
+                                      .join(", ")
+                                  : t("detail.mealsIncluded")}
+                              </p>
+                            </div>
                           </div>
-                        )}
+
+                          {day.activities && day.activities.length > 0 && (
+                            <div className='mt-3'>
+                              <h4 className='font-semibold text-[#c6b892] mb-2'>
+                                {t("detail.activities")}
+                              </h4>
+                              <ul className='list-disc list-inside text-sm text-gray-600'>
+                                {day.activities
+                                  .filter(
+                                    (activity): activity is string =>
+                                      typeof activity === "string"
+                                  )
+                                  .map((activity: string, index: number) => (
+                                    <li key={index}>{activity}</li>
+                                  ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
+                  ))}
+                </div>
+              </section>
             )}
 
             {/* Route */}
@@ -200,16 +202,12 @@ export default async function SafariDetailPage({
                       (location): location is string =>
                         typeof location === "string"
                     )
-                    .map((location: string, index: number) => (
+                    .map((location: string, index: number, filteredArray) => (
                       <div
                         key={location}
                         className='flex items-center'>
                         <span>{location}</span>
-                        {index <
-                          safari.route.filter(
-                            (l): l is string => typeof l === "string"
-                          ).length -
-                            1 && (
+                        {index < filteredArray.length - 1 && (
                           <svg
                             className='w-5 h-5 mx-2 text-[#c6b892]'
                             fill='none'
