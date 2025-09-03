@@ -112,12 +112,13 @@ export default async function SafariDetailPage({
             )}
 
             {/* Itinerary */}
-            <section>
-              <h2 className='text-3xl font-semibold mb-6'>
-                {t("detail.itinerary")}
-              </h2>
-              <div className='space-y-6'>
-                {safari.itinerary?.map((day: ItineraryDay) => (
+            {safari.itinerary && safari.itinerary.length > 0 && (
+              <section>
+                <h2 className='text-3xl font-semibold mb-6'>
+                  {t("detail.itinerary")}
+                </h2>
+                <div className='space-y-6'>
+                  {safari.itinerary.map((day: ItineraryDay) => (
                   <div
                     key={day.day}
                     className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
@@ -185,6 +186,7 @@ export default async function SafariDetailPage({
                 ))}
               </div>
             </section>
+            )}
 
             {/* Route */}
             {safari.route && safari.route.length > 0 && (
