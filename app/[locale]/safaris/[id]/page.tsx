@@ -1,9 +1,9 @@
+import { ItineraryDay } from "@/lib/types/safari"
 import { getLocale, getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
-import { notFound } from "next/navigation"
 import Image from "next/image"
+import { notFound } from "next/navigation"
 import { formatCurrency, getSafariData } from "../utils"
-import { Safari, ItineraryDay } from "@/lib/types/safari"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -25,18 +25,25 @@ export default async function SafariDetailPage({
   }
 
   const experienceLabels = (safari.experienceTypes || [])
-    .filter((type): type is string | { name: string; description?: string } => 
-      type !== null && type !== undefined)
+    .filter(
+      (type): type is string | { name: string; description?: string } =>
+        type !== null && type !== undefined
+    )
     .map((type) => {
       const typeKey = typeof type === "object" ? type.name : type
       return t(`catalog.experienceTypes.${typeKey}`)
     })
 
   const highlightLabels = (safari.highlights || [])
-    .filter((highlight): highlight is string | { name: string; description?: string } => 
-      highlight !== null && highlight !== undefined)
+    .filter(
+      (
+        highlight
+      ): highlight is string | { name: string; description?: string } =>
+        highlight !== null && highlight !== undefined
+    )
     .map((highlight) => {
-      const highlightKey = typeof highlight === "object" ? highlight.name : highlight
+      const highlightKey =
+        typeof highlight === "object" ? highlight.name : highlight
       return t(`catalog.highlights.${highlightKey}`)
     })
 
@@ -58,7 +65,7 @@ export default async function SafariDetailPage({
           {/* Galería de imágenes simple */}
           <div className='relative h-64 md:h-80 rounded-lg overflow-hidden mb-8'>
             <Image
-              src={safari.images?.[0] || '/images/default-safari.jpg'}
+              src={safari.images?.[0] || "/images/default-safari.jpg"}
               alt={safari.title}
               fill
               className='object-cover'
@@ -88,7 +95,10 @@ export default async function SafariDetailPage({
                 </h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                   {highlightLabels
-                    .filter((highlight): highlight is string => typeof highlight === "string")
+                    .filter(
+                      (highlight): highlight is string =>
+                        typeof highlight === "string"
+                    )
                     .map((highlight: string, index: number) => (
                       <div
                         key={index}
@@ -107,69 +117,72 @@ export default async function SafariDetailPage({
                 {t("detail.itinerary")}
               </h2>
               <div className='space-y-6'>
-                {safari.itinerary.map((day: ItineraryDay) => (
-                    <div
-                      key={day.day}
-                      className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
-                      <div className='flex items-start gap-4'>
-                        <div className='flex-shrink-0 w-12 h-12 bg-[#c6b892] rounded-full flex items-center justify-center text-white font-bold'>
-                          {day.day}
-                        </div>
-                        <div className='flex-1'>
-                          <h3 className='text-xl font-semibold mb-2'>
-                            {day.title}
-                          </h3>
-                          <p className='text-gray-700 mb-3'>
-                            {day.description}
-                          </p>
+                {safari.itinerary?.map((day: ItineraryDay) => (
+                  <div
+                    key={day.day}
+                    className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
+                    <div className='flex items-start gap-4'>
+                      <div className='flex-shrink-0 w-12 h-12 bg-[#c6b892] rounded-full flex items-center justify-center text-white font-bold'>
+                        {day.day}
+                      </div>
+                      <div className='flex-1'>
+                        <h3 className='text-xl font-semibold mb-2'>
+                          {day.title}
+                        </h3>
+                        <p className='text-gray-700 mb-3'>{day.description}</p>
 
-                          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                            <div>
-                              <h4 className='font-semibold text-[#c6b892] mb-2'>
-                                {t("detail.accommodation")}
-                              </h4>
-                              <p className='text-sm text-gray-600'>
-                                {typeof day.accommodation === "string"
-                                  ? day.accommodation
-                                  : typeof day.accommodation === "object" &&
-                                    day.accommodation?.name
-                                  ? day.accommodation.name
-                                  : "Alojamiento incluido"}
-                              </p>
-                            </div>
-                            <div>
-                              <h4 className='font-semibold text-[#c6b892] mb-2'>
-                                {t("detail.meals")}
-                              </h4>
-                              <p className='text-sm text-gray-600'>
-                                {day.meals
-                                  ? day.meals
-                                      .filter((meal): meal is string => typeof meal === "string")
-                                      .join(", ")
-                                  : t("detail.mealsIncluded")}
-                              </p>
-                            </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                          <div>
+                            <h4 className='font-semibold text-[#c6b892] mb-2'>
+                              {t("detail.accommodation")}
+                            </h4>
+                            <p className='text-sm text-gray-600'>
+                              {typeof day.accommodation === "string"
+                                ? day.accommodation
+                                : typeof day.accommodation === "object" &&
+                                  day.accommodation?.name
+                                ? day.accommodation.name
+                                : "Alojamiento incluido"}
+                            </p>
                           </div>
-
-                          {day.activities && day.activities.length > 0 && (
-                            <div className='mt-3'>
-                              <h4 className='font-semibold text-[#c6b892] mb-2'>
-                                {t("detail.activities")}
-                              </h4>
-                              <ul className='list-disc list-inside text-sm text-gray-600'>
-                                {day.activities
-                                  .filter((activity): activity is string => typeof activity === "string")
-                                  .map((activity: string, index: number) => (
-                                    <li key={index}>{activity}</li>
-                                  ))}
-                              </ul>
-                            </div>
-                          )}
+                          <div>
+                            <h4 className='font-semibold text-[#c6b892] mb-2'>
+                              {t("detail.meals")}
+                            </h4>
+                            <p className='text-sm text-gray-600'>
+                              {day.meals
+                                ? day.meals
+                                    .filter(
+                                      (meal): meal is string =>
+                                        typeof meal === "string"
+                                    )
+                                    .join(", ")
+                                : t("detail.mealsIncluded")}
+                            </p>
+                          </div>
                         </div>
+
+                        {day.activities && day.activities.length > 0 && (
+                          <div className='mt-3'>
+                            <h4 className='font-semibold text-[#c6b892] mb-2'>
+                              {t("detail.activities")}
+                            </h4>
+                            <ul className='list-disc list-inside text-sm text-gray-600'>
+                              {day.activities
+                                .filter(
+                                  (activity): activity is string =>
+                                    typeof activity === "string"
+                                )
+                                .map((activity: string, index: number) => (
+                                  <li key={index}>{activity}</li>
+                                ))}
+                            </ul>
+                          </div>
+                        )}
                       </div>
                     </div>
-                  )
-                )}
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -181,15 +194,19 @@ export default async function SafariDetailPage({
                 </h2>
                 <div className='flex items-center gap-2 text-lg text-gray-700'>
                   {safari.route
-                    .filter((location): location is string => typeof location === "string")
+                    .filter(
+                      (location): location is string =>
+                        typeof location === "string"
+                    )
                     .map((location: string, index: number) => (
                       <div
                         key={location}
                         className='flex items-center'>
                         <span>{location}</span>
                         {index <
-                          safari.route.filter((l): l is string => typeof l === "string")
-                            .length -
+                          safari.route.filter(
+                            (l): l is string => typeof l === "string"
+                          ).length -
                             1 && (
                           <svg
                             className='w-5 h-5 mx-2 text-[#c6b892]'
@@ -259,7 +276,9 @@ export default async function SafariDetailPage({
                   </span>
                   <div className='mt-1'>
                     {experienceLabels
-                      .filter((label): label is string => typeof label === "string")
+                      .filter(
+                        (label): label is string => typeof label === "string"
+                      )
                       .map((label: string, index: number) => (
                         <span
                           key={index}
@@ -319,7 +338,7 @@ export default async function SafariDetailPage({
                 <div className='relative'>
                   {/* Imagen del mapa */}
                   <div className='relative w-full aspect-square bg-white rounded-lg border border-[#c6b892]/20 overflow-hidden'>
-                    <img
+                    <Image
                       src={`/images/safaris/mapa-${
                         safari.id === "ndutu"
                           ? "safariclassic"
@@ -330,7 +349,8 @@ export default async function SafariDetailPage({
                           : safari.id
                       }.png`}
                       alt={`Ruta del safari ${safari.title}`}
-                      className='w-full h-full object-contain'
+                      fill
+                      className='object-contain'
                     />
                   </div>
 

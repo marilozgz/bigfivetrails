@@ -39,7 +39,7 @@ export interface Safari {
   accomodation: string
   transportation: string
   bestTime: string
-  difficulty: 'easy' | 'moderate' | 'challenging'
+  difficulty: "easy" | "moderate" | "challenging"
   location: string | null
   thumbnail: string | null
   images: string[] | null
