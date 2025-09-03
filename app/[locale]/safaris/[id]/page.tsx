@@ -340,13 +340,13 @@ export default async function SafariDetailPage({
                   <div className='relative w-full aspect-square bg-white rounded-lg border border-[#c6b892]/20 overflow-hidden'>
                     <Image
                       src={`/images/safaris/mapa-${
-                        safari.id === "ndutu"
+                        safari.code === "ndutu"
                           ? "safariclassic"
-                          : safari.id === "serengeti"
+                          : safari.code === "serengeti"
                           ? "safariclassic"
-                          : safari.id === "maretuniwonder"
+                          : safari.code === "maretuniwonder"
                           ? "maretuniwonder"
-                          : safari.id
+                          : safari.code
                       }.png`}
                       alt={`Ruta del safari ${safari.title}`}
                       fill
