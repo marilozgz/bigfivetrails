@@ -11,7 +11,8 @@
         "photographic": "Fotográfico",
         "smallGroup": "Grupo reducido",
         "adventure": "Aventura",
-        "camping": "Camping"
+        "camping": "Camping",
+        "wildlife": "Vida salvaje"
       },
       "highlights": {
         "bigFive": "Encuentros con los Cinco Grandes",
@@ -22,7 +23,14 @@
         "budgetFriendly": "Económico",
         "kiliFoothills": "Caminata en las faldas del Kili",
         "nightInBush": "Noche en la sabana",
-        "customizableCamp": "Campamento personalizable"
+        "customizableCamp": "Campamento personalizable",
+        "greatMigration": "Gran Migración",
+        "photographic": "Safari fotográfico",
+        "expertGuide": "Guía experto",
+        "culturalExperience": "Experiencia cultural",
+        "wildlifeViewing": "Observación de fauna",
+        "scenicDrives": "Rutas panorámicas",
+        "birdWatching": "Observación de aves"
       }
     },
     "hero": {
@@ -39,6 +47,7 @@
       "duration": "Duración (días)",
       "min": "Mín",
       "max": "Máx",
+      "priceRange": "Rango de precios",
       "active": "Filtros activos",
       "none": "Ninguno"
     },
@@ -65,6 +74,30 @@
         "Safaris diarios",
         "Salidas flexibles"
       ]
+    },
+    "detail": {
+      "description": "Descripción del Safari",
+      "highlights": "Destacados",
+      "itinerary": "Itinerario Detallado",
+      "route": "Ruta del Safari",
+      "accommodation": "Alojamiento",
+      "meals": "Comidas",
+      "activities": "Actividades",
+      "details": "Detalles del Safari",
+      "duration": "Duración",
+      "location": "Ubicación",
+      "experienceType": "Tipo de Experiencia",
+      "maxGroupSize": "Tamaño máximo del grupo",
+      "transportation": "Transporte",
+      "bestTime": "Mejor época",
+      "difficulty": "Dificultad",
+      "routeMap": "Mapa de la Ruta",
+      "bookNow": "Reservar Ahora",
+      "requestQuote": "Solicitar Cotización",
+      "perPerson": "por persona",
+      "people": "personas",
+      "mealsIncluded": "Comidas incluidas",
+      "days": "días"
     }
   },
   "brand": {

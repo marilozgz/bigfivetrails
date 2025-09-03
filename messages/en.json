@@ -11,7 +11,8 @@
         "photographic": "Photographic",
         "smallGroup": "Small Group",
         "adventure": "Adventure",
-        "camping": "Camping"
+        "camping": "Camping",
+        "wildlife": "Wildlife"
       },
       "highlights": {
         "bigFive": "Big Five Encounters",
@@ -22,7 +23,14 @@
         "budgetFriendly": "Budget friendly",
         "kiliFoothills": "Kili foothills hike",
         "nightInBush": "Night in the bush",
-        "customizableCamp": "Customizable camp setup"
+        "customizableCamp": "Customizable camp setup",
+        "greatMigration": "Great Migration",
+        "photographic": "Photographic Safari",
+        "expertGuide": "Expert Guide",
+        "culturalExperience": "Cultural Experience",
+        "wildlifeViewing": "Wildlife Viewing",
+        "scenicDrives": "Scenic Drives",
+        "birdWatching": "Bird Watching"
       }
     },
     "hero": {
@@ -39,6 +47,7 @@
       "duration": "Duration (days)",
       "min": "Min",
       "max": "Max",
+      "priceRange": "Price range",
       "active": "Active filters",
       "none": "None"
     },
@@ -65,6 +74,30 @@
         "Daily game drives",
         "Flexible departures"
       ]
+    },
+    "detail": {
+      "description": "Safari Description",
+      "highlights": "Highlights",
+      "itinerary": "Detailed Itinerary",
+      "route": "Safari Route",
+      "accommodation": "Accommodation",
+      "meals": "Meals",
+      "activities": "Activities",
+      "details": "Safari Details",
+      "duration": "Duration",
+      "location": "Location",
+      "experienceType": "Experience Type",
+      "maxGroupSize": "Maximum group size",
+      "transportation": "Transportation",
+      "bestTime": "Best time",
+      "difficulty": "Difficulty",
+      "routeMap": "Route Map",
+      "bookNow": "Book Now",
+      "requestQuote": "Request Quote",
+      "perPerson": "per person",
+      "people": "people",
+      "mealsIncluded": "Meals included",
+      "days": "days"
     }
   },
   "brand": {

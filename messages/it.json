@@ -11,7 +11,8 @@
         "photographic": "Fotografico",
         "smallGroup": "Piccolo Gruppo",
         "adventure": "Avventura",
-        "camping": "Campeggio"
+        "camping": "Campeggio",
+        "wildlife": "Fauna"
       },
       "highlights": {
         "bigFive": "Incontri con i Big Five",
@@ -22,7 +23,14 @@
         "budgetFriendly": "Budget accessibile",
         "kiliFoothills": "Escursione ai piedi del Kili",
         "nightInBush": "Notte nella boscaglia",
-        "customizableCamp": "Setup del campo personalizzabile"
+        "customizableCamp": "Setup del campo personalizzabile",
+        "greatMigration": "Grande Migrazione",
+        "photographic": "Safari Fotografico",
+        "expertGuide": "Guida Esperta",
+        "culturalExperience": "Esperienza Culturale",
+        "wildlifeViewing": "Osservazione della Fauna",
+        "scenicDrives": "Percorsi Panoramici",
+        "birdWatching": "Birdwatching"
       }
     },
     "hero": {
@@ -39,6 +47,7 @@
       "duration": "Durata (giorni)",
       "min": "Min",
       "max": "Max",
+      "priceRange": "Fascia di prezzo",
       "active": "Filtri attivi",
       "none": "Nessuno"
     },
@@ -65,6 +74,30 @@
         "Safari quotidiani",
         "Partenze flessibili"
       ]
+    },
+    "detail": {
+      "description": "Descrizione del Safari",
+      "highlights": "Punti Salienti",
+      "itinerary": "Itinerario Dettagliato",
+      "route": "Percorso del Safari",
+      "accommodation": "Sistemazione",
+      "meals": "Pasti",
+      "activities": "Attività",
+      "details": "Dettagli del Safari",
+      "duration": "Durata",
+      "location": "Località",
+      "experienceType": "Tipo di Esperienza",
+      "maxGroupSize": "Dimensione massima del gruppo",
+      "transportation": "Trasporto",
+      "bestTime": "Periodo migliore",
+      "difficulty": "Difficoltà",
+      "routeMap": "Mappa del Percorso",
+      "bookNow": "Prenota Ora",
+      "requestQuote": "Richiedi Preventivo",
+      "perPerson": "a persona",
+      "people": "persone",
+      "mealsIncluded": "Pasti inclusi",
+      "days": "giorni"
     }
   },
   "brand": {

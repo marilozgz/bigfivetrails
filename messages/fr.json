@@ -11,7 +11,8 @@
         "photographic": "Photographique",
         "smallGroup": "Petit Groupe",
         "adventure": "Aventure",
-        "camping": "Camping"
+        "camping": "Camping",
+        "wildlife": "Faune"
       },
       "highlights": {
         "bigFive": "Rencontres du Big Five",
@@ -22,7 +23,14 @@
         "budgetFriendly": "Budget accessible",
         "kiliFoothills": "Randonnée au pied du Kili",
         "nightInBush": "Nuit dans la brousse",
-        "customizableCamp": "Installation de camp personnalisable"
+        "customizableCamp": "Installation de camp personnalisable",
+        "greatMigration": "Grande Migration",
+        "photographic": "Safari Photographique",
+        "expertGuide": "Guide Expert",
+        "culturalExperience": "Expérience Culturelle",
+        "wildlifeViewing": "Observation de la Faune",
+        "scenicDrives": "Circuits Panoramiques",
+        "birdWatching": "Observation des Oiseaux"
       }
     },
     "hero": {
@@ -42,6 +50,7 @@
       "duration": "Durée (jours)",
       "min": "Min",
       "max": "Max",
+      "priceRange": "Gamme de prix",
       "active": "Filtres actifs",
       "none": "Aucun"
     },
@@ -68,6 +77,30 @@
         "Safaris quotidiens",
         "Départs flexibles"
       ]
+    },
+    "detail": {
+      "description": "Description du Safari",
+      "highlights": "Points Forts",
+      "itinerary": "Itinéraire Détaillé",
+      "route": "Route du Safari",
+      "accommodation": "Hébergement",
+      "meals": "Repas",
+      "activities": "Activités",
+      "details": "Détails du Safari",
+      "duration": "Durée",
+      "location": "Localisation",
+      "experienceType": "Type d'Expérience",
+      "maxGroupSize": "Taille maximale du groupe",
+      "transportation": "Transport",
+      "bestTime": "Meilleure période",
+      "difficulty": "Difficulté",
+      "routeMap": "Carte de l'Itinéraire",
+      "bookNow": "Réserver Maintenant",
+      "requestQuote": "Demander un Devis",
+      "perPerson": "par personne",
+      "people": "personnes",
+      "mealsIncluded": "Repas inclus",
+      "days": "jours"
     }
   },
   "brand": {
