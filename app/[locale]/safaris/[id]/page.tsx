@@ -1,7 +1,9 @@
 import { getLocale, getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
 import { notFound } from "next/navigation"
+import Image from "next/image"
 import { formatCurrency, getSafariData } from "../utils"
+import { Safari, ItineraryDay } from "@/lib/types/safari"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -23,17 +25,18 @@ export default async function SafariDetailPage({
   }
 
   const experienceLabels = (safari.experienceTypes || [])
-    .filter((type: any) => type !== null && type !== undefined)
-    .map((type: any) => {
-      const typeKey = typeof type === "object" ? type.name || type : type
+    .filter((type): type is string | { name: string; description?: string } => 
+      type !== null && type !== undefined)
+    .map((type) => {
+      const typeKey = typeof type === "object" ? type.name : type
       return t(`catalog.experienceTypes.${typeKey}`)
     })
 
   const highlightLabels = (safari.highlights || [])
-    .filter((highlight: any) => highlight !== null && highlight !== undefined)
-    .map((highlight: any) => {
-      const highlightKey =
-        typeof highlight === "object" ? highlight.name || highlight : highlight
+    .filter((highlight): highlight is string | { name: string; description?: string } => 
+      highlight !== null && highlight !== undefined)
+    .map((highlight) => {
+      const highlightKey = typeof highlight === "object" ? highlight.name : highlight
       return t(`catalog.highlights.${highlightKey}`)
     })
 
@@ -54,10 +57,12 @@ export default async function SafariDetailPage({
 
           {/* Galería de imágenes simple */}
           <div className='relative h-64 md:h-80 rounded-lg overflow-hidden mb-8'>
-            <img
-              src={safari.images[0]}
+            <Image
+              src={safari.images?.[0] || '/images/default-safari.jpg'}
               alt={safari.title}
-              className='w-full h-full object-cover'
+              fill
+              className='object-cover'
+              priority
             />
           </div>
         </div>
@@ -83,7 +88,7 @@ export default async function SafariDetailPage({
                 </h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                   {highlightLabels
-                    .filter((highlight: any) => typeof highlight === "string")
+                    .filter((highlight): highlight is string => typeof highlight === "string")
                     .map((highlight: string, index: number) => (
                       <div
                         key={index}
@@ -102,15 +107,7 @@ export default async function SafariDetailPage({
                 {t("detail.itinerary")}
               </h2>
               <div className='space-y-6'>
-                {safari.itinerary.map(
-                  (day: {
-                    day: number
-                    title: string
-                    description: string
-                    accommodation: string
-                    meals: string[]
-                    activities?: string[]
-                  }) => (
+                {safari.itinerary.map((day: ItineraryDay) => (
                     <div
                       key={day.day}
                       className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
@@ -147,9 +144,7 @@ export default async function SafariDetailPage({
                               <p className='text-sm text-gray-600'>
                                 {day.meals
                                   ? day.meals
-                                      .filter(
-                                        (meal: any) => typeof meal === "string"
-                                      )
+                                      .filter((meal): meal is string => typeof meal === "string")
                                       .join(", ")
                                   : t("detail.mealsIncluded")}
                               </p>
@@ -163,10 +158,7 @@ export default async function SafariDetailPage({
                               </h4>
                               <ul className='list-disc list-inside text-sm text-gray-600'>
                                 {day.activities
-                                  .filter(
-                                    (activity: any) =>
-                                      typeof activity === "string"
-                                  )
+                                  .filter((activity): activity is string => typeof activity === "string")
                                   .map((activity: string, index: number) => (
                                     <li key={index}>{activity}</li>
                                   ))}
@@ -189,14 +181,14 @@ export default async function SafariDetailPage({
                 </h2>
                 <div className='flex items-center gap-2 text-lg text-gray-700'>
                   {safari.route
-                    .filter((location: any) => typeof location === "string")
+                    .filter((location): location is string => typeof location === "string")
                     .map((location: string, index: number) => (
                       <div
                         key={location}
                         className='flex items-center'>
                         <span>{location}</span>
                         {index <
-                          safari.route.filter((l: any) => typeof l === "string")
+                          safari.route.filter((l): l is string => typeof l === "string")
                             .length -
                             1 && (
                           <svg
@@ -267,7 +259,7 @@ export default async function SafariDetailPage({
                   </span>
                   <div className='mt-1'>
                     {experienceLabels
-                      .filter((label: any) => typeof label === "string")
+                      .filter((label): label is string => typeof label === "string")
                       .map((label: string, index: number) => (
                         <span
                           key={index}

@@ -13,14 +13,14 @@ export interface StrapiResponse<T> {
 
 export interface StrapiSingleResponse<T> {
   data: T
-  meta: {}
+  meta: Record<string, unknown>
 }
 
 export interface ItineraryDay {
   day: number
   title: string
   description: string
-  accommodation: string
+  accommodation: string | { name: string; description?: string }
   meals: string[]
   activities: string[]
 }
@@ -48,8 +48,8 @@ export interface Safari {
   notIncluded: string[] | null
   itinerary: ItineraryDay[] | null
   accommodation: string | null
-  experienceTypes: string[] | null
-  highlights: string[] | null
+  experienceTypes: (string | { name: string; description?: string })[] | null
+  highlights: (string | { name: string; description?: string })[] | null
   duration: string | null
   client: string | null
   participants: number | null
