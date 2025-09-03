@@ -71,8 +71,8 @@ export default function SafariFilters({
     if (filters.experience.length > 0) {
       filtered = filtered.filter((safari) =>
         safari.experienceTypes?.some((exp) => {
-          const expKey = typeof exp === "object" ? exp.name || exp : exp
-          return filters.experience.includes(expKey)
+          const expKey = typeof exp === "object" ? exp.name : exp
+          return typeof expKey === "string" && filters.experience.includes(expKey)
         })
       )
     }
@@ -193,9 +193,9 @@ export default function SafariFilters({
               <option value=''>{t("filters.location")}</option>
               {uniqueLocations.map((location) => (
                 <option
-                  key={location}
-                  value={location}>
-                  {location}
+                  key={location || 'unknown'}
+                  value={location || ''}>
+                  {location || 'Unknown'}
                 </option>
               ))}
             </select>
@@ -207,21 +207,24 @@ export default function SafariFilters({
               {t("filters.experience")}
             </label>
             <div className='space-y-2'>
-              {uniqueExperiences.map((exp) => (
-                <label
-                  key={exp}
-                  className='flex items-center'>
-                  <input
-                    type='checkbox'
-                    checked={filters.experience.includes(exp)}
-                    onChange={() => handleExperienceToggle(exp)}
-                    className='rounded border-gray-300 text-[#c6b892] focus:ring-[#c6b892]'
-                  />
-                  <span className='ml-2 text-sm text-gray-700'>
-                    {t(`catalog.experienceTypes.${exp}`, { defaultValue: exp })}
-                  </span>
-                </label>
-              ))}
+              {uniqueExperiences.map((exp) => {
+                const expKey = typeof exp === "object" ? exp.name : exp
+                return (
+                  <label
+                    key={expKey || 'unknown'}
+                    className='flex items-center'>
+                    <input
+                      type='checkbox'
+                      checked={typeof expKey === "string" && filters.experience.includes(expKey)}
+                      onChange={() => typeof expKey === "string" && handleExperienceToggle(expKey)}
+                      className='rounded border-gray-300 text-[#c6b892] focus:ring-[#c6b892]'
+                    />
+                    <span className='ml-2 text-sm text-gray-700'>
+                      {t(`catalog.experienceTypes.${expKey}`, { defaultValue: expKey })}
+                    </span>
+                  </label>
+                )
+              })}
             </div>
           </div>
 

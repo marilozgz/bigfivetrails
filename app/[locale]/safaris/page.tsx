@@ -31,7 +31,9 @@ export default async function DestinationsPage() {
   // Counts per location (for nicer sidebar)
   const locationCounts = new Map<string, number>()
   for (const s of safaris) {
-    locationCounts.set(s.location, (locationCounts.get(s.location) || 0) + 1)
+    if (s.location) {
+      locationCounts.set(s.location, (locationCounts.get(s.location) || 0) + 1)
+    }
   }
 
   return (
