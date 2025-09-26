@@ -4,6 +4,32 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "travelRecommendations": {
+    "title": "Reiseempfehlungen",
+    "subtitle": "Praktische Tipps für Ihre Ostafrika‑Reise",
+    "tanzania": {
+      "title": "Tansania",
+      "intro": "Vom Serengeti bis Ngorongoro – diese Tipps helfen Ihnen, das Beste herauszuholen.",
+      "tips": [
+        "Beste Zeit für die Große Migration: Juni–Oktober.",
+        "Packen Sie neutrale Schichten; Nächte können kühl sein.",
+        "Trinkgeld in bar (USD oder TZS) für Guides und Camp‑Teams.",
+        "Sonnenschutz und Repellent sind ganzjährig wichtig."
+      ],
+      "link": { "label": "Safaris in Tansania", "href": "/safaris?t=tanzania" }
+    },
+    "kenya": {
+      "title": "Kenia",
+      "intro": "Klassische Afrika‑Safari in der Masai Mara und privaten Conservancies.",
+      "tips": [
+        "Mara‑Flussüberquerungen meist Juli–September.",
+        "Heißluftballons früh buchen: begrenzte Plätze.",
+        "Kombinieren Sie Mara mit Laikipia oder Amboseli.",
+        "Karten funktionieren in Luxuslodges, etwas Bargeld mitnehmen."
+      ],
+      "link": { "label": "Safaris in Kenia", "href": "/safaris?t=kenya" }
+    }
+  },
   "safaris": {
     "catalog": {
       "experienceTypes": {
@@ -113,6 +139,7 @@
   "nav": {
     "tours": "Touren",
     "destinations": "Reiseziele",
+    "travelRecommendations": "Reiseempfehlungen",
     "whyUs": "Warum wir",
     "reviews": "Bewertungen",
     "contact": "Kontakt",

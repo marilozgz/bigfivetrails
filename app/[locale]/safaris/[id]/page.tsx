@@ -1,9 +1,12 @@
 import { ItineraryDay } from "@/lib/types/safari"
+import type { Metadata } from "next"
 import { getLocale, getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { formatCurrency, getSafariData } from "../utils"
+import { formatCurrency, getSafariData, getShimmerDataURL } from "../utils"
+import Breadcrumbs from "./breadcrumbs"
+import SafariJsonLd from "./jsonld"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -26,10 +29,12 @@ export default async function SafariDetailPage({
 
   const experienceLabels = (safari.experienceTypes || [])
     .filter(
-      (type): type is string | { name: string; description?: string } =>
+      (
+        type: unknown
+      ): type is string | { name: string; description?: string } =>
         type !== null && type !== undefined
     )
-    .map((type) => {
+    .map((type: string | { name: string }) => {
       const typeKey = typeof type === "object" ? type.name : type
       return t(`catalog.experienceTypes.${typeKey}`)
     })
@@ -37,11 +42,11 @@ export default async function SafariDetailPage({
   const highlightLabels = (safari.highlights || [])
     .filter(
       (
-        highlight
+        highlight: unknown
       ): highlight is string | { name: string; description?: string } =>
         highlight !== null && highlight !== undefined
     )
-    .map((highlight) => {
+    .map((highlight: string | { name: string }): string => {
       const highlightKey =
         typeof highlight === "object" ? highlight.name : highlight
       return t(`catalog.highlights.${highlightKey}`)
@@ -53,6 +58,11 @@ export default async function SafariDetailPage({
       <div className='max-w-7xl mx-auto px-4 py-8'>
         {/* Header con título y galería */}
         <div className='mb-8'>
+          <Breadcrumbs
+            locale={locale}
+            code={safari.code}
+            title={safari.title}
+          />
           <div className='text-center mb-8'>
             <h1 className='text-4xl md:text-5xl font-bold text-[#1f221b] mb-4'>
               {safari.title}
@@ -65,11 +75,18 @@ export default async function SafariDetailPage({
           {/* Galería de imágenes simple */}
           <div className='relative h-64 md:h-80 rounded-lg overflow-hidden mb-8'>
             <Image
-              src={safari.images?.[0] || "/images/default-safari.jpg"}
+              src={
+                safari.thumbnail_thumb ||
+                safari.thumbnail ||
+                safari.images?.[0] ||
+                "/images/default-safari.jpg"
+              }
               alt={safari.title}
               fill
               className='object-cover'
               priority
+              placeholder='blur'
+              blurDataURL={getShimmerDataURL(1024, 512)}
             />
           </div>
         </div>
@@ -95,10 +112,7 @@ export default async function SafariDetailPage({
                 </h2>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                   {highlightLabels
-                    .filter(
-                      (highlight): highlight is string =>
-                        typeof highlight === "string"
-                    )
+                    .filter((h: unknown): h is string => typeof h === "string")
                     .map((highlight: string, index: number) => (
                       <div
                         key={index}
@@ -199,30 +213,36 @@ export default async function SafariDetailPage({
                 <div className='flex items-center gap-2 text-lg text-gray-700'>
                   {safari.route
                     .filter(
-                      (location): location is string =>
+                      (location: unknown): location is string =>
                         typeof location === "string"
                     )
-                    .map((location: string, index: number, filteredArray) => (
-                      <div
-                        key={location}
-                        className='flex items-center'>
-                        <span>{location}</span>
-                        {index < filteredArray.length - 1 && (
-                          <svg
-                            className='w-5 h-5 mx-2 text-[#c6b892]'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'>
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              strokeWidth={2}
-                              d='M17 8l4 4m0 0l-4 4m4-4H3'
-                            />
-                          </svg>
-                        )}
-                      </div>
-                    ))}
+                    .map(
+                      (
+                        location: string,
+                        index: number,
+                        filteredArray: string[]
+                      ) => (
+                        <div
+                          key={location}
+                          className='flex items-center'>
+                          <span>{location}</span>
+                          {index < filteredArray.length - 1 && (
+                            <svg
+                              className='w-5 h-5 mx-2 text-[#c6b892]'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'>
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth={2}
+                                d='M17 8l4 4m0 0l-4 4m4-4H3'
+                              />
+                            </svg>
+                          )}
+                        </div>
+                      )
+                    )}
                 </div>
               </section>
             )}
@@ -277,7 +297,7 @@ export default async function SafariDetailPage({
                   <div className='mt-1'>
                     {experienceLabels
                       .filter(
-                        (label): label is string => typeof label === "string"
+                        (l: unknown): l is string => typeof l === "string"
                       )
                       .map((label: string, index: number) => (
                         <span
@@ -372,6 +392,66 @@ export default async function SafariDetailPage({
           </div>
         </div>
       </div>
+      {/* JSON-LD */}
+      <SafariJsonLd
+        id={safari.code || String(id)}
+        locale={locale}
+      />
     </div>
   )
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const locale = await getLocale()
+  const { id } = await params
+  const safari = await getSafariData(id, locale)
+  // Título basado en el título mostrado, enriquecido con ubicación y duración si están disponibles
+  const composedTitleParts: string[] = []
+  if (safari?.title) composedTitleParts.push(safari.title)
+  if (safari?.location) composedTitleParts.push(String(safari.location))
+  if (safari?.durationDays)
+    composedTitleParts.push(`${safari.durationDays} días`)
+  const fallbackComposedTitle =
+    composedTitleParts.length > 0
+      ? `${composedTitleParts.join(" · ")} | Big Five Trails`
+      : "Safari | Big Five Trails"
+  const title = safari?.seo_title || fallbackComposedTitle
+
+  // Descripción priorizando la propia del safari
+  const description =
+    safari?.seo_description ||
+    safari?.description ||
+    safari?.overview ||
+    "Safaris inolvidables en Tanzania y Kenia con Big Five Trails."
+  const images = [
+    safari?.og_image || safari?.thumbnail || "/images/serengeti.jpg"
+  ].filter(Boolean) as string[]
+  const url =
+    typeof process !== "undefined" && process.env.NEXT_PUBLIC_SITE_URL
+      ? `${process.env.NEXT_PUBLIC_SITE_URL}/safaris/${safari?.code || id}`
+      : undefined
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url
+    },
+    openGraph: {
+      title,
+      description,
+      images,
+      type: "website",
+      url
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images
+    }
+  }
 }

@@ -4,6 +4,35 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "travelRecommendations": {
+    "title": "Raccomandazioni di viaggio",
+    "subtitle": "Consigli pratici per preparare la tua avventura in Africa Orientale",
+    "tanzania": {
+      "title": "Tanzania",
+      "intro": "Dal Serengeti al Ngorongoro, questi consigli ti aiuteranno a goderti al massimo.",
+      "tips": [
+        "Periodo migliore per la Grande Migrazione: giugno–ottobre.",
+        "Porta strati in colori neutri; le notti possono essere fresche.",
+        "Mance in contanti (USD o TZS) per guide e staff dei campi.",
+        "Crema solare e repellente sono essenziali tutto l'anno."
+      ],
+      "link": {
+        "label": "Vedi safari in Tanzania",
+        "href": "/safaris?t=tanzania"
+      }
+    },
+    "kenya": {
+      "title": "Kenya",
+      "intro": "Safari africano classico al Masai Mara e nelle conservancies private.",
+      "tips": [
+        "Attraversamenti del fiume Mara tipicamente luglio–settembre.",
+        "Prenota le mongolfiere in anticipo: posti limitati.",
+        "Considera di abbinare Mara con Laikipia o Amboseli.",
+        "Le carte funzionano nei lodge di lusso, ma porta un po' di contanti."
+      ],
+      "link": { "label": "Vedi safari in Kenya", "href": "/safaris?t=kenya" }
+    }
+  },
   "safaris": {
     "catalog": {
       "experienceTypes": {
@@ -113,6 +142,7 @@
   "nav": {
     "tours": "Tour",
     "destinations": "Destinazioni",
+    "travelRecommendations": "Raccomandazioni di viaggio",
     "whyUs": "Perché Noi",
     "reviews": "Recensioni",
     "contact": "Contatto",

@@ -4,7 +4,7 @@
 import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
-import { formatCurrency } from "../utils"
+import { formatCurrency, getShimmerDataURL } from "../utils"
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -34,10 +34,12 @@ export default function SafariCardRow({ safari }: SafariCardRowProps) {
           <Image
             fill
             sizes='(min-width: 1024px) 40vw, 100vw'
-            src={safari.thumbnail}
-            alt={safari.title}
+            src={safari.thumbnail_thumb || safari.thumbnail}
+            alt={safari.thumbnail_alt || safari.title}
             className='object-cover'
             loading='lazy'
+            placeholder='blur'
+            blurDataURL={getShimmerDataURL(800, 600)}
           />
           {safari.popular && (
             <span className='absolute left-3 top-3 rounded-md bg-[#e9f0e4] px-2 py-1 text-xs font-semibold text-[#2e4e1f] shadow'>

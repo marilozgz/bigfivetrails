@@ -11,6 +11,7 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
     { id: "tours", label: t("tours") },
     { id: "destinations", label: t("destinations") },
     { id: "why-us", label: t("whyUs") },
+    { id: "travel-tips", label: t("travelRecommendations") },
     { id: "reviews", label: t("reviews") },
     { id: "contact", label: t("contact") }
   ]
@@ -48,6 +49,8 @@ export default function NavMenu({ fontClass }: { fontClass?: string }) {
               ? "/safaris"
               : s.id === "contact"
               ? "/contact"
+              : s.id === "travel-tips"
+              ? "/travel-tips"
               : `/#${s.id}`
           }
           className={`relative text-sm font-medium text-[#c6b892]/95 hover:text-[#c6b892] transition

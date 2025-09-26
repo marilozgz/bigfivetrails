@@ -9,6 +9,8 @@
       "experienceTypes": {
         "lodge": "Lodge",
         "photographic": "Fotográfico",
+        "fotográfico": "Fotográfico",
+        "privado": "Privado",
         "smallGroup": "Grupo reducido",
         "adventure": "Aventura",
         "camping": "Camping",
@@ -28,6 +30,7 @@
         "photographic": "Safari fotográfico",
         "expertGuide": "Guía experto",
         "culturalExperience": "Experiencia cultural",
+        "wildlife": "Vida salvaje",
         "wildlifeViewing": "Observación de fauna",
         "scenicDrives": "Rutas panorámicas",
         "birdWatching": "Observación de aves"
@@ -100,6 +103,44 @@
       "days": "días"
     }
   },
+  "travelRecommendations": {
+    "title": "Recomendaciones de viaje",
+    "subtitle": "Consejos prácticos para preparar tu aventura en África del Este",
+    "tanzania": {
+      "title": "Tanzania",
+      "intro": "Desde el Serengueti al Ngorongoro, estos consejos te ayudarán a disfrutar al máximo.",
+      "tips": [
+        "La mejor época para ver la Gran Migración es de junio a octubre.",
+        "Lleva ropa en capas y tonos neutros; las noches pueden ser frescas.",
+        "Paga propinas en efectivo (USD o TZS) para guías y personal de campamento.",
+        "Protección solar y repelente son imprescindibles todo el año."
+      ],
+      "link": {
+        "label": "Ver safaris en Tanzania",
+        "href": "/safaris?t=tanzania"
+      }
+    },
+    "kenya": {
+      "title": "Kenia",
+      "intro": "Clásico safari africano en Masai Mara y reservas privadas.",
+      "tips": [
+        "La temporada de cruces del río Mara suele ser de julio a septiembre.",
+        "Reserva globos aerostáticos con antelación: plazas limitadas.",
+        "Considera combinar Mara con Laikipia o Amboseli.",
+        "Tarjetas funcionan en lodges de lujo, pero lleva algo de efectivo."
+      ],
+      "link": { "label": "Ver safaris en Kenia", "href": "/safaris?t=kenya" }
+    },
+    "sections": {
+      "labels": {
+        "visas": "Visados",
+        "health": "Vacunación y salud",
+        "money": "Dinero y tarjetas",
+        "luggage": "Equipaje recomendado",
+        "tipping": "Propinas"
+      }
+    }
+  },
   "brand": {
     "title": "bigfivetrails",
     "subtitle": "Experiencias de Safari"
@@ -116,6 +157,7 @@
     "whyUs": "Por qué nosotros",
     "reviews": "Opiniones",
     "contact": "Contacto",
+    "travelRecommendations": "Recomendaciones de viaje",
     "packages": {
       "tours": "Tours",
       "serengetiLuxury": "Escapada de lujo al Serengueti",

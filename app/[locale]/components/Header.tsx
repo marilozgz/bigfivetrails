@@ -6,7 +6,7 @@ import { Link as LocaleLink } from "@/navigation"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { FaWhatsapp } from "react-icons/fa"
 import NavMenu from "./NavMenu"
 import TailorQuoteModal from "./TailorQuoteModal"
@@ -37,12 +37,35 @@ export default function Header() {
   const isTransparent = transparentPages.includes(pathname)
   const solid = !isTransparent || scrolled
 
+  const orgJson = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Big Five Trails",
+      url: "https://bigfivetrails.com",
+      logo: "/logo.png",
+      sameAs: ["https://www.instagram.com/", "https://www.facebook.com/"],
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+255 000 000",
+        contactType: "customer service",
+        areaServed: ["ES", "EN", "FR", "IT", "DE"],
+        availableLanguage: ["es", "en", "fr", "it", "de"]
+      }
+    }),
+    []
+  )
+
   return (
     <header
       className={
         "fixed inset-x-0 top-0 z-50 transition-all " +
         (solid ? "backdrop-blur bg-[#1f221b]/70 shadow-sm" : "bg-transparent")
       }>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJson) }}
+      />
       {/* Microbar */}
       <div
         className={`hidden md:flex items-center justify-center gap-6 text-sm py-2 text-[#e7c6c2] bg-[#1f221b] ${cormorant.className}`}>
@@ -196,7 +219,7 @@ export default function Header() {
             </MobileLink>
             <MobileLink
               onClick={() => setOpen(false)}
-              href='/#contact'>
+              href='/contact'>
               {t("nav.contact")}
             </MobileLink>
             <div className='flex gap-3 pt-4'>

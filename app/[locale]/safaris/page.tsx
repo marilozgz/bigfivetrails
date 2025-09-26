@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { locales } from "@/i18n"
+import type { Metadata } from "next"
 import { getLocale, getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
@@ -81,6 +83,52 @@ export default async function DestinationsPage() {
       <section className='mx-auto max-w-7xl px-4'>
         <SafariFiltersWrapper safaris={safaris} />
       </section>
+      {/* JSON-LD ItemList */}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: safaris.map((s, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `/${locale}/safaris/${s.code}`,
+              name: s.title
+            }))
+          })
+        }}
+      />
     </div>
   )
+}
+
+const site =
+  (typeof process !== "undefined" && process.env.NEXT_PUBLIC_SITE_URL) ||
+  "https://bigfivetrails.com"
+
+export const metadata: Metadata = {
+  title: "Safaris | Big Five Trails",
+  description:
+    "Explora safaris en Tanzania y Kenia: Serengeti, Ngorongoro, Masai Mara y más.",
+  alternates: {
+    canonical: `${site}/safaris`,
+    languages: Object.fromEntries(
+      locales.map((l) => [l, `${site}/${l}/safaris`])
+    )
+  },
+  openGraph: {
+    title: "Safaris | Big Five Trails",
+    description:
+      "Explora safaris en Tanzania y Kenia: Serengeti, Ngorongoro, Masai Mara y más.",
+    images: ["/images/serengeti.jpg"],
+    type: "website",
+    url: `${site}/safaris`
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Safaris | Big Five Trails",
+    description:
+      "Explora safaris en Tanzania y Kenia: Serengeti, Ngorongoro, Masai Mara y más."
+  }
 }

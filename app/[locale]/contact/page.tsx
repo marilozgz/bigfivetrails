@@ -1,5 +1,9 @@
+import { sendContactEmail } from "@/lib/email"
+import { createSupabaseServerClient } from "@/lib/supabase/server"
+import type { Metadata } from "next"
 import { getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
+import { redirect } from "next/navigation"
 import {
   FaCertificate,
   FaClock,
@@ -17,8 +21,99 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"]
 })
 
-export default async function ContactPage() {
+export const metadata: Metadata = {
+  title: "Contacto | Big Five Trails",
+  description:
+    "Escríbenos para planificar tu safari a medida en Tanzania. Te responderemos muy pronto.",
+  alternates: { canonical: "/contact" }
+}
+
+export default async function ContactPage({
+  searchParams
+}: {
+  searchParams?: { success?: string; error?: string }
+}) {
   const t = await getTranslations("contact")
+
+  async function submitContact(formData: FormData) {
+    "use server"
+    const supabase = createSupabaseServerClient()
+    // honeypot simple: campo oculto 'company' debe estar vacío
+    const company = String(formData.get("company") || "")
+    if (company) {
+      return redirect(`?success=${encodeURIComponent("¡Gracias!")}`)
+    }
+
+    const firstName = String(formData.get("firstName") || "").trim()
+    const lastName = String(formData.get("lastName") || "").trim()
+    const email = String(formData.get("email") || "").trim()
+    const phone = String(formData.get("phone") || "").trim()
+    const tripType = String(formData.get("tripType") || "").trim()
+    const travelers = String(formData.get("travelers") || "").trim()
+    const budget = String(formData.get("budget") || "").trim()
+    const message = String(formData.get("message") || "").trim()
+
+    if (!firstName || !email || !message) {
+      return redirect(
+        `?error=${encodeURIComponent(
+          "Por favor completa los campos requeridos."
+        )}`
+      )
+    }
+    const emailOk = /.+@.+\..+/.test(email)
+    if (!emailOk) {
+      return redirect(`?error=${encodeURIComponent("Email inválido.")}`)
+    }
+
+    // rate limiting simple por email: 3/hora
+    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString()
+    const { count } = await supabase
+      .from("contact_messages")
+      .select("id", { count: "exact", head: true })
+      .gte("created_at", oneHourAgo)
+      .eq("email", email)
+    if ((count || 0) >= 3) {
+      return redirect(
+        `?error=${encodeURIComponent(
+          "Has alcanzado el límite de envíos. Intenta más tarde."
+        )}`
+      )
+    }
+
+    const { error } = await supabase.from("contact_messages").insert({
+      first_name: firstName,
+      last_name: lastName || null,
+      email,
+      phone: phone || null,
+      trip_type: tripType || null,
+      travelers: travelers || null,
+      budget: budget || null,
+      message,
+      created_at: new Date().toISOString()
+    })
+
+    if (error) {
+      return redirect(
+        `?error=${encodeURIComponent(
+          "No pudimos enviar tu mensaje. Intenta nuevamente."
+        )}`
+      )
+    }
+    // enviar notificación (si hay credenciales configuradas)
+    await sendContactEmail({
+      firstName,
+      lastName: lastName || null,
+      email,
+      phone: phone || null,
+      tripType: tripType || null,
+      travelers: travelers || null,
+      budget: budget || null,
+      message
+    })
+    return redirect(
+      `?success=${encodeURIComponent("¡Gracias! Te contactaremos pronto.")}`
+    )
+  }
 
   return (
     <>
@@ -37,6 +132,22 @@ export default async function ContactPage() {
         </div>
       </section>
 
+      {/* Mensajes de feedback */}
+      {Boolean(searchParams?.success || searchParams?.error) && (
+        <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-6'>
+          {searchParams?.success && (
+            <div className='mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-700'>
+              {decodeURIComponent(searchParams.success)}
+            </div>
+          )}
+          {searchParams?.error && (
+            <div className='mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700'>
+              {decodeURIComponent(searchParams.error)}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Main Content */}
       <main className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16'>
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
@@ -52,7 +163,18 @@ export default async function ContactPage() {
               </p>
             </div>
 
-            <form className='space-y-6'>
+            <form
+              action={submitContact}
+              className='space-y-6'>
+              {/* Honeypot field */}
+              <input
+                type='text'
+                name='company'
+                tabIndex={-1}
+                autoComplete='off'
+                className='hidden'
+                aria-hidden
+              />
               <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div>
                   <label

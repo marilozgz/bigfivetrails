@@ -4,6 +4,35 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "travelRecommendations": {
+    "title": "Travel Recommendations",
+    "subtitle": "Practical tips to prepare your East Africa adventure",
+    "tanzania": {
+      "title": "Tanzania",
+      "intro": "From Serengeti to Ngorongoro, these tips help you make the most.",
+      "tips": [
+        "Best time for the Great Migration: June–October.",
+        "Pack neutral layers; nights can be chilly.",
+        "Tip guides and camp staff in cash (USD or TZS).",
+        "Sunscreen and repellent are essential year-round."
+      ],
+      "link": {
+        "label": "See safaris in Tanzania",
+        "href": "/safaris?t=tanzania"
+      }
+    },
+    "kenya": {
+      "title": "Kenya",
+      "intro": "Classic African safari in Masai Mara and private conservancies.",
+      "tips": [
+        "Mara River crossings typically July–September.",
+        "Book hot-air balloons early: limited seats.",
+        "Consider pairing Mara with Laikipia or Amboseli.",
+        "Cards work in luxury lodges, but carry some cash."
+      ],
+      "link": { "label": "See safaris in Kenya", "href": "/safaris?t=kenya" }
+    }
+  },
   "safaris": {
     "catalog": {
       "experienceTypes": {
@@ -113,6 +142,7 @@
   "nav": {
     "tours": "Tours",
     "destinations": "Destinations",
+    "travelRecommendations": "Travel Recommendations",
     "whyUs": "Why Us",
     "reviews": "Reviews",
     "contact": "Contact",

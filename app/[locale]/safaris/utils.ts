@@ -1,184 +1,176 @@
-import { safariService } from '../../../lib/services/strapi'
-import { Safari } from '../../../lib/types/safari'
+import { createSupabaseServerClient } from "@/lib/supabase/server"
+import { Safari } from "@/lib/types/safari"
 
-export type SortKey =
-  | "popularity"
-  | "priceAsc"
-  | "priceDesc"
-  | "durationAsc"
-  | "durationDesc"
-
-export function formatCurrency(
-  amount: number,
-  locale = "en-GB",
-  currency = "EUR"
-): string {
-  return new Intl.NumberFormat(locale, { style: "currency", currency }).format(
-    amount
-  )
+type SafariRow = {
+  id: string
+  code: string
+  [key: string]: unknown
 }
 
-export function useUniqueByKey<T, K extends keyof T>(
-  list: T[],
-  key: K
-): string[] {
-  // Note: this is a simple helper; the hook naming mirrors original usage but has no React state
-  return Array.from(new Set(list.map((item) => String(item[key])))).sort()
-}
-
-export function sortByKey<
-  T extends { priceFrom: number; durationDays: number }
->(list: T[], key: SortKey): T[] {
-  const arr = [...list]
-  switch (key) {
-    case "priceAsc":
-      return arr.sort((a, b) => a.priceFrom - b.priceFrom)
-    case "priceDesc":
-      return arr.sort((a, b) => b.priceFrom - a.priceFrom)
-    case "durationAsc":
-      return arr.sort((a, b) => a.durationDays - b.durationDays)
-    case "durationDesc":
-      return arr.sort((a, b) => b.durationDays - a.durationDays)
-    default:
-      return arr
-  }
-}
-
-// Función para cargar datos de safaris desde Strapi
 export async function getSafarisData(locale: string): Promise<Safari[]> {
-  try {
-    console.log("🔍 Cargando safaris desde Strapi para locale:", locale)
-    
-    const safaris = await safariService.getAll(locale)
-    
-    console.log(`🎯 Safaris cargados desde Strapi: ${safaris.length}`)
-    console.log(
-      "📊 Safaris:",
-      safaris.map((s) => ({ id: s.code, title: s.title }))
+  const supabase = createSupabaseServerClient()
+  const { data, error } = await supabase
+    .from("safaris")
+    .select(
+      [
+        "id",
+        "code",
+        `title_${locale}:title_${locale}`,
+        `overview_${locale}:overview_${locale}`,
+        "location",
+        "duration_days",
+        "price_from",
+        "experience_types",
+        "highlights",
+        "route",
+        "thumbnail",
+        "thumbnail_thumb",
+        "popular"
+      ].join(", ")
     )
+    .order("popular", { ascending: false })
 
-    return safaris
-  } catch (error) {
-    console.error("💥 Error cargando safaris desde Strapi:", error)
-    
-    // Fallback a datos locales si Strapi no está disponible
-    console.log("🔄 Intentando fallback a datos locales...")
-    return await getSafarisDataLocal(locale)
-  }
-}
-
-// Función para obtener un safari específico por código desde Strapi
-export async function getSafariData(safariCode: string, locale: string): Promise<Safari | null> {
-  try {
-    console.log(
-      `🔍 getSafariData: Cargando safari ${safariCode} desde Strapi para locale ${locale}`
-    )
-    
-    const safari = await safariService.getByCode(safariCode, locale)
-    
-    if (safari) {
-      console.log(`✅ getSafariData: Safari ${safariCode} cargado desde Strapi`)
-      return safari
-    } else {
-      console.log(`❌ getSafariData: Safari ${safariCode} no encontrado en Strapi`)
-      
-      // Fallback a datos locales
-      console.log("�� Intentando fallback a datos locales...")
-      return await getSafariDataLocal(safariCode, locale)
-    }
-  } catch (error) {
-    console.error(`💥 Error cargando safari ${safariCode} desde Strapi:`, error)
-    
-    // Fallback a datos locales
-    console.log("🔄 Intentando fallback a datos locales...")
-    return await getSafariDataLocal(safariCode, locale)
-  }
-}
-
-// Funciones de fallback para datos locales (mantener compatibilidad)
-async function getSafarisDataLocal(locale: string): Promise<Safari[]> {
-  try {
-    console.log("🔍 Fallback: Buscando safaris locales para locale:", locale)
-
-    // Solo cargar safaris que sabemos que existen
-    const safariIds = ["ndutu", "serengeti", "maretuniwonder", "pumba"]
-    console.log("📋 IDs de safaris locales a buscar:", safariIds)
-
-    const safaris = await Promise.all(
-      safariIds.map(async (id) => {
-        console.log(`🔍 Intentando cargar safari local: ${id}`)
-        try {
-          const data = await import(
-            `../../../data/safaris/${id}/${id}.${locale}.json`
-          )
-          console.log(`✅ Safari local ${id} cargado exitosamente`)
-          return data.default
-        } catch (error) {
-          console.log(
-            `❌ Error cargando ${id}.${locale}.json:`,
-            (error as Error).message
-          )
-          // Fallback al español si no existe el idioma
-          try {
-            const fallback = await import(
-              `../../../data/safaris/${id}/${id}.es.json`
-            )
-            console.log(`✅ Safari local ${id} cargado con fallback español`)
-            return fallback.default
-          } catch (fallbackError) {
-            console.warn(
-              `❌ No se pudo cargar el safari local ${id}:`,
-              (fallbackError as Error).message
-            )
-            return null
-          }
-        }
-      })
-    )
-
-    const validSafaris = safaris.filter(Boolean)
-    console.log(`🎯 Safaris locales válidos encontrados: ${validSafaris.length}`)
-    
-    return validSafaris
-  } catch (error) {
-    console.error("💥 Error general cargando safaris locales:", error)
+  if (error) {
+    console.error("Error fetching safaris from Supabase:", error.message)
     return []
   }
+
+  const rows: SafariRow[] = (data as unknown as SafariRow[]) || []
+  return rows.map((row) => {
+    const title = row[`title_${locale}`] || row.title_en || row.title || ""
+    const overview =
+      row[`overview_${locale}`] || row.overview_en || row.overview || ""
+    const experienceTypes = Array.isArray(row.experience_types as unknown[])
+      ? row.experience_types
+      : []
+
+    return {
+      id: row.id,
+      code: row.code,
+      title,
+      overview,
+      location: row.location || undefined,
+      durationDays: row.duration_days || undefined,
+      priceFrom: row.price_from || undefined,
+      experienceTypes,
+      highlights: row.highlights || [],
+      route: row.route || [],
+      thumbnail: row.thumbnail,
+      thumbnail_thumb: row.thumbnail_thumb || undefined,
+      popular: row.popular ?? false
+    } as Safari
+  })
 }
 
-async function getSafariDataLocal(safariId: string, locale: string): Promise<Safari | null> {
-  try {
-    console.log(
-      `🔍 getSafariDataLocal: Intentando cargar ${safariId}.${locale}.json`
+export async function getSafariData(
+  idOrCode: string,
+  locale: string
+): Promise<Safari | null> {
+  const supabase = createSupabaseServerClient()
+  const isUuid = /[0-9a-fA-F-]{36}/.test(idOrCode)
+  const query = supabase
+    .from("safaris")
+    .select(
+      [
+        "id",
+        "code",
+        `title_${locale}:title_${locale}`,
+        `overview_${locale}:overview_${locale}`,
+        `description_${locale}:description_${locale}`,
+        "location",
+        "duration_days",
+        "price_from",
+        "experience_types",
+        "highlights",
+        "route",
+        "thumbnail",
+        "thumbnail_thumb",
+        "images",
+        "itinerary",
+        "max_group_size",
+        "accommodation",
+        "transportation",
+        "best_time",
+        "difficulty",
+        "popular"
+      ].join(", ")
     )
-    const data = await import(
-      `../../../data/safaris/${safariId}/${safariId}.${locale}.json`
-    )
-    console.log(`✅ getSafariDataLocal: Safari ${safariId} cargado exitosamente`)
-    return data.default
-  } catch (error) {
-    console.log(
-      `❌ getSafariDataLocal: Error cargando ${safariId}.${locale}.json:`,
-      (error as Error).message
-    )
-    // Fallback al español si no existe el idioma
-    try {
-      console.log(
-        `🔄 getSafariDataLocal: Intentando fallback español para ${safariId}`
-      )
-      const fallback = await import(
-        `../../../data/safaris/${safariId}/${safariId}.es.json`
-      )
-      console.log(
-        `✅ getSafariDataLocal: Safari ${safariId} cargado con fallback español`
-      )
-      return fallback.default
-    } catch (fallbackError) {
-      console.error(
-        `❌ getSafariDataLocal: No se pudo cargar el safari ${safariId}:`,
-        (fallbackError as Error).message
-      )
-      return null
-    }
+    .limit(1)
+
+  const { data, error } = isUuid
+    ? await query.eq("id", idOrCode)
+    : await query.eq("code", idOrCode)
+
+  if (error) {
+    console.error("Error fetching safari from Supabase:", error.message)
+    return null
   }
+
+  const row = (data as unknown as SafariRow[])?.[0] as SafariRow | undefined
+  if (!row) return null
+
+  return {
+    id: row.id,
+    code: row.code,
+    title: row[`title_${locale}`] || row.title_en || row.title || "",
+    overview:
+      row[`overview_${locale}`] || row.overview_en || row.overview || "",
+    description:
+      row[`description_${locale}`] ||
+      row.description_en ||
+      row.description ||
+      "",
+    location: row.location || undefined,
+    durationDays: row.duration_days || undefined,
+    priceFrom: row.price_from || undefined,
+    experienceTypes: Array.isArray(row.experience_types)
+      ? row.experience_types
+      : [],
+    highlights: row.highlights || [],
+    route: row.route || [],
+    thumbnail: row.thumbnail,
+    thumbnail_thumb: row.thumbnail_thumb || undefined,
+    images: row.images || [],
+    itinerary: row.itinerary || [],
+    maxGroupSize: row.max_group_size || undefined,
+    accommodation: row.accommodation || undefined,
+    transportation: row.transportation || undefined,
+    bestTime: row.best_time || undefined,
+    difficulty: row.difficulty || undefined,
+    popular: row.popular ?? false
+  } as Safari
+}
+
+export function formatCurrency(value?: number): string {
+  if (!value && value !== 0) return ""
+  return new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0
+  }).format(value)
+}
+
+function shimmerSVG(width: number, height: number) {
+  return `
+  <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="g">
+        <stop stop-color="#f6f7f8" offset="20%" />
+        <stop stop-color="#edeef1" offset="50%" />
+        <stop stop-color="#f6f7f8" offset="70%" />
+      </linearGradient>
+    </defs>
+    <rect width="${width}" height="${height}" fill="#f6f7f8" />
+    <rect id="r" width="${width}" height="${height}" fill="url(#g)" />
+    <animate xlink:href="#r" attributeName="x" from="-${width}" to="${width}" dur="1.2s" repeatCount="indefinite"  />
+  </svg>`
+}
+
+export function getShimmerDataURL(width = 700, height = 475): string {
+  const svg = shimmerSVG(width, height)
+  const base64 =
+    typeof window === "undefined"
+      ? Buffer.from(svg).toString("base64")
+      : window.btoa(svg)
+  return `data:image/svg+xml;base64,${base64}`
 }

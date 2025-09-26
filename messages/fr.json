@@ -4,6 +4,38 @@
     "phone": "+255 000 000",
     "phoneRaw": "+255000000"
   },
+  "travelRecommendations": {
+    "title": "Recommandations de voyage",
+    "subtitle": "Conseils pratiques pour préparer votre aventure en Afrique de l'Est",
+    "tanzania": {
+      "title": "Tanzanie",
+      "intro": "Du Serengeti au Ngorongoro, ces conseils vous aideront à en profiter au maximum.",
+      "tips": [
+        "Meilleure période pour la Grande Migration : juin–octobre.",
+        "Prévoyez des couches neutres ; les nuits peuvent être fraîches.",
+        "Laissez des pourboires en espèces (USD ou TZS) aux guides et au personnel.",
+        "Crème solaire et répulsif sont indispensables toute l'année."
+      ],
+      "link": {
+        "label": "Voir les safaris en Tanzanie",
+        "href": "/safaris?t=tanzania"
+      }
+    },
+    "kenya": {
+      "title": "Kenya",
+      "intro": "Safari africain classique au Masai Mara et dans les conservancies privées.",
+      "tips": [
+        "Traversées de la rivière Mara généralement juillet–septembre.",
+        "Réservez les montgolfières à l'avance : places limitées.",
+        "Envisagez de combiner Mara avec Laikipia ou Amboseli.",
+        "Les cartes fonctionnent dans les lodges de luxe, mais gardez un peu d'espèces."
+      ],
+      "link": {
+        "label": "Voir les safaris au Kenya",
+        "href": "/safaris?t=kenya"
+      }
+    }
+  },
   "safaris": {
     "catalog": {
       "experienceTypes": {
@@ -116,6 +148,7 @@
   "nav": {
     "tours": "Circuits",
     "destinations": "Destinations",
+    "travelRecommendations": "Recommandations de voyage",
     "whyUs": "Pourquoi Nous",
     "reviews": "Avis",
     "contact": "Contact",

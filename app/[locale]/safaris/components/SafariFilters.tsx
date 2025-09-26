@@ -7,6 +7,14 @@ import { useEffect, useState } from "react"
 interface SafariFiltersProps {
   safaris: Safari[]
   onFilteredSafaris: (filtered: Safari[]) => void
+  initialLocation?: string
+  initialSearch?: string
+  initialPriceMin?: string
+  initialPriceMax?: string
+  initialDurationMin?: string
+  initialDurationMax?: string
+  registerClearAll?: (clearFn: () => void) => void
+  onFiltersChange?: (filters: FilterState) => void
 }
 
 interface FilterState {
@@ -21,18 +29,26 @@ interface FilterState {
 
 export default function SafariFilters({
   safaris,
-  onFilteredSafaris
+  onFilteredSafaris,
+  initialLocation,
+  initialSearch,
+  initialPriceMin,
+  initialPriceMax,
+  initialDurationMin,
+  initialDurationMax,
+  registerClearAll,
+  onFiltersChange
 }: SafariFiltersProps) {
   const t = useTranslations("safaris")
 
   const [filters, setFilters] = useState<FilterState>({
-    search: "",
-    location: "",
+    search: initialSearch || "",
+    location: initialLocation || "",
     experience: [],
-    durationMin: "",
-    durationMax: "",
-    priceMin: "",
-    priceMax: ""
+    durationMin: initialDurationMin || "",
+    durationMax: initialDurationMax || "",
+    priceMin: initialPriceMin || "",
+    priceMax: initialPriceMax || ""
   })
 
   const [isOpen, setIsOpen] = useState(false)
@@ -72,7 +88,9 @@ export default function SafariFilters({
       filtered = filtered.filter((safari) =>
         safari.experienceTypes?.some((exp) => {
           const expKey = typeof exp === "object" ? exp.name : exp
-          return typeof expKey === "string" && filters.experience.includes(expKey)
+          return (
+            typeof expKey === "string" && filters.experience.includes(expKey)
+          )
         })
       )
     }
@@ -98,6 +116,7 @@ export default function SafariFilters({
     }
 
     onFilteredSafaris(filtered)
+    onFiltersChange?.(filters)
   }, [filters, safaris, onFilteredSafaris])
 
   const handleExperienceToggle = (exp: string) => {
@@ -120,6 +139,11 @@ export default function SafariFilters({
       priceMax: ""
     })
   }
+
+  useEffect(() => {
+    if (registerClearAll) registerClearAll(clearAllFilters)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
@@ -193,9 +217,9 @@ export default function SafariFilters({
               <option value=''>{t("filters.location")}</option>
               {uniqueLocations.map((location) => (
                 <option
-                  key={location || 'unknown'}
-                  value={location || ''}>
-                  {location || 'Unknown'}
+                  key={location || "unknown"}
+                  value={location || ""}>
+                  {location || "Unknown"}
                 </option>
               ))}
             </select>
@@ -211,16 +235,24 @@ export default function SafariFilters({
                 const expKey = typeof exp === "object" ? exp.name : exp
                 return (
                   <label
-                    key={expKey || 'unknown'}
+                    key={expKey || "unknown"}
                     className='flex items-center'>
                     <input
                       type='checkbox'
-                      checked={typeof expKey === "string" && filters.experience.includes(expKey)}
-                      onChange={() => typeof expKey === "string" && handleExperienceToggle(expKey)}
+                      checked={
+                        typeof expKey === "string" &&
+                        filters.experience.includes(expKey)
+                      }
+                      onChange={() =>
+                        typeof expKey === "string" &&
+                        handleExperienceToggle(expKey)
+                      }
                       className='rounded border-gray-300 text-[#c6b892] focus:ring-[#c6b892]'
                     />
                     <span className='ml-2 text-sm text-gray-700'>
-                      {t(`catalog.experienceTypes.${expKey}`, { defaultValue: expKey })}
+                      {t(`catalog.experienceTypes.${expKey}`, {
+                        defaultValue: expKey
+                      })}
                     </span>
                   </label>
                 )
