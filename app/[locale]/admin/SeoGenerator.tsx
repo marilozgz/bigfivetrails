@@ -110,8 +110,8 @@ export default function SeoGenerator() {
     const seoDesc = document.querySelector(
       'input[name="seo_description"]'
     ) as HTMLInputElement | null
-    if (seoTitle) seoTitle.value = out.title
-    if (seoDesc) seoDesc.value = out.description
+    if (seoTitle && out.title) seoTitle.value = out.title
+    if (seoDesc && out.description) seoDesc.value = out.description
     if (!ai) setError("Usando generación heurística (sin token HF)")
     setLoading(false)
   }

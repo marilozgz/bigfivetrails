@@ -31,9 +31,12 @@ export const metadata: Metadata = {
 export default async function ContactPage({
   searchParams
 }: {
-  searchParams?: { success?: string; error?: string }
+  searchParams?: Promise<{ success?: string; error?: string }>
 }) {
   const t = await getTranslations("contact")
+
+  // Await searchParams since it's now a Promise in Next.js 15
+  const resolvedSearchParams = await searchParams
 
   async function submitContact(formData: FormData) {
     "use server"
@@ -133,16 +136,18 @@ export default async function ContactPage({
       </section>
 
       {/* Mensajes de feedback */}
-      {Boolean(searchParams?.success || searchParams?.error) && (
+      {Boolean(
+        resolvedSearchParams?.success || resolvedSearchParams?.error
+      ) && (
         <div className='mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-6'>
-          {searchParams?.success && (
+          {resolvedSearchParams?.success && (
             <div className='mb-4 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-green-700'>
-              {decodeURIComponent(searchParams.success)}
+              {decodeURIComponent(resolvedSearchParams?.success || "")}
             </div>
           )}
-          {searchParams?.error && (
+          {resolvedSearchParams?.error && (
             <div className='mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700'>
-              {decodeURIComponent(searchParams.error)}
+              {decodeURIComponent(resolvedSearchParams?.error || "")}
             </div>
           )}
         </div>
