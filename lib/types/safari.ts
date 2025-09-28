@@ -8,9 +8,9 @@ export interface SafariHighlight {
 
 export interface ItineraryDay {
   day: number
-  title: string
-  description?: string
-  accommodation?: string | { name: string }
+  title: string | MultiLanguageContent
+  description?: string | MultiLanguageContent
+  accommodation?: string | MultiLanguageContent | { name: string }
   meals?: string[]
   activities?: string[]
 }
@@ -36,18 +36,24 @@ export function getLocalizedContent(
   if (typeof content === "string") return content
 
   // Si es un objeto MultiLanguageContent, buscar el idioma específico
-  const localizedContent = content[locale as keyof MultiLanguageContent]
-  if (localizedContent) return localizedContent
+  if (typeof content === "object" && content !== null) {
+    // Buscar el idioma específico
+    if (locale === "fr" && content.fr) return content.fr
+    if (locale === "en" && content.en) return content.en
+    if (locale === "es" && content.es) return content.es
+    if (locale === "de" && content.de) return content.de
+    if (locale === "it" && content.it) return content.it
 
-  // Fallback a inglés si existe
-  if (content.en) return content.en
+    // Fallback a inglés si existe
+    if (content.en) return content.en
 
-  // Fallback a español si existe
-  if (content.es) return content.es
+    // Fallback a español si existe
+    if (content.es) return content.es
 
-  // Fallback al primer idioma disponible
-  const availableLanguages = Object.values(content).filter(Boolean)
-  if (availableLanguages.length > 0) return availableLanguages[0]
+    // Fallback al primer idioma disponible
+    const availableLanguages = Object.values(content).filter(Boolean)
+    if (availableLanguages.length > 0) return availableLanguages[0]
+  }
 
   return fallback || ""
 }

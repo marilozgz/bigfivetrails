@@ -19,14 +19,62 @@ interface SafariCardRowProps {
 
 export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
   const t = useTranslations("safaris")
-  const highlightKeys =
-    safari.highlights ??
-    (["bigFive", "twiceDailyDrives", "customizableCamp"] as unknown as any[])
+
+  // Helper para parsear campos que pueden venir como strings JSON
+  const parseField = (field: any): any => {
+    if (!field) return field
+    if (typeof field === "string") {
+      try {
+        return JSON.parse(field)
+      } catch {
+        return field
+      }
+    }
+    return field
+  }
+
+  // Procesar highlights de forma simple y robusta
+  const parsedHighlights = parseField(safari.highlights)
+  const highlightKeys = Array.isArray(parsedHighlights) ? parsedHighlights : []
+
   const highlights = highlightKeys.map((key: any) => {
-    const highlightKey = typeof key === "object" ? key.name || key : key
-    return t(`catalog.highlights.${highlightKey}`)
+    // Si es un objeto con traducciones multiidioma
+    if (typeof key === "object" && key !== null) {
+      // Si tiene la estructura {en: "...", es: "...", etc.}
+      if (key[locale]) {
+        return key[locale]
+      }
+      // Si tiene la estructura {name: "...", description: "..."}
+      if (key.name) {
+        return t(`catalog.highlights.${key.name}`, { defaultValue: key.name })
+      }
+      // Si tiene id
+      if (key.id) {
+        return t(`catalog.highlights.${key.id}`, { defaultValue: key.id })
+      }
+      // Fallback: usar el primer valor disponible
+      const firstValue = Object.values(key).find((v) => typeof v === "string")
+      if (firstValue) {
+        return String(firstValue)
+      }
+      // Último fallback: stringify
+      return JSON.stringify(key)
+    }
+
+    // Si es un string simple, usarlo como clave de traducción
+    const stringKey = String(key)
+    return t(`catalog.highlights.${stringKey}`, { defaultValue: stringKey })
   })
-  const route = safari.route ?? []
+  // Procesar route - extraer solo location
+  const parsedRoute = parseField(safari.route)
+  const route = (Array.isArray(parsedRoute) ? parsedRoute : []).map(
+    (r: any) => {
+      if (typeof r === "object" && r !== null) {
+        return r.location || r[locale] || r.name || r.id || JSON.stringify(r)
+      }
+      return String(r)
+    }
+  )
 
   return (
     <article className='relative overflow-hidden rounded-xl border border-[var(--accent-color)]/50 bg-white shadow-sm md:h-[400px] text-[#1f221b]/95'>
@@ -36,10 +84,10 @@ export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
           <Image
             fill
             sizes='(min-width: 1024px) 40vw, 100vw'
-            src={safari.thumbnail_thumb || safari.thumbnail}
-            alt={
+            src={String(safari.thumbnail_thumb || safari.thumbnail)}
+            alt={String(
               safari.thumbnail_alt || getLocalizedContent(safari.title, locale)
-            }
+            )}
             className='object-cover'
             loading='lazy'
             placeholder='blur'
@@ -57,7 +105,7 @@ export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
                 {t("card.from")}
               </div>
               <div className='text-xl font-extrabold leading-none'>
-                {formatCurrency(safari.priceFrom)}
+                {formatCurrency(Number(safari.priceFrom))}
               </div>
             </div>
           </div>
@@ -73,7 +121,7 @@ export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
                   {t("card.from")}
                 </div>
                 <div className='text-3xl font-extrabold leading-none'>
-                  {formatCurrency(safari.priceFrom)}
+                  {formatCurrency(Number(safari.priceFrom))}
                 </div>
               </div>
             </div>
@@ -81,13 +129,13 @@ export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
 
           <h3
             className={`mb-2 ${cormorant.className} text-lg md:text-3xl font-semibold tracking-wide text-[#1f221b] line-clamp-2 md:line-clamp-none`}>
-            {safari.durationDays} {t("card.days")} •{" "}
-            {getLocalizedContent(safari.title, locale).toUpperCase()}
+            {String(safari.durationDays)} {t("card.days")} •{" "}
+            {String(getLocalizedContent(safari.title, locale)).toUpperCase()}
           </h3>
 
           <ul className='mb-3 list-disc pl-5 text-sm leading-6 md:mb-4'>
-            {highlights.slice(0, 3).map((h: string) => (
-              <li key={h}>{h}</li>
+            {highlights.slice(0, 3).map((h: string, index: number) => (
+              <li key={index}>{String(h)}</li>
             ))}
           </ul>
 
@@ -97,7 +145,7 @@ export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
                 <span
                   key={`${r}-${i}`}
                   className='inline-flex items-center'>
-                  {r}
+                  {String(r)}
                   {i < route.length - 1 && <ChevronRight />}
                 </span>
               ))}
@@ -106,7 +154,7 @@ export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
 
           <div className='mt-auto'>
             <a
-              href={`/safaris/${safari.code}`}
+              href={`/safaris/${String(safari.id)}`}
               className='inline-flex w-full items-center justify-center rounded-md bg-[var(--green)] px-4 py-3 text-sm font-extrabold tracking-wide text-white hover:brightness-110 transition-colors'>
               {t("card.viewTrip")}
             </a>

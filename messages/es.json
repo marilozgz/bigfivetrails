@@ -14,7 +14,15 @@
         "smallGroup": "Grupo reducido",
         "adventure": "Aventura",
         "camping": "Camping",
-        "wildlife": "Vida salvaje"
+        "wildlife": "Vida salvaje",
+        "migration": "Migración",
+        "Migration": "Migración",
+        "Nature": "Naturaleza",
+        "Private Tour": "Tour Privado",
+        "Safari": "Safari",
+        "Wildlife": "Vida Salvaje",
+        "Culture": "Cultura",
+        "Waterfalls": "Cascadas"
       },
       "highlights": {
         "bigFive": "Encuentros con los Cinco Grandes",

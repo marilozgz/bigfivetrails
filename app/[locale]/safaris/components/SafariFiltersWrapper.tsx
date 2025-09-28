@@ -2,7 +2,7 @@
 
 import { Safari } from "@/lib/types/safari"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import SafariCardRow from "./SafariCardRow"
 import SafariFilters from "./SafariFilters"
 
@@ -76,6 +76,18 @@ export default function SafariFiltersWrapper({
     window.history.replaceState({}, "", newUrl)
   }, [currentFilters])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleFiltersChange = useCallback((f: any) => {
+    setCurrentFilters({
+      search: f.search,
+      location: f.location,
+      durationMin: f.durationMin,
+      durationMax: f.durationMax,
+      priceMin: f.priceMin,
+      priceMax: f.priceMax
+    })
+  }, [])
+
   return (
     <div className='flex flex-col lg:flex-row gap-8'>
       {/* Sidebar con filtros */}
@@ -89,16 +101,7 @@ export default function SafariFiltersWrapper({
           initialDurationMin={initialDurationMin}
           initialDurationMax={initialDurationMax}
           registerClearAll={(fn) => setClearAllFn(() => fn)}
-          onFiltersChange={(f) =>
-            setCurrentFilters({
-              search: f.search,
-              location: f.location,
-              durationMin: f.durationMin,
-              durationMax: f.durationMax,
-              priceMin: f.priceMin,
-              priceMax: f.priceMax
-            })
-          }
+          onFiltersChange={handleFiltersChange}
           onFilteredSafaris={setFilteredSafaris}
           locale={locale}
         />

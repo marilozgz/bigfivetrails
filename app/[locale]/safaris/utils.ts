@@ -5,6 +5,20 @@ import {
   Safari
 } from "@/lib/types/safari"
 
+// Helper para parsear campos JSONB que pueden venir como strings
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseJsonbField(field: any): any {
+  if (!field) return field
+  if (typeof field === "string") {
+    try {
+      return JSON.parse(field)
+    } catch {
+      return field
+    }
+  }
+  return field
+}
+
 type SafariRow = {
   id: string
   code: string
@@ -67,14 +81,14 @@ export async function getSafarisData(locale: string): Promise<Safari[]> {
     return {
       id: row.id,
       code: row.code,
-      title: getLocalizedContent(row.title, locale),
-      overview: getLocalizedContent(row.overview, locale),
+      title: getLocalizedContent(parseJsonbField(row.title), locale),
+      overview: getLocalizedContent(parseJsonbField(row.overview), locale),
       location: row.location || undefined,
       durationDays: row.duration_days || undefined,
       priceFrom: row.price_from || undefined,
       experienceTypes,
-      highlights: row.highlights || [],
-      route: row.route || [],
+      highlights: parseJsonbField(row.highlights) || [],
+      route: parseJsonbField(row.route) || [],
       thumbnail: row.thumbnail,
       thumbnail_thumb: row.thumbnail_thumb || undefined,
       popular: row.popular ?? false
@@ -132,33 +146,39 @@ export async function getSafariData(
   return {
     id: row.id,
     code: row.code,
-    title: getLocalizedContent(row.title, locale),
-    overview: getLocalizedContent(row.overview, locale),
-    description: getLocalizedContent(row.description, locale),
+    title: getLocalizedContent(parseJsonbField(row.title), locale),
+    overview: getLocalizedContent(parseJsonbField(row.overview), locale),
+    description: getLocalizedContent(parseJsonbField(row.description), locale),
     location: row.location || undefined,
     durationDays: row.duration_days || undefined,
     priceFrom: row.price_from || undefined,
     experienceTypes: Array.isArray(row.experience_types)
       ? row.experience_types
       : [],
-    highlights: row.highlights || [],
-    route: row.route || [],
+    highlights: parseJsonbField(row.highlights) || [],
+    route: parseJsonbField(row.route) || [],
     thumbnail: row.thumbnail,
     thumbnail_thumb: row.thumbnail_thumb || undefined,
     images: row.images || [],
     itinerary: row.itinerary || [],
     maxGroupSize: row.max_group_size || undefined,
-    accommodation: getLocalizedContent(row.accommodation, locale),
-    transportation: getLocalizedContent(row.transportation, locale),
-    bestTime: getLocalizedContent(row.best_time, locale),
-    difficulty: getLocalizedContent(row.difficulty, locale),
+    accommodation: getLocalizedContent(
+      parseJsonbField(row.accommodation),
+      locale
+    ),
+    transportation: getLocalizedContent(
+      parseJsonbField(row.transportation),
+      locale
+    ),
+    bestTime: getLocalizedContent(parseJsonbField(row.best_time), locale),
+    difficulty: getLocalizedContent(parseJsonbField(row.difficulty), locale),
     popular: row.popular ?? false
   } as Safari
 }
 
 export function formatCurrency(value?: number): string {
   if (!value && value !== 0) return ""
-  return new Intl.NumberFormat(undefined, {
+  return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
     maximumFractionDigits: 0

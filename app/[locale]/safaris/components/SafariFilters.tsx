@@ -123,7 +123,7 @@ export default function SafariFilters({
 
     onFilteredSafaris(filtered)
     onFiltersChange?.(filters)
-  }, [filters, safaris, onFilteredSafaris])
+  }, [filters, safaris, onFilteredSafaris, locale, onFiltersChange])
 
   const handleExperienceToggle = (exp: string) => {
     setFilters((prev) => ({

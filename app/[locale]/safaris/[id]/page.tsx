@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ItineraryDay, getLocalizedContent } from "@/lib/types/safari"
 import type { Metadata } from "next"
 import { getLocale, getTranslations } from "next-intl/server"
@@ -27,6 +28,19 @@ export default async function SafariDetailPage({
     notFound()
   }
 
+  // Helper para parsear campos que pueden venir como strings JSON
+  const parseField = (field: any): any => {
+    if (!field) return field
+    if (typeof field === "string") {
+      try {
+        return JSON.parse(field)
+      } catch {
+        return field
+      }
+    }
+    return field
+  }
+
   const experienceLabels = (safari.experienceTypes || [])
     .filter(
       (
@@ -39,17 +53,47 @@ export default async function SafariDetailPage({
       return t(`catalog.experienceTypes.${typeKey}`)
     })
 
-  const highlightLabels = (safari.highlights || [])
+  const parsedHighlights = parseField(safari.highlights)
+  const parsedRoute = parseField(safari.route)
+  const highlightLabels = (
+    Array.isArray(parsedHighlights) ? parsedHighlights : []
+  )
     .filter(
-      (
-        highlight: unknown
-      ): highlight is string | { name: string; description?: string } =>
-        highlight !== null && highlight !== undefined
+      (highlight: unknown) => highlight !== null && highlight !== undefined
     )
-    .map((highlight: string | { name: string }): string => {
-      const highlightKey =
-        typeof highlight === "object" ? highlight.name : highlight
-      return t(`catalog.highlights.${highlightKey}`)
+    .map((highlight: any): string => {
+      // Si es un objeto con traducciones multiidioma
+      if (typeof highlight === "object" && highlight !== null) {
+        // Si tiene la estructura {en: "...", es: "...", etc.}
+        if (highlight[locale]) {
+          return highlight[locale]
+        }
+        // Si tiene la estructura {name: "...", description: "..."}
+        if (highlight.name) {
+          return t(`catalog.highlights.${highlight.name}`, {
+            defaultValue: highlight.name
+          })
+        }
+        // Si tiene id
+        if (highlight.id) {
+          return t(`catalog.highlights.${highlight.id}`, {
+            defaultValue: highlight.id
+          })
+        }
+        // Fallback: usar el primer valor disponible
+        const firstValue = Object.values(highlight).find(
+          (v) => typeof v === "string"
+        )
+        if (firstValue) {
+          return String(firstValue)
+        }
+        // Último fallback: stringify
+        return JSON.stringify(highlight)
+      }
+
+      // Si es un string simple, usarlo como clave de traducción
+      const stringKey = String(highlight)
+      return t(`catalog.highlights.${stringKey}`, { defaultValue: stringKey })
     })
 
   return (
@@ -142,10 +186,10 @@ export default async function SafariDetailPage({
                         </div>
                         <div className='flex-1'>
                           <h3 className='text-xl font-semibold mb-2'>
-                            {day.title}
+                            {getLocalizedContent(day.title, locale)}
                           </h3>
                           <p className='text-gray-700 mb-3'>
-                            {day.description}
+                            {getLocalizedContent(day.description, locale)}
                           </p>
 
                           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -154,12 +198,14 @@ export default async function SafariDetailPage({
                                 {t("detail.accommodation")}
                               </h4>
                               <p className='text-sm text-gray-600'>
-                                {typeof day.accommodation === "string"
-                                  ? day.accommodation
-                                  : typeof day.accommodation === "object" &&
-                                    day.accommodation?.name
+                                {typeof day.accommodation === "object" &&
+                                day.accommodation !== null &&
+                                "name" in day.accommodation
                                   ? day.accommodation.name
-                                  : "Alojamiento incluido"}
+                                  : getLocalizedContent(
+                                      day.accommodation,
+                                      locale
+                                    ) || "Alojamiento incluido"}
                               </p>
                             </div>
                             <div>
@@ -205,16 +251,31 @@ export default async function SafariDetailPage({
             )}
 
             {/* Route */}
-            {safari.route && safari.route.length > 0 && (
+            {parsedRoute && parsedRoute.length > 0 && (
               <section>
                 <h2 className='text-3xl font-semibold mb-4'>
                   {t("detail.route")}
                 </h2>
                 <div className='flex items-center gap-2 text-lg text-gray-700'>
-                  {safari.route
+                  {parsedRoute
+                    .map((location: any) => {
+                      // Procesar route igual que en SafariCardRow
+                      if (typeof location === "object" && location !== null) {
+                        return (
+                          location[locale] ||
+                          location.location ||
+                          location.name ||
+                          location.id ||
+                          JSON.stringify(location)
+                        )
+                      }
+                      return String(location)
+                    })
                     .filter(
-                      (location: unknown): location is string =>
-                        typeof location === "string"
+                      (location: string) =>
+                        location &&
+                        location !== "null" &&
+                        location !== "undefined"
                     )
                     .map(
                       (
@@ -321,7 +382,8 @@ export default async function SafariDetailPage({
                     {t("detail.accommodation")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {getLocalizedContent(safari.accommodation, locale)}
+                    {getLocalizedContent(safari.accommodation, locale) ||
+                      "Alojamiento incluido"}
                   </span>
                 </div>
                 <div>
@@ -329,7 +391,8 @@ export default async function SafariDetailPage({
                     {t("detail.transportation")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {getLocalizedContent(safari.transportation, locale)}
+                    {getLocalizedContent(safari.transportation, locale) ||
+                      "Transporte incluido"}
                   </span>
                 </div>
                 <div>
@@ -337,7 +400,8 @@ export default async function SafariDetailPage({
                     {t("detail.bestTime")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {getLocalizedContent(safari.bestTime, locale)}
+                    {getLocalizedContent(safari.bestTime, locale) ||
+                      "Todo el año"}
                   </span>
                 </div>
                 <div>
@@ -345,14 +409,14 @@ export default async function SafariDetailPage({
                     {t("detail.difficulty")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {getLocalizedContent(safari.difficulty, locale)}
+                    {getLocalizedContent(safari.difficulty, locale) || "Fácil"}
                   </span>
                 </div>
               </div>
             </div>
 
             {/* Route Map */}
-            {safari.route && safari.route.length > 0 && (
+            {parsedRoute && parsedRoute.length > 0 && (
               <div className='bg-white rounded-lg border border-[#c6b892]/30 p-6'>
                 <h3 className='text-xl font-semibold mb-4 text-center'>
                   {t("detail.routeMap")}
@@ -385,10 +449,32 @@ export default async function SafariDetailPage({
                       <span className='font-semibold text-[#c6b892]'>
                         {safari.durationDays} días
                       </span>{" "}
-                      • {safari.route.length} destinos
+                      • {parsedRoute.length} destinos
                     </p>
                     <p className='text-xs text-gray-600 mt-2'>
-                      {safari.route.join(" → ")}
+                      {parsedRoute
+                        .map((location: any) => {
+                          if (
+                            typeof location === "object" &&
+                            location !== null
+                          ) {
+                            return (
+                              location[locale] ||
+                              location.location ||
+                              location.name ||
+                              location.id ||
+                              JSON.stringify(location)
+                            )
+                          }
+                          return String(location)
+                        })
+                        .filter(
+                          (location: string) =>
+                            location &&
+                            location !== "null" &&
+                            location !== "undefined"
+                        )
+                        .join(" → ")}
                     </p>
                   </div>
                 </div>

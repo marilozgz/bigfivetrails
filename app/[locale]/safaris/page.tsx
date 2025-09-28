@@ -96,7 +96,7 @@ export default async function DestinationsPage() {
             itemListElement: safaris.map((s, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: `/${locale}/safaris/${s.code}`,
+              url: `/${locale}/safaris/${s.code || s.id}`,
               name: s.title
             }))
           })

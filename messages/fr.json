@@ -44,7 +44,15 @@
         "smallGroup": "Petit Groupe",
         "adventure": "Aventure",
         "camping": "Camping",
-        "wildlife": "Faune"
+        "wildlife": "Faune",
+        "migration": "Migration",
+        "Migration": "Migration",
+        "Nature": "Nature",
+        "Private Tour": "Tour Privé",
+        "Safari": "Safari",
+        "Wildlife": "Faune",
+        "Culture": "Culture",
+        "Waterfalls": "Waterfalls"
       },
       "highlights": {
         "bigFive": "Rencontres du Big Five",

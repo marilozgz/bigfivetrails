@@ -41,7 +41,15 @@
         "smallGroup": "Piccolo Gruppo",
         "adventure": "Avventura",
         "camping": "Campeggio",
-        "wildlife": "Fauna"
+        "wildlife": "Fauna",
+        "migration": "Migrazione",
+        "Migration": "Migrazione",
+        "Nature": "Natura",
+        "Private Tour": "Tour Privato",
+        "Safari": "Safari",
+        "Wildlife": "Fauna",
+        "Culture": "Cultura",
+        "Waterfalls": "Cascate"
       },
       "highlights": {
         "bigFive": "Incontri con i Big Five",
