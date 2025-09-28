@@ -1,4 +1,4 @@
-import { ItineraryDay } from "@/lib/types/safari"
+import { ItineraryDay, getLocalizedContent } from "@/lib/types/safari"
 import type { Metadata } from "next"
 import { getLocale, getTranslations } from "next-intl/server"
 import { Cormorant_Garamond } from "next/font/google"
@@ -61,11 +61,11 @@ export default async function SafariDetailPage({
           <Breadcrumbs
             locale={locale}
             code={safari.code}
-            title={safari.title}
+            title={getLocalizedContent(safari.title, locale)}
           />
           <div className='text-center mb-8'>
             <h1 className='text-4xl md:text-5xl font-bold text-[#1f221b] mb-4'>
-              {safari.title}
+              {getLocalizedContent(safari.title, locale)}
             </h1>
             <p className='text-xl text-[#1f221b]/80'>
               {safari.location} • {safari.durationDays} {t("detail.days")}
@@ -81,7 +81,7 @@ export default async function SafariDetailPage({
                 safari.images?.[0] ||
                 "/images/default-safari.jpg"
               }
-              alt={safari.title}
+              alt={getLocalizedContent(safari.title, locale)}
               fill
               className='object-cover'
               priority
@@ -100,7 +100,7 @@ export default async function SafariDetailPage({
                 {t("detail.description")}
               </h2>
               <p className='text-lg leading-relaxed text-gray-700'>
-                {safari.description}
+                {getLocalizedContent(safari.description, locale)}
               </p>
             </section>
 
@@ -321,7 +321,7 @@ export default async function SafariDetailPage({
                     {t("detail.accommodation")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {safari.accommodation}
+                    {getLocalizedContent(safari.accommodation, locale)}
                   </span>
                 </div>
                 <div>
@@ -329,21 +329,23 @@ export default async function SafariDetailPage({
                     {t("detail.transportation")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {safari.transportation}
+                    {getLocalizedContent(safari.transportation, locale)}
                   </span>
                 </div>
                 <div>
                   <span className='font-semibold text-[#c6b892]'>
                     {t("detail.bestTime")}:
                   </span>
-                  <span className='ml-2 text-gray-700'>{safari.bestTime}</span>
+                  <span className='ml-2 text-gray-700'>
+                    {getLocalizedContent(safari.bestTime, locale)}
+                  </span>
                 </div>
                 <div>
                   <span className='font-semibold text-[#c6b892]'>
                     {t("detail.difficulty")}:
                   </span>
                   <span className='ml-2 text-gray-700'>
-                    {safari.difficulty}
+                    {getLocalizedContent(safari.difficulty, locale)}
                   </span>
                 </div>
               </div>
@@ -368,7 +370,10 @@ export default async function SafariDetailPage({
                           ? "maretuniwonder"
                           : safari.code
                       }.png`}
-                      alt={`Ruta del safari ${safari.title}`}
+                      alt={`Ruta del safari ${getLocalizedContent(
+                        safari.title,
+                        locale
+                      )}`}
                       fill
                       className='object-contain'
                     />
@@ -411,7 +416,8 @@ export async function generateMetadata({
   const safari = await getSafariData(id, locale)
   // Título basado en el título mostrado, enriquecido con ubicación y duración si están disponibles
   const composedTitleParts: string[] = []
-  if (safari?.title) composedTitleParts.push(safari.title)
+  if (safari?.title)
+    composedTitleParts.push(getLocalizedContent(safari.title, locale))
   if (safari?.location) composedTitleParts.push(String(safari.location))
   if (safari?.durationDays)
     composedTitleParts.push(`${safari.durationDays} días`)
@@ -424,8 +430,8 @@ export async function generateMetadata({
   // Descripción priorizando la propia del safari
   const description =
     safari?.seo_description ||
-    safari?.description ||
-    safari?.overview ||
+    getLocalizedContent(safari?.description, locale) ||
+    getLocalizedContent(safari?.overview, locale) ||
     "Safaris inolvidables en Tanzania y Kenia con Big Five Trails."
   const images = [
     safari?.og_image || safari?.thumbnail || "/images/serengeti.jpg"

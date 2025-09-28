@@ -81,7 +81,10 @@ export default async function DestinationsPage() {
       </div>
 
       <section className='mx-auto max-w-7xl px-4'>
-        <SafariFiltersWrapper safaris={safaris} />
+        <SafariFiltersWrapper
+          safaris={safaris}
+          locale={locale}
+        />
       </section>
       {/* JSON-LD ItemList */}
       <script

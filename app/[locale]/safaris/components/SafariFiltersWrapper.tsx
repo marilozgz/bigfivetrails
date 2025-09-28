@@ -8,10 +8,12 @@ import SafariFilters from "./SafariFilters"
 
 interface SafariFiltersWrapperProps {
   safaris: Safari[]
+  locale: string
 }
 
 export default function SafariFiltersWrapper({
-  safaris
+  safaris,
+  locale
 }: SafariFiltersWrapperProps) {
   const t = useTranslations("safaris")
   const [filteredSafaris, setFilteredSafaris] = useState<Safari[]>(safaris)
@@ -98,6 +100,7 @@ export default function SafariFiltersWrapper({
             })
           }
           onFilteredSafaris={setFilteredSafaris}
+          locale={locale}
         />
       </div>
 
@@ -160,6 +163,7 @@ export default function SafariFiltersWrapper({
             <SafariCardRow
               key={s.id}
               safari={s}
+              locale={locale}
             />
           ))}
           {filteredSafaris.length === 0 && (

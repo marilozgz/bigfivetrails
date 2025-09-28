@@ -1,6 +1,6 @@
 "use client"
 
-import { Safari } from "@/lib/types/safari"
+import { getLocalizedContent, Safari } from "@/lib/types/safari"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
@@ -15,6 +15,7 @@ interface SafariFiltersProps {
   initialDurationMax?: string
   registerClearAll?: (clearFn: () => void) => void
   onFiltersChange?: (filters: FilterState) => void
+  locale: string
 }
 
 interface FilterState {
@@ -37,7 +38,8 @@ export default function SafariFilters({
   initialDurationMin,
   initialDurationMax,
   registerClearAll,
-  onFiltersChange
+  onFiltersChange,
+  locale
 }: SafariFiltersProps) {
   const t = useTranslations("safaris")
 
@@ -70,8 +72,12 @@ export default function SafariFilters({
       const searchLower = filters.search.toLowerCase()
       filtered = filtered.filter(
         (safari) =>
-          safari.title?.toLowerCase().includes(searchLower) ||
-          safari.overview?.toLowerCase().includes(searchLower) ||
+          getLocalizedContent(safari.title, locale)
+            .toLowerCase()
+            .includes(searchLower) ||
+          getLocalizedContent(safari.overview, locale)
+            .toLowerCase()
+            .includes(searchLower) ||
           safari.location?.toLowerCase().includes(searchLower)
       )
     }

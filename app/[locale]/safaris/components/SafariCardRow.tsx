@@ -1,6 +1,7 @@
 "use client"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { getLocalizedContent } from "@/lib/types/safari"
 import { useTranslations } from "next-intl"
 import { Cormorant_Garamond } from "next/font/google"
 import Image from "next/image"
@@ -13,9 +14,10 @@ const cormorant = Cormorant_Garamond({
 
 interface SafariCardRowProps {
   safari: any
+  locale: string
 }
 
-export default function SafariCardRow({ safari }: SafariCardRowProps) {
+export default function SafariCardRow({ safari, locale }: SafariCardRowProps) {
   const t = useTranslations("safaris")
   const highlightKeys =
     safari.highlights ??
@@ -35,7 +37,9 @@ export default function SafariCardRow({ safari }: SafariCardRowProps) {
             fill
             sizes='(min-width: 1024px) 40vw, 100vw'
             src={safari.thumbnail_thumb || safari.thumbnail}
-            alt={safari.thumbnail_alt || safari.title}
+            alt={
+              safari.thumbnail_alt || getLocalizedContent(safari.title, locale)
+            }
             className='object-cover'
             loading='lazy'
             placeholder='blur'
@@ -78,7 +82,7 @@ export default function SafariCardRow({ safari }: SafariCardRowProps) {
           <h3
             className={`mb-2 ${cormorant.className} text-lg md:text-3xl font-semibold tracking-wide text-[#1f221b] line-clamp-2 md:line-clamp-none`}>
             {safari.durationDays} {t("card.days")} •{" "}
-            {safari.title.toUpperCase()}
+            {getLocalizedContent(safari.title, locale).toUpperCase()}
           </h3>
 
           <ul className='mb-3 list-disc pl-5 text-sm leading-6 md:mb-4'>

@@ -1,9 +1,32 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server"
-import { Safari } from "@/lib/types/safari"
+import {
+  getLocalizedContent,
+  MultiLanguageContent,
+  Safari
+} from "@/lib/types/safari"
 
 type SafariRow = {
   id: string
   code: string
+  title?: string | MultiLanguageContent
+  overview?: string | MultiLanguageContent
+  description?: string | MultiLanguageContent
+  accommodation?: string | MultiLanguageContent
+  transportation?: string | MultiLanguageContent
+  best_time?: string | MultiLanguageContent
+  difficulty?: string | MultiLanguageContent
+  location?: string
+  duration_days?: number
+  price_from?: number
+  experience_types?: unknown[]
+  highlights?: unknown[]
+  route?: string[]
+  thumbnail: string
+  thumbnail_thumb?: string
+  images?: string[]
+  itinerary?: unknown[]
+  max_group_size?: number
+  popular?: boolean
   [key: string]: unknown
 }
 
@@ -15,8 +38,8 @@ export async function getSafarisData(locale: string): Promise<Safari[]> {
       [
         "id",
         "code",
-        `title_${locale}:title_${locale}`,
-        `overview_${locale}:overview_${locale}`,
+        "title",
+        "overview",
         "location",
         "duration_days",
         "price_from",
@@ -37,9 +60,6 @@ export async function getSafarisData(locale: string): Promise<Safari[]> {
 
   const rows: SafariRow[] = (data as unknown as SafariRow[]) || []
   return rows.map((row) => {
-    const title = row[`title_${locale}`] || row.title_en || row.title || ""
-    const overview =
-      row[`overview_${locale}`] || row.overview_en || row.overview || ""
     const experienceTypes = Array.isArray(row.experience_types as unknown[])
       ? row.experience_types
       : []
@@ -47,8 +67,8 @@ export async function getSafarisData(locale: string): Promise<Safari[]> {
     return {
       id: row.id,
       code: row.code,
-      title,
-      overview,
+      title: getLocalizedContent(row.title, locale),
+      overview: getLocalizedContent(row.overview, locale),
       location: row.location || undefined,
       durationDays: row.duration_days || undefined,
       priceFrom: row.price_from || undefined,
@@ -74,9 +94,9 @@ export async function getSafariData(
       [
         "id",
         "code",
-        `title_${locale}:title_${locale}`,
-        `overview_${locale}:overview_${locale}`,
-        `description_${locale}:description_${locale}`,
+        "title",
+        "overview",
+        "description",
         "location",
         "duration_days",
         "price_from",
@@ -112,14 +132,9 @@ export async function getSafariData(
   return {
     id: row.id,
     code: row.code,
-    title: row[`title_${locale}`] || row.title_en || row.title || "",
-    overview:
-      row[`overview_${locale}`] || row.overview_en || row.overview || "",
-    description:
-      row[`description_${locale}`] ||
-      row.description_en ||
-      row.description ||
-      "",
+    title: getLocalizedContent(row.title, locale),
+    overview: getLocalizedContent(row.overview, locale),
+    description: getLocalizedContent(row.description, locale),
     location: row.location || undefined,
     durationDays: row.duration_days || undefined,
     priceFrom: row.price_from || undefined,
@@ -133,10 +148,10 @@ export async function getSafariData(
     images: row.images || [],
     itinerary: row.itinerary || [],
     maxGroupSize: row.max_group_size || undefined,
-    accommodation: row.accommodation || undefined,
-    transportation: row.transportation || undefined,
-    bestTime: row.best_time || undefined,
-    difficulty: row.difficulty || undefined,
+    accommodation: getLocalizedContent(row.accommodation, locale),
+    transportation: getLocalizedContent(row.transportation, locale),
+    bestTime: getLocalizedContent(row.best_time, locale),
+    difficulty: getLocalizedContent(row.difficulty, locale),
     popular: row.popular ?? false
   } as Safari
 }
