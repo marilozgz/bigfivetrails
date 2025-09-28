@@ -49,12 +49,12 @@ export default async function SafarisAdmin({
     let query = supabase
       .from("safaris")
       .select(
-        "id, code, title_es, price_from, duration_days, thumbnail, thumbnail_thumb",
+        "id, code, title, price_from, duration_days, thumbnail, thumbnail_thumb",
         { count: "exact" }
       )
       .order("inserted_at", { ascending: false })
       .range(from, to)
-    if (q) query = query.ilike("title_es", `%${q}%`)
+    if (q) query = query.ilike("title", `%${q}%`)
     const res = await query
     safaris = res.data
     count = res.count
@@ -476,37 +476,224 @@ function AddSafariForm() {
               className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
             />
           </div>
-          <div>
-            <label className='block text-sm mb-1'>Dificultad</label>
-            <input
-              name='difficulty'
-              className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
-            />
-          </div>
-          <div>
-            <label className='block text-sm mb-1'>Mejor época</label>
-            <input
-              name='bestTime'
-              className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
-            />
-          </div>
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-          <div>
-            <label className='block text-sm mb-1'>Transporte</label>
-            <input
-              name='transportation'
-              className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
-            />
-          </div>
-          <div>
-            <label className='block text-sm mb-1'>Alojamiento</label>
-            <input
-              name='accommodation'
-              className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
-            />
-          </div>
-        </div>
+
+        <Tabs
+          items={[
+            {
+              key: "difficulty",
+              label: "Dificultad",
+              content: (
+                <div className='space-y-3'>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Dificultad (ES)
+                    </label>
+                    <input
+                      name='difficulty_es'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Dificultad (EN)
+                    </label>
+                    <input
+                      name='difficulty_en'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Dificultad (FR)
+                    </label>
+                    <input
+                      name='difficulty_fr'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Dificultad (IT)
+                    </label>
+                    <input
+                      name='difficulty_it'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Dificultad (DE)
+                    </label>
+                    <input
+                      name='difficulty_de'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                </div>
+              )
+            },
+            {
+              key: "bestTime",
+              label: "Mejor época",
+              content: (
+                <div className='space-y-3'>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Mejor época (ES)
+                    </label>
+                    <input
+                      name='bestTime_es'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Mejor época (EN)
+                    </label>
+                    <input
+                      name='bestTime_en'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Mejor época (FR)
+                    </label>
+                    <input
+                      name='bestTime_fr'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Mejor época (IT)
+                    </label>
+                    <input
+                      name='bestTime_it'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Mejor época (DE)
+                    </label>
+                    <input
+                      name='bestTime_de'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                </div>
+              )
+            },
+            {
+              key: "transportation",
+              label: "Transporte",
+              content: (
+                <div className='space-y-3'>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Transporte (ES)
+                    </label>
+                    <input
+                      name='transportation_es'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Transporte (EN)
+                    </label>
+                    <input
+                      name='transportation_en'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Transporte (FR)
+                    </label>
+                    <input
+                      name='transportation_fr'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Transporte (IT)
+                    </label>
+                    <input
+                      name='transportation_it'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Transporte (DE)
+                    </label>
+                    <input
+                      name='transportation_de'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                </div>
+              )
+            },
+            {
+              key: "accommodation",
+              label: "Alojamiento",
+              content: (
+                <div className='space-y-3'>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Alojamiento (ES)
+                    </label>
+                    <input
+                      name='accommodation_es'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Alojamiento (EN)
+                    </label>
+                    <input
+                      name='accommodation_en'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Alojamiento (FR)
+                    </label>
+                    <input
+                      name='accommodation_fr'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Alojamiento (IT)
+                    </label>
+                    <input
+                      name='accommodation_it'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                  <div>
+                    <label className='block text-sm mb-1'>
+                      Alojamiento (DE)
+                    </label>
+                    <input
+                      name='accommodation_de'
+                      className='w-full border border-[#c6b892]/40 px-3 py-2 rounded-lg outline-none'
+                    />
+                  </div>
+                </div>
+              )
+            }
+          ]}
+        />
         <div>
           <label className='block text-sm mb-1'>
             Highlights (uno por línea)
@@ -607,7 +794,9 @@ function Pagination({
 type SafariListItem = {
   id: string
   code: string
-  title_es?: string
+  title?:
+    | string
+    | { es?: string; en?: string; fr?: string; it?: string; de?: string }
   price_from?: number
   duration_days?: number
   thumbnail?: string
@@ -615,17 +804,31 @@ type SafariListItem = {
 }
 
 function SafariRow({ safari }: { safari: SafariListItem }) {
+  // Extraer título del objeto multiidioma
+  const getTitle = (
+    title:
+      | string
+      | { es?: string; en?: string; fr?: string; it?: string; de?: string }
+      | undefined
+  ) => {
+    if (!title) return ""
+    if (typeof title === "string") return title
+    return title.es || title.en || title.fr || title.it || title.de || ""
+  }
+
+  const displayTitle = getTitle(safari.title)
+
   return (
     <div className='flex items-center gap-3 p-3 hover:bg-[#f6f3ee]/50 transition-colors'>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={safari.thumbnail_thumb || safari.thumbnail || ""}
-        alt={safari.title_es || safari.code}
+        alt={displayTitle || safari.code}
         className='w-12 h-12 object-cover rounded ring-1 ring-[#c6b892]/30'
       />
       <div className='flex-1'>
         <div className='font-medium text-[#1f221b]'>
-          {safari.title_es || safari.code}
+          {displayTitle || safari.code}
         </div>
         <div className='text-xs text-gray-500'>
           {safari.duration_days} días · ${safari.price_from}
